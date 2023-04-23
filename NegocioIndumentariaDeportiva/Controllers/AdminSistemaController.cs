@@ -1,46 +1,54 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using TrabajoPráctico.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
-namespace TrabajoPráctico.Controllers
+
+namespace NegocioIndumentariaDeportiva.Controllers
 {
     public class AdminSistemaController : Controller
     {
+        /*
         private readonly ILogger<AdminSistemaController> _logger;
 
         public AdminSistemaController(ILogger<AdminSistemaController> logger)
         {
             _logger = logger;
         }
-
-        public IActionResult Index()
+        */
+        public ActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Vertodos()
+        public ActionResult Vertodos()
         {
             return View();
         }
 
-        public IActionResult Alta()
+        public ActionResult Alta()
         {
             return View();
         }
 
-        public IActionResult Pendientes()
+        public ActionResult Pendientes()
         {
             return View();
         }
 
-        public IActionResult Historial()
+        public ActionResult Historial()
         {
             return View();
         }
+
+        /*
+         * ARREGLAR ESTA PARTE
+         * 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public ActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        } */
     }
 }

@@ -1,7 +1,7 @@
-﻿@using Microsoft.AspNetCore.Mvc.Rendering;
+﻿<!--using Microsoft.AspNetCore.Mvc.Rendering; -->
 @{
     ViewData["Title"] = "Tareas pendientes";
-    Layout = "LayoutNav";
+    Layout = "~/Views/Shared/LayoutNav.cshtml";
 
 }
 <!DOCTYPE html>
@@ -28,47 +28,48 @@
 
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Pendientes</h1>
-                    
-                    
-   <div>
-    <table class="table">
-        <thead>
-            <tr scope="row">
-                <th scope="col">Fecha</th>
-                <th scope="col">Hora</th>
-                <th scope="col">Sector</th>
-                <th scope="col">Descripción</th>
+
+
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr scope="row">
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Hora</th>
+                                    <th scope="col">Sector</th>
+                                    <th scope="col">Descripción</th>
                                     <th scope="col">Usuario</th>
                                     <th scope="col">Estado</th>
 
-            </tr>
-        </thead>
-        <tbody>
-            <tr scope="row">
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr scope="row">
 
                                     <td scope="col">3/5/2023</td>
                                     <td scope="col">12.34 pm. </td>
                                     <td scope="col">Mostrador </td>
                                     <td scope="col">No funciona el programa de carga de cliente</td>
                                     <td scope="col">Vendedor</td>
-                                
-                                    <td scope="col"><select class="form-control" id="exampleFormControlSelect1">
-                                        <option>Pendiente</option>
-                                        <option>En curso</option>
-                                        <option>Realizada</option>
+
+                                    <td scope="col">
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>Pendiente</option>
+                                            <option>En curso</option>
+                                            <option>Realizada</option>
                                         </select>
                                     </td>
-                               
 
-            </tr>
-        </tbody>
-    </table>
-    </div>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div class="mt-4 mb-0">
                         <div class="d-grid"><a class="btn btn-primary btn-block" asp-action="Historial">Historial</a></div>
                     </div>
-             </div>
+                </div>
             </main>
             <footer class="py-4 bg-light mt-auto">
             </footer>
