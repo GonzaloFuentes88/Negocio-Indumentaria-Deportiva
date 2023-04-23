@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering;
+@{
+    ViewData["Title"] = "Tareas pendientes";
+    Layout = "LayoutNav";
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Usuarios: ver</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+
+
+
+    <div id="layoutSidenav">
+
+        <div id="layoutSidenav_content">
+            <main>
+
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Pendientes</h1>
+                    
+                    
+   <div>
+    <table class="table">
+        <thead>
+            <tr scope="row">
+                <th scope="col">Fecha</th>
+                <th scope="col">Hora</th>
+                <th scope="col">Sector</th>
+                <th scope="col">Descripción</th>
+                                    <th scope="col">Usuario</th>
+                                    <th scope="col">Estado</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr scope="row">
+
+                                    <td scope="col">3/5/2023</td>
+                                    <td scope="col">12.34 pm. </td>
+                                    <td scope="col">Mostrador </td>
+                                    <td scope="col">No funciona el programa de carga de cliente</td>
+                                    <td scope="col">Vendedor</td>
+                                
+                                    <td scope="col"><select class="form-control" id="exampleFormControlSelect1">
+                                        <option>Pendiente</option>
+                                        <option>En curso</option>
+                                        <option>Realizada</option>
+                                        </select>
+                                    </td>
+                               
+
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+                    <div class="mt-4 mb-0">
+                        <div class="d-grid"><a class="btn btn-primary btn-block" asp-action="Historial">Historial</a></div>
+                    </div>
+             </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+            </footer>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="js/datatables-simple-demo.js"></script>
+</body>
+</html>
+
