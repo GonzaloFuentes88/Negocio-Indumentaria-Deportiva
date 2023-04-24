@@ -119,6 +119,7 @@
     <Compile Include="Controllers\AdminSistemaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\VendedorController.cs" />
     <Compile Include="Datos\Conexion.cs" />
     <Compile Include="Datos\DaoImpl\UsuarioDao.cs" />
     <Compile Include="Datos\Dao\IGenericDao.cs" />
@@ -213,6 +214,8 @@
     <Content Include="Views\AdminSistema\Pendientes.cshtml" />
     <Content Include="Views\AdminSistema\Vertodos.cshtml" />
     <Content Include="Views\Shared\LayoutNav.cshtml" />
+    <Content Include="Views\Vendedor\RegistrarVenta.cshtml" />
+    <Content Include="Views\Vendedor\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
