@@ -19,5 +19,6 @@ namespace NegocioIndumentariaDeportiva.Controllers
             var oList = usuarioDao.FindAll();
             return View(oList);
         }
+
     }
 }

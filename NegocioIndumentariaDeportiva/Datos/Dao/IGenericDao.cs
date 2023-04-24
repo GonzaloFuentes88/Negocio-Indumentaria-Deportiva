@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NegocioIndumentariaDeportiva.Models;
 
 namespace NegocioIndumentariaDeportiva.Datos
 {
@@ -15,9 +16,9 @@ namespace NegocioIndumentariaDeportiva.Datos
         List<T> FindAll();
         T FindOne(int id);
 
-        bool Save();
+        bool Save(UsuarioModel usuarioModel);
 
-        bool Delete();
+        bool Delete(int id);
 
     }
 }

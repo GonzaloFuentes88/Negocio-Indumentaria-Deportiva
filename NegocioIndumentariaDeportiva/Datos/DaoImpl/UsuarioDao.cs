@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using NegocioIndumentariaDeportiva.Models;
 using System.Data.SqlClient;
+using System.Data;
+
 
 
 namespace NegocioIndumentariaDeportiva.Datos.DaoImpl
@@ -18,7 +20,7 @@ namespace NegocioIndumentariaDeportiva.Datos.DaoImpl
 
         public UsuarioDao() { }
 
-        public bool Delete()
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -26,12 +28,13 @@ namespace NegocioIndumentariaDeportiva.Datos.DaoImpl
         public List<UsuarioModel> FindAll()
         {
             List<UsuarioModel> usuarios = new List<UsuarioModel>();
-            string query = "SELECT * FROM Usuarios";
+            string query = "SELECT * FROM Usuarios"; 
+            //string query = "sp_ListarUsuarios";
             using (SqlConnection connection = conexion.Conectar())
             {
-
                 using (SqlCommand sqlCommand = new SqlCommand(query, connection))
                 {
+                    //sqlCommand.CommandType = CommandType.StoredProcedure;
                     using (SqlDataReader dr = sqlCommand.ExecuteReader())
                     {
                         while (dr.Read())
@@ -58,10 +61,36 @@ namespace NegocioIndumentariaDeportiva.Datos.DaoImpl
 
         public UsuarioModel FindOne(int id)
         {
-            throw new NotImplementedException();
+            UsuarioModel usuario = new UsuarioModel();
+            string query = "SELECT * FROM Usuarios WHERE ID_Usuario = "+id;
+            //string query = "sp_ObtenerUsuario";
+            using (SqlConnection connection = conexion.Conectar())
+            {
+                using (SqlCommand sqlCommand = new SqlCommand(query, connection))
+                {
+                    //sqlCommand.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataReader dr = sqlCommand.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            usuario.Id = Convert.ToInt32(dr["ID_Usuario"]);
+                            usuario.Nombre = dr["Nombre_Usuario"].ToString();
+                            usuario.Email = dr["Email"].ToString();
+                            usuario.Username = dr["Username"].ToString();
+                            usuario.Password = dr["Password"].ToString();
+
+                        }
+
+                    }
+                }
+            }
+            conexion.Desconectar();
+
+            return usuario;
+
         }
 
-        public bool Save()
+        public bool Save(UsuarioModel usuarioModel)
         {
             throw new NotImplementedException();
         }
