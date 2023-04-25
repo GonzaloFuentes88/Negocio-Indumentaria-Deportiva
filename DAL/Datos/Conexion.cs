@@ -6,7 +6,7 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Data;
 
-namespace NegocioIndumentariaDeportiva.Datos
+namespace DAL.Datos
 {
     /// <summary>
     /// Esta clase se utiliza para conectarse o desconectarse a la bd

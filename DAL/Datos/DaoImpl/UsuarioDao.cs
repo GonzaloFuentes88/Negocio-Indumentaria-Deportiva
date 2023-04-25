@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using NegocioIndumentariaDeportiva.Models;
+using BBL.Models;
 using System.Data.SqlClient;
 using System.Data;
 
 
 
-namespace NegocioIndumentariaDeportiva.Datos.DaoImpl
+namespace DAL.Datos.DaoImpl
 {
     /// <summary>
     /// Clase para manipular los usuarios

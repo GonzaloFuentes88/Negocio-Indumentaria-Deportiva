@@ -42,6 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\UsuarioModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NegocioIndumentariaDeportiva\NegocioIndumentariaDeportiva.csproj">
+      <Project>{d768eab5-5827-4d74-a494-d6d568abfcc4}</Project>
+      <Name>NegocioIndumentariaDeportiva</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

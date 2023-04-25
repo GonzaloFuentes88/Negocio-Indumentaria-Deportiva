@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NegocioIndumentariaDeportiva.Models;
+using BBL.Models;
 
-namespace NegocioIndumentariaDeportiva.Datos
+namespace DAL.Datos
 {
     /// <summary>
     /// Interface generica para implementar Dao's sobre los distintos obj del proyecto
