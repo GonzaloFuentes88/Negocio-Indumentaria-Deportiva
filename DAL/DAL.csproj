@@ -44,11 +44,5 @@
     <Compile Include="Datos\Conexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BBL\BBL.csproj">
-      <Project>{4442d2e8-7215-4cda-9d51-32208580f861}</Project>
-      <Name>BBL</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

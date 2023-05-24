@@ -46,9 +46,9 @@
     <Compile Include="Models\UsuarioModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NegocioIndumentariaDeportiva\NegocioIndumentariaDeportiva.csproj">
-      <Project>{d768eab5-5827-4d74-a494-d6d568abfcc4}</Project>
-      <Name>NegocioIndumentariaDeportiva</Name>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{e908ca27-0f5c-441e-a94e-71d42b55cd4e}</Project>
+      <Name>DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
