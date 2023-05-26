@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BBL.Models
 {
-      class Empleado : Persona
+        public class Empleado : Persona
     {
         private long _legajo;
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BBL.Models
 {
-    abstract class Persona
+    public abstract class Persona
     {
         private long _dni;
 

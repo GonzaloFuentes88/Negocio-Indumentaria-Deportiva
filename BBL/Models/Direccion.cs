@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BBL.Models
 {
-    class Direccion
+    public class Direccion
     {
         private long _idDireccion;
 
