@@ -6,7 +6,29 @@ using System.Threading.Tasks;
 
 namespace BBL.Models
 {
-    class Talle
+    public class Talle 
     {
+        private long _idtalle;
+        public long idTalle
+        {
+            get { return _idtalle; }
+            set { _idtalle = value; }
+        }
+
+        private string _talles;
+        public string Talles
+        {
+            get { return _talles; }
+            set { _talles = value; }
+        }
+    
+
+    public Talle(long idTalle, string talles)
+    {
+        this.idTalle = idTalle;
+        this.Talles = talles;
     }
+
+    }
+
 }
