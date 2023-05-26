@@ -7,12 +7,12 @@ namespace BBL.Models
 {
     public class Role
     {
-        private int _id;
+        private long _idRole;
 
-        public int Id
+        public long IdRole
         {
-            get { return _id; }
-            set { _id = value; }
+            get { return _idRole; }
+            set { _idRole = value; }
         }
 
         private string _nombre;
@@ -23,7 +23,11 @@ namespace BBL.Models
             set { _nombre = value; }
         }
 
-        public Role() { }
+        public Role(long idRol, string nombre) 
+        {
+            this.IdRole = idRol;
+            this.Nombre = nombre;
+        }
 
 
     }

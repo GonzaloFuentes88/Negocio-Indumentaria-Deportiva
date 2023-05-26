@@ -5,23 +5,23 @@ using System.Web;
 
 namespace BBL.Models
 {
-    public class UsuarioModel
+    public class Usuario
     {
-        private int _id;
+        private int _idUsuario;
 
-        public int Id
+        public int IdUsuario
         {
-            get { return _id; }
-            set { _id = value; }
+            get { return _idUsuario; }
+            set { _idUsuario = value; }
         }
 
-        private string _nombre;
+        private Empleado _empleado;
 
-        public string  Nombre
+        public Empleado Empleado
         {
-            get { return _nombre; }
-            set { _nombre = value; }
-        }
+            get { return _empleado; }
+            set { _empleado = value; }
+        } 
 
         private string _username;
 
@@ -39,12 +39,12 @@ namespace BBL.Models
             set { _password = value; }
         }
 
-        private string _email;
+        private bool _estado;
 
-        public string Email
+        public bool Estado
         {
-            get { return _email; }
-            set { _email = value; }
+            get { return _estado; }
+            set { _estado = value; }
         }
 
         private Role _role;
@@ -55,7 +55,7 @@ namespace BBL.Models
             set { _role = value; }
         }
 
-        public UsuarioModel() { }
+       
 
 
     }
