@@ -14,7 +14,7 @@ namespace BBL.Models
             get { return _idventa; }
             set { _idventa = value; }
         }
-
+ 
         private Usuario _usuario;
         public Usuario Usuario
         {
