@@ -15,7 +15,7 @@ namespace BBL.Models
             get { return _usuarios; }
             set { _usuarios = value; }
         }
-        /*
+        
                 private Venta _ventas;
 
                 public Venta Ventas
@@ -32,14 +32,14 @@ namespace BBL.Models
                     set { _productos = value; }
                 }
 
-                private ManipularDatos _datos;
+             //   private ManipularDatos _datos;
 
-                public ManipularDatos Datos
-                {
-                    get { return _datos; }
-                    set { _datos = value; }
-                }
+            //    public ManipularDatos Datos
+            //    {
+            //        get { return _datos; }
+             //       set { _datos = value; }
+           //     }
 
-                */
+                
     }
 }
