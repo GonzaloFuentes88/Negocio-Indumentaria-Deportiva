@@ -9,14 +9,14 @@ namespace BBL.Models
     public class Producto
     {
         private long _idproducto;
-        public long idProducto
+        public long IdProducto
         {
             get { return _idproducto; }
             set { _idproducto = value; }
         }
 
         private Categoria _categoria;
-        public long Categoria
+        public Categoria Categoria
         {
             get { return _categoria; }
             set { _categoria = value; }

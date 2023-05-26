@@ -9,7 +9,7 @@ namespace BBL.Models
     public class Venta
     {
         private long _idventa;
-        public long idVenta
+        public long IdVenta
         {
             get { return _idventa; }
             set { _idventa = value; }
@@ -23,11 +23,13 @@ namespace BBL.Models
         }
 
         private Cliente _cliente;
+
         public Cliente Cliente
         {
             get { return _cliente; }
             set { _cliente = value; }
         }
+
 
         private DateTime _fecha;
         public DateTime Fecha
@@ -43,8 +45,6 @@ namespace BBL.Models
             set { _total = value; }
         }
 
-       
-
         public Venta(long idVenta, Usuario usuario, Cliente cliente, DateTime fecha, double total)
         {
             this.IdVenta = idVenta;
@@ -53,6 +53,8 @@ namespace BBL.Models
             this.Fecha = fecha;
             this.Total = total;
         }
+
+
 
     }
 }

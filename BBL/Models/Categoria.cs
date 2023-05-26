@@ -21,15 +21,14 @@ namespace BBL.Models
             get { return _nombre; }
             set { _nombre = value; }
         }
-    
 
-    
+        private Proveedor _proveedor;
 
-    public Proveedor(long idCategoria, string Nombre)
-    {
-        this.idCategoria = idCategoria;
-        this.Nombre = Nombre;
-    }
+        public Proveedor Proveedor
+        {
+            get { return _proveedor; }
+            set { _proveedor = value; }
+        }
 
 
     }

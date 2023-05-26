@@ -9,7 +9,7 @@ namespace BBL.Models
     public class Detalle
     {
         private long _iddetalle;
-        public long idDetalle
+        public long IdDetalle
         {
             get { return _iddetalle; }
             set { _iddetalle = value; }
@@ -40,7 +40,7 @@ namespace BBL.Models
         public double Precio
         {
             get { return _precio; }
-            set { _precio = value; }0
+            set { _precio = value; }
         }
 
        
