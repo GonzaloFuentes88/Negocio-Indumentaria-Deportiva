@@ -36,7 +36,7 @@ namespace DAL.Datos
         public DataTable IniciarSesion(string user,string pass)
         {
             Conexion objConexion = Conexion.GetConexion;
-            string nombreStoreProcedure = "sp_insertar_materia";
+
             SqlParameter[] parametros = new SqlParameter[2];
 
             parametros[0] = objConexion.crearParametro("@Username", user);

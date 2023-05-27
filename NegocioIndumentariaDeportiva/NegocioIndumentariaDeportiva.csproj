@@ -214,11 +214,11 @@
     <Content Include="Views\Vendedor\RegistrarProducto.cshtml" />
     <Content Include="Views\Vendedor\EditarProducto.cshtml" />
     <Content Include="Views\Usuario\Listar.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
