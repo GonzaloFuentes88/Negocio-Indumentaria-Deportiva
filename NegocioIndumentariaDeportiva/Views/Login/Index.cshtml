@@ -29,7 +29,15 @@
 
             <button type="submit" class="btn btn-primary">Iniciar sesión</button>
         </form>
-
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    @Html.Raw(error.ErrorMessage)<br />
+                }
+            </div>
+        }
         @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
         {
             <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
