@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BBL.Models
 {
-    class Cliente : Persona
+    public class Cliente : Persona
     {
         private long _idCliente;
 

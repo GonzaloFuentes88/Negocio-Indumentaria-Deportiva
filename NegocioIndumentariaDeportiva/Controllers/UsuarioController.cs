@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using NegocioIndumentariaDeportiva.Datos;
-using NegocioIndumentariaDeportiva.Datos.DaoImpl;
+using BBL.Models;
 
 namespace NegocioIndumentariaDeportiva.Controllers
 {
     public class UsuarioController : Controller
     {
-        private UsuarioDao usuarioDao = new UsuarioDao();
+        private Empresa empresa = Empresa.GetInstance;
         
         // GET: Usuario
         public ActionResult Listar()
         {
-
-            var oList = usuarioDao.FindAll();
+            var oList = empresa.ObtenerUsuarios();
             return View(oList);
         }
 

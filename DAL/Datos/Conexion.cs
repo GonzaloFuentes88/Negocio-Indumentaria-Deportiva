@@ -53,7 +53,7 @@ namespace DAL.Datos
         public SqlConnection Conectar()
         {
             //Cambiar InitialCatalog y el Data Source por los propios
-            strCadenaDeConexion = @"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Sistema;Data Source=localhost\SQLEXPRESS";
+            strCadenaDeConexion = @"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=TiendaDeportiva_tp;Data Source=localhost\SQLEXPRESS";
             objConexion = new SqlConnection(strCadenaDeConexion);
             objConexion.Open();
 
@@ -114,7 +114,6 @@ namespace DAL.Datos
                 this.Desconectar();
             }
 
-
             return unaTabla;
         }
 
@@ -164,6 +163,73 @@ namespace DAL.Datos
 
             return filasAfectadas;
         }
+
+        #region Parametros
+        public SqlParameter crearParametro(string pNombre, string pValor)
+        {
+
+            SqlParameter objParametro = new SqlParameter();
+
+            objParametro.ParameterName = pNombre;
+            objParametro.Value = pValor;
+            objParametro.DbType = DbType.String;
+
+            return objParametro;
+        }
+
+
+
+        public SqlParameter crearParametro(string pNombre, double pValor)
+        {
+
+            SqlParameter objParametro = new SqlParameter();
+
+            objParametro.ParameterName = pNombre;
+            objParametro.Value = pValor;
+            objParametro.DbType = DbType.Double;
+
+            return objParametro;
+        }
+
+
+        public SqlParameter crearParametro(string pNombre, DateTime pValor)
+        {
+
+            SqlParameter objParametro = new SqlParameter();
+
+            objParametro.ParameterName = pNombre;
+            objParametro.Value = pValor;
+            objParametro.DbType = DbType.DateTime;
+
+            return objParametro;
+        }
+
+
+        public SqlParameter crearParametro(string pNombre, int pValor)
+        {
+
+            SqlParameter objParametro = new SqlParameter();
+
+            objParametro.ParameterName = pNombre;
+            objParametro.Value = pValor;
+            objParametro.DbType = DbType.Int32;
+
+            return objParametro;
+        }
+
+
+        public SqlParameter crearParametro(string pNombre, Boolean pValor)
+        {
+
+            SqlParameter objParametro = new SqlParameter();
+
+            objParametro.ParameterName = pNombre;
+            objParametro.Value = pValor;
+            objParametro.DbType = DbType.Boolean;
+
+            return objParametro;
+        }
+        #endregion
 
 
     }
