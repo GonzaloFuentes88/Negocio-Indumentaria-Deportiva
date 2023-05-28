@@ -35,8 +35,27 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
             if (usuario != null)
             {
-                return RedirectToAction("Index", "Home");
+                if(usuario.Role.IdRole == 1) {
+                    return RedirectToAction("Index", "AdminSistema");
+                }
+                else if (usuario.Role.IdRole == 2)
+                {
+                    return RedirectToAction("Index", "Gerente");
+                }
+                else if (usuario.Role.IdRole == 3)
+                {
+                    return RedirectToAction("Index", "Vendedor");
+                }
+                else if (usuario.Role.IdRole == 4)
+                {
+                    return RedirectToAction("Index", "Administrativo");
+                }
+                else
+                {
+                    return View("Index", sesion);
+                }
             }
+
             else
             {
                 // El usuario no existe o las credenciales son incorrectas
