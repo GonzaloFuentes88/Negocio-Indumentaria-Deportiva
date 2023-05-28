@@ -133,6 +133,33 @@ namespace BBL.Models
             return usuario;
         }
 
+        public bool RegistrarUsuario(Usuario usuario)
+        {
+            DireccionCon direccionCon = DireccionCon.GetDireccionCon;
+            EmpleadoCon empleadoCon = EmpleadoCon.GetEmpleadoCon;
+            UsuarioCon usuarioCon = UsuarioCon.GetUsuarioCon;
+            
+            if(usuario.Empleado.Direccion != null)
+            {
+                Direccion dir = usuario.Empleado.Direccion;
+                if(direccionCon.RegistrarDireccion(dir.CP, dir.Calle, dir.Numero))
+                {
+                    Empleado empl = usuario.Empleado;
+                    if (empleadoCon.RegistrarEmpleado(
+                        dir.IDdireccion, empl.Nombre, empl.Apellido, empl.DNI, empl.Telefono, empl.Email))
+                    {
+                        if (usuarioCon.RegistrarUsuario(
+                            usuario.Username,usuario.Password,usuario.Role.IdRole,empl.Legajo))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+
+        }
+
 
 
                 

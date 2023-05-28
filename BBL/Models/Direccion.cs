@@ -47,6 +47,7 @@ namespace BBL.Models
             this.Calle = calle;
             this.Numero = numero;
         }
+        public Direccion() { }
 
     }
 }
