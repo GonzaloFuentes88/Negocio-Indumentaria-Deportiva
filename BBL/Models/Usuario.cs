@@ -55,7 +55,13 @@ namespace BBL.Models
             set { _role = value; }
         }
 
-       
+       public Usuario CrearUsuario(Empleado empleado, Role rol)
+        {
+            Usuario unUsuario = new Usuario();
+            unUsuario.Empleado = empleado;
+            unUsuario.Role = rol;
+            return unUsuario;
+        }
 
 
     }

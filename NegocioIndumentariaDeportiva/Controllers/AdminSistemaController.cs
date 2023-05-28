@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BBL.Models;
 
 
 namespace NegocioIndumentariaDeportiva.Controllers
@@ -32,6 +33,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
             return View();
         }
 
+        
         public ActionResult Pendientes()
         {
             return View();
@@ -41,6 +43,36 @@ namespace NegocioIndumentariaDeportiva.Controllers
         {
             return View();
         }
+
+        public ActionResult ComboboxRol()
+        {
+            Role admin = new Role(1, "Administrador");
+            Role vendedor = new Role(2, "Vendedor");
+            Role gerente = new Role(3, "Gerente");
+
+
+            List<Role> roles = new List<Role>();
+            roles.Add(admin);
+            roles.Add(vendedor);
+            roles.Add(gerente);
+
+            ViewBag.roles = new SelectList(roles);
+
+            return View();
+;        }
+
+
+        [HttpPost]
+
+        //
+        public ActionResult DarAlta(Empleado empleado, Role rol)
+        {
+            Usuario usuario = new Usuario();
+            usuario.CrearUsuario(empleado, rol);
+
+            return View();
+        }
+
 
         /*
          * ARREGLAR ESTA PARTE
