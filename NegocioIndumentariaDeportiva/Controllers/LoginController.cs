@@ -35,14 +35,13 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
             if (usuario != null)
             {
-
                 return RedirectToAction("Index", "Home");
             }
             else
             {
                 // El usuario no existe o las credenciales son incorrectas
-                ViewBag.ErrorMessage = "Invalid username or password";
-                return View(); // Devuelve la vista de nuevo para mostrar el mensaje de error
+                ModelState.AddModelError("", "Usuario o contraseña inválidos");
+                return View("Index", sesion); // Devuelve la vista original con el modelo y el mensaje de error
             }
         }
     }

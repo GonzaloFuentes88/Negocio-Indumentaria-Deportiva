@@ -99,11 +99,15 @@ namespace BBL.Models
 
         public Usuario IniciarSesion(string user, string pass)
         {
+
             Usuario usuario = new Usuario();
             UsuarioCon usuarioCon = UsuarioCon.GetUsuarioCon;
 
             DataTable dt = new DataTable();
             dt = usuarioCon.IniciarSesion(user,pass);
+
+            if (dt == null || dt.Rows.Count == 0)
+                return null;
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -124,6 +128,7 @@ namespace BBL.Models
                     usuario.Estado = true;
                 }
             }
+
 
             return usuario;
         }
