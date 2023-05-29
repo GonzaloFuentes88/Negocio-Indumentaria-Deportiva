@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - Administrador</title>
     <link href="/css/site.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
@@ -24,13 +24,19 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                @Html.ActionLink("Inicio", "Index", "Login", new { area = "Login" }, new { @class = "nav-link" })
+                                @Html.ActionLink("Inicio", "Index", "AdminSistema", new { @class = "nav-link" })
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Acerca de", "About", "Home", new { area = "" },  new { @class = "nav-link" })
+                                @Html.ActionLink("Crear usuario", "Alta", "AdminSistema", new { @class = "nav-link" })
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                                @Html.ActionLink("Usuarios", "Vertodos", "AdminSistema", new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Historial", "Historial", "AdminSistema", new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Pendientes", "Pendientes", "AdminSistema", new { @class = "nav-link" })
                             </li>
                         </ul>
                     </div>

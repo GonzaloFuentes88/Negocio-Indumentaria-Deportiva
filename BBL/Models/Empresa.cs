@@ -52,14 +52,32 @@ namespace BBL.Models
                     set { _productos = value; }
                 }
 
-             //   private ManipularDatos _datos;
+        //   private ManipularDatos _datos;
 
-            //    public ManipularDatos Datos
-            //    {
-            //        get { return _datos; }
-             //       set { _datos = value; }
-           //     }
+        //    public ManipularDatos Datos
+        //    {
+        //        get { return _datos; }
+        //       set { _datos = value; }
+        //     }
+        
+        public List<Role> ObtenerRoles()
+        {
+            List<Role> listRoles = new List<Role>();
+            RoleCon RoleCon = RoleCon.GetUsuarioCon;
+            DataTable dt = new DataTable();
+            dt = RoleCon.ObtenerRoles();
 
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Role role = new Role();
+                role.IdRole = Convert.ToInt32(dt.Rows[i]["Id_Rol"]);
+                role.Nombre = dt.Rows[i]["Tipo"].ToString();
+
+                listRoles.Add(role);
+            }
+
+            return listRoles;
+        }
         public List<Usuario> ObtenerUsuarios()
         {
             List<Usuario> listUsuarios = new List<Usuario>();
@@ -131,6 +149,33 @@ namespace BBL.Models
 
 
             return usuario;
+        }
+
+        public bool RegistrarUsuario(Usuario usuario)
+        {
+            DireccionCon direccionCon = DireccionCon.GetDireccionCon;
+            EmpleadoCon empleadoCon = EmpleadoCon.GetEmpleadoCon;
+            UsuarioCon usuarioCon = UsuarioCon.GetUsuarioCon;
+            
+            if(usuario.Empleado.Direccion != null)
+            {
+                Direccion dir = usuario.Empleado.Direccion;
+                if(direccionCon.RegistrarDireccion(dir.CP, dir.Calle, dir.Numero))
+                {
+                    Empleado empl = usuario.Empleado;
+                    if (empleadoCon.RegistrarEmpleado(
+                        dir.IDdireccion, empl.Nombre, empl.Apellido, empl.DNI, empl.Telefono, empl.Email))
+                    {
+                        if (usuarioCon.RegistrarUsuario(
+                            usuario.Username,usuario.Password,usuario.Role.IdRole,empl.Legajo))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+
         }
 
 

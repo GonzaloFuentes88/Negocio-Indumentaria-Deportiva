@@ -1,13 +1,12 @@
 ﻿@model BBL.Models.Usuario
 
-
 @{
     ViewData["Title"] = "Usuarios: ver";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 
 }
 <head>
-    <link rel="stylesheet" href="~/Content/styles.css"/>
+    <link rel="stylesheet" href="~/Content/styles.css" />
 </head>
 <body>
     <div id="layoutAuthentication">
@@ -18,23 +17,46 @@
                         <div class="col-lg-5">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div><h3 class="text-center font-weight-light my-4">Crear usuario</h3></div>
-                                
-                                                
+                                <div class="card-body form-group mb-3">
 
-                                                    <!--
-            falta el label para contraseña y rol
+                                    <div class="row mb-3">
+                                        <div>
+                                            <div class="mb-3 mb-md-0 ">
+
+                                                <form action="@Url.Action("DarAlta", "AdminSistema")" method="post">
+                                                    @Html.AntiForgeryToken()
 
 
-        <div class="form-group mb-3">
-        <label for="exampleFormControlSelect1">Perfil</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-            <option>Selecciona una opción</option>
-            <option>Administrativo</option>
-            <option>Administrador de sistema</option>
-            <option>Gerente</option>
-            <option>Vendedor</option>
-        </select>
-        </div>-->
+
+                                                    <div class="row">
+
+                                                        <div class="col-6">
+                                                            @Html.LabelFor(m => m.Empleado.Nombre)
+                                                            @Html.TextBoxFor(m => m.Empleado.Nombre, new { @class = "form-control" })
+                                                        </div>
+
+                                                        <div class="col-6">
+                                                            @Html.LabelFor(m => m.Empleado.Apellido)
+                                                            @Html.TextBoxFor(m => m.Empleado.Apellido, new { @class = "form-control" })
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <label class="mt-4 mb-0">Documento</label>
+
+                                                        <!-- @Html.LabelFor(m => m.Empleado.DNI)-->
+                                                        @Html.TextBoxFor(m => m.Empleado.DNI, new { @class = "form-control" })
+                                                    </div>
+
+                                                    <div class="mt-4 mb-0">
+                                                        @Html.LabelFor(m => m.Empleado.Email)
+                                                        @Html.TextBoxFor(m => m.Empleado.Email, new { @class = "form-control" })
+                                                    </div>
+         
+                                                    <div class="mt-4 mb-0">
+                                                        @Html.LabelFor(m => m.Role)
+                                                        @Html.DropDownListFor(m => m.Role, new SelectList(ViewBag.roles, "Nombre", "Nombre"), "Seleccione un Rol", new { @class = "form-control" })
+                                                    </div>
+
                                                 </form>
 
                                             </div>
@@ -46,7 +68,7 @@
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid"><a class="btn btn-primary btn-block">Guardar</a></div>
                                             </div>
-                                            
+
                                         </div>
 
                                     </div>

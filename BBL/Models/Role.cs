@@ -28,7 +28,10 @@ namespace BBL.Models
             this.IdRole = idRol;
             this.Nombre = nombre;
         }
+        public Role()
+        {
 
+        }
 
     }
 }

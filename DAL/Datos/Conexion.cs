@@ -53,7 +53,9 @@ namespace DAL.Datos
         public SqlConnection Conectar()
         {
             //Cambiar InitialCatalog y el Data Source por los propios
+            ////gonzaCadena= @"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Sistema;Data Source=localhost\SQLEXPRESS";
             strCadenaDeConexion = @"Data Source=DESKTOP-LHGQJON;Initial Catalog=TiendaDeportiva_tp;Integrated Security=True;";
+
             objConexion = new SqlConnection(strCadenaDeConexion);
             objConexion.Open();
 
