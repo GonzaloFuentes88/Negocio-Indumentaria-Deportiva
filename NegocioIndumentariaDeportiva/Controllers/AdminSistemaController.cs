@@ -18,6 +18,8 @@ namespace NegocioIndumentariaDeportiva.Controllers
             _logger = logger;
         }
         */
+        private Empresa empresa = Empresa.GetInstance;
+
         public ActionResult Index()
         {
             return View();
@@ -30,6 +32,9 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
         public ActionResult Alta()
         {
+            List<Role> roles = new List<Role>();
+            roles = empresa.ObtenerRoles();
+            ViewBag.roles = roles;
             return View();
         }
 
