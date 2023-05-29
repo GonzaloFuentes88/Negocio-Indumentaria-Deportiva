@@ -340,10 +340,9 @@ th {
 
 
 label {
-    display: inline-block;
+    display: flex;
     color: #65a17d;
     padding-bottom: 3px;
-    padding-left: 10px;
 }
 
 button {
@@ -7636,7 +7635,7 @@ textarea.form-control-lg {
 .mt-4 {
     margin-top: 1.5rem !important;
     text-align-last: center;
-    padding-bottom: 25px;
+    padding-bottom: 5px;
     color: #32a36a;
 }
 
