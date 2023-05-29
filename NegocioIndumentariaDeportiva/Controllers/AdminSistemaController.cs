@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BBL.Models;
 
 
+
 namespace NegocioIndumentariaDeportiva.Controllers
 {
     public class AdminSistemaController : Controller
@@ -44,19 +45,24 @@ namespace NegocioIndumentariaDeportiva.Controllers
             return View();
         }
 
-        public ActionResult ComboboxRol()
+        
+        public ActionResult ComboboxRol(string rol)
         {
-            Role admin = new Role(1, "Administrador");
+            /*Role admin = new Role(1, "Administrador");
             Role vendedor = new Role(2, "Vendedor");
             Role gerente = new Role(3, "Gerente");
 
 
-            List<Role> roles = new List<Role>();
-            roles.Add(admin);
-            roles.Add(vendedor);
-            roles.Add(gerente);
+            List<string> roles = new List<string>
+            {
+                "Administrador",
+                "Vendedor", 
+                "Gerente"
 
-            ViewBag.roles = new SelectList(roles);
+                };
+            
+
+            ViewBag.Role = new SelectList(roles);*/
 
             return View();
 ;        }
