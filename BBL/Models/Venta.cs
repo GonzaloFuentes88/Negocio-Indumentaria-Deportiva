@@ -45,13 +45,18 @@ namespace BBL.Models
             set { _total = value; }
         }
 
-        public Venta(long idVenta, Usuario usuario, Cliente cliente, DateTime fecha, double total)
+        private List<Detalle> _detalles;
+
+        public List<Detalle> Detalles
         {
-            this.IdVenta = idVenta;
-            this.Usuario = usuario;
-            this.Cliente = cliente;
-            this.Fecha = fecha;
-            this.Total = total;
+            get { return _detalles; }
+            set { _detalles = value; }
+        }
+
+
+        public Venta()
+        {
+
         }
 
 

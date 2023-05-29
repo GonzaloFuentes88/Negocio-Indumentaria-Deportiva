@@ -28,38 +28,14 @@ namespace BBL.Models
             }
         }
 
-        private List<Usuario> _usuarios;
+        private Usuario _usuarioEnUso;
 
-        public List<Usuario> Usuarios
+        public Usuario UsuarioEnUso
         {
-            get { return _usuarios; }
-            set { _usuarios = value; }
+            get { return _usuarioEnUso; }
+            set { _usuarioEnUso = value; }
         }
-        
-                private Venta _ventas;
 
-                public Venta Ventas
-                {
-                    get { return _ventas; }
-                    set { _ventas = value; }
-                }
-
-                private Producto _productos;
-
-                public Producto Productos
-                {
-                    get { return _productos; }
-                    set { _productos = value; }
-                }
-
-        //   private ManipularDatos _datos;
-
-        //    public ManipularDatos Datos
-        //    {
-        //        get { return _datos; }
-        //       set { _datos = value; }
-        //     }
-        
         public List<Role> ObtenerRoles()
         {
             List<Role> listRoles = new List<Role>();
@@ -106,10 +82,6 @@ namespace BBL.Models
                 }
 
                 listUsuarios.Add(usuario);
-            }
-            if(listUsuarios.Count > 0)
-            {
-                this.Usuarios = listUsuarios;
             }
 
             return listUsuarios;
