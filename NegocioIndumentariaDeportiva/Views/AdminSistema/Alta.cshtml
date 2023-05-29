@@ -1,10 +1,11 @@
 ﻿@model BBL.Models.Usuario
 
 @{
-    ViewData["Title"] = "Usuarios: ver";
+
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 
 }
+<!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="~/Content/styles.css" />
 </head>
@@ -22,7 +23,7 @@
                                     <div class="row mb-3">
                                         <div>
                                             <div class="mb-3 mb-md-0 ">
-
+                                                
                                                 <form action="@Url.Action("DarAlta", "AdminSistema")" method="post">
                                                     @Html.AntiForgeryToken()
 
@@ -81,24 +82,19 @@
 
 
                                                     @Html.AntiForgeryToken()
-                                                    <div class="row">
+                                                    <div class="mt-4 mb-0 col-6">
 
-                                                        <div class="col-6">
-                                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                                        </div>
+                                                        @Html.LabelFor(m => m.Password)
+                                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
 
-                                                        <div class="col-6">
-                                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                                        </div>
+                                                    </div>
 
+                                                    <div class="mt-4 mb-0">
+                                                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
                                                     </div>
 
                                                 </form>
 
-                                            </div>
-
-                                            <div class="mt-4 mb-0">
-                                                <div class="d-grid"><a class="btn btn-primary btn-block">Guardar</a></div>
                                             </div>
 
                                         </div>

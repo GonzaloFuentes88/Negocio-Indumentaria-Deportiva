@@ -21,6 +21,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         */
         private Empresa empresa = Empresa.GetInstance;
 
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
@@ -51,37 +52,25 @@ namespace NegocioIndumentariaDeportiva.Controllers
         }
 
         
-        public ActionResult ComboboxRol(string rol)
-        {
-            /*Role admin = new Role(1, "Administrador");
-            Role vendedor = new Role(2, "Vendedor");
-            Role gerente = new Role(3, "Gerente");
-
-
-            List<string> roles = new List<string>
-            {
-                "Administrador",
-                "Vendedor", 
-                "Gerente"
-
-                };
-            
-
-            ViewBag.Role = new SelectList(roles);*/
-
-            return View();
-;        }
 
 
         [HttpPost]
-
-        //
-        public ActionResult DarAlta(Empleado empleado, Role rol)
+        public ActionResult DarAlta(Usuario usuario)
         {
-            Usuario usuario = new Usuario();
-            usuario.CrearUsuario(empleado, rol);
+            Boolean registrado = empresa.RegistrarUsuario(usuario); 
+            if (registrado)
+            {
 
-            return View();
+                return View("Alta");
+
+            }
+            else
+            {
+                // El modelo no es válido, manejar los errores de validación
+                ModelState.AddModelError("", "Usuario o contraseña inválidos");
+                return View("Alta");
+            }
+;
         }
 
 
