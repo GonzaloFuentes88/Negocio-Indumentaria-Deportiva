@@ -15,7 +15,10 @@ namespace BBL.Models
             get { return _legajo; }
             set { _legajo = value; }
         }
+        public Empleado()
+        {
 
+        }
         public Empleado(long dni, string nombre, string apellido, long telefono, string email, Direccion direccion)
         {
             this.DNI = dni;
