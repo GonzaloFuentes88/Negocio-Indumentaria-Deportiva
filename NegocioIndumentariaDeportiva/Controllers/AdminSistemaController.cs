@@ -29,7 +29,33 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
         public ActionResult Vertodos()
         {
-            return View();
+            List<Usuario> usuarios = new List<Usuario>();
+            Empleado empleado = new Empleado();
+            empleado.Legajo = 123;
+            empleado.Nombre = "Pepe";
+            empleado.Apellido = "Reo";
+            empleado.DNI = 121331;
+            empleado.Email = "pepe@gmail.com";
+            empleado.Telefono = 123131;
+            Role r = new Role(1,"ADMIN");
+            Direccion dir = new Direccion(23,"12312","Mitre",123);
+            empleado.Direccion = dir;
+            Usuario user = new Usuario();
+            user.Role = r;
+            user.Empleado = empleado;
+            user.Username = "Jose";
+            user.Password = "123";
+            user.Estado = true;
+            Usuario user2 = new Usuario();
+            user2.Role = r;
+            user2.Empleado = empleado;
+            user2.Username = "JoseLues";
+            user2.Password = "123";
+            user2.Estado = false;
+
+            usuarios.Add(user);
+            usuarios.Add(user2);
+            return View(usuarios);
         }
 
         public ActionResult Alta()
@@ -60,15 +86,13 @@ namespace NegocioIndumentariaDeportiva.Controllers
             Boolean registrado = empresa.RegistrarUsuario(usuario); 
             if (registrado)
             {
-
-                return View("Alta");
-
+                return RedirectToAction("Alta");
             }
             else
             {
                 // El modelo no es válido, manejar los errores de validación
                 ModelState.AddModelError("", "Usuario o contraseña inválidos");
-                return View("Alta");
+                return RedirectToAction("Alta");
             }
 ;
         }

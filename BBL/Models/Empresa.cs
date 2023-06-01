@@ -132,11 +132,13 @@ namespace BBL.Models
             if(usuario.Empleado.Direccion != null)
             {
                 Direccion dir = usuario.Empleado.Direccion;
-                if(direccionCon.RegistrarDireccion(dir.CP, dir.Calle, dir.Numero))
+                dir.IDdireccion = direccionCon.RegistrarDireccion(dir.CP, dir.Calle, dir.Numero);
+                if (dir.IDdireccion > 0)
                 {
                     Empleado empl = usuario.Empleado;
-                    if (empleadoCon.RegistrarEmpleado(
-                        dir.IDdireccion, empl.Nombre, empl.Apellido, empl.DNI, empl.Telefono, empl.Email))
+                    empl.Legajo = empleadoCon.RegistrarEmpleado(
+                        dir.IDdireccion, empl.Nombre, empl.Apellido, empl.DNI, empl.Telefono, empl.Email);
+                    if (empl.Legajo > 0)
                     {
                         if (usuarioCon.RegistrarUsuario(
                             usuario.Username,usuario.Password,usuario.Role.IdRole,empl.Legajo))

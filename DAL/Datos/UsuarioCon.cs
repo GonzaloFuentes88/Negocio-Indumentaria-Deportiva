@@ -60,7 +60,7 @@ namespace DAL.Datos
             parametros[3] = objConexion.crearParametro("@Id_Rol", idRole);
             parametros[4] = objConexion.crearParametro("@Legajo",legajo);
 
-            filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_registrar_empleado",parametros);
+            filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_registrar_usuario",parametros);
             if(filasAfectadas > 0)
             {
                 return true;

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<BBL.Models.Usuario>
+@{
     ViewData["Title"] = "Usuarios: ver";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 
@@ -17,11 +18,11 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
-  
-        
-        
+
+
+
     <div id="layoutSidenav">
-      
+
         <div id="layoutSidenav_content">
             <main>
 
@@ -34,58 +35,69 @@
                             <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                         </div>
                     </form>
-                    
-                   
-                 
-                        <div >
-                            <table class="table">
-                                <thead>
-                                    <tr scope="row" class="fila-seleccionable">
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Apellido</th>
-                                        <th scope="col">E-mail</th>
-                                        <th scope="col">Perfil</th>
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
+
+
+
+                    <div>
+                        <table class="table">
+                            <thead>
                                 <tr scope="row" class="fila-seleccionable">
-                                        <td scope="col">Tiger </td>
-                                        <td scope="col">Nixon</td>
-                                        <td scope="col">tnix@mail.com</td>
-                                        <td scope="col">Vendedor</td>
-                                        
-                                    </tr>
+                                    <th scope="col">LEGAJO</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">E-mail</th>
+                                    <th scope="col">Perfil</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">ALTA-BAJA</th>
+                                    <th scope="col">EDITAR</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
                                 <tr scope="row" class="fila-seleccionable">
-                                        <td scope="col">Garrett </td>
-                                        <td scope="col">Winters</td>
-                                        <td scope="col">gwinters@email.com</td>
-                                        <td scope="col">Gerente</td>
-                                        
-                                    </tr>
-                                    <tr scope="row" class="fila-seleccionable">
-                                        <td scope="col" >Ashton </td>
-                                        <td scope="col">Cox</td>
-                                        <td scope="col">acox@email.com</td>
-                                        <td scope="col">Administrador de sistema</td>
-                                        
-                                    </tr>
+                                    <td scope="col">
+                                        <a @Html.ActionLink(item.Empleado.Legajo.ToString(), "VerUsuario", new { id = item.Empleado.Legajo })
+                                    </td>
+                                    <td scope="col">
+                                        @Html.DisplayFor(modelItem => item.Username)
+                                    </td>
+                                    <td scope="col">
+                                        @Html.DisplayFor(modelItem => item.Empleado.Email)
+                                    </td>
+                                    <td scope="col">
+                                        @Html.DisplayFor(modelItem => item.Role.Nombre)
+                                    </td>
+                                    <td scope="col">
+                                        @Html.DisplayFor(modelItem => item.Estado)
+                                    </td>
+                                    @if (item.Estado)
+                                    {
+                                        <td scope="col">
+                                            <a class="btn btn-primary btn-block" @Html.ActionLink("Baja", "Baja", new { id = item.IdUsuario })
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td scope="col">
+                                            <a class="btn btn-primary btn-block" @Html.ActionLink("Alta", "Baja", new { id = item.IdUsuario })
+                                        </td>
+                                    }
+                                    <td scope="col">
+                                        <a class="btn btn-primary btn-block" @Html.ActionLink("Editar", "Editar", new { id = item.IdUsuario })
+                                    </td>
+                                </tr>
+                                    }
                                 </tbody>
-                            </table>
-                            
-                        </div>
-                        <div class="mt-4 mb-0">
-                            <div class="d-grid"><a class="btn btn-primary btn-block" asp-action="Index">Dar de baja</a>
-                                                <a class="btn btn-primary btn-block" asp-action="Index">Editar</a>
-                                </div>
-                        </div>
+                        </table>
+
                     </div>
-                
+                </div>
+
             </main>
-            </div>
+        </div>
 
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>

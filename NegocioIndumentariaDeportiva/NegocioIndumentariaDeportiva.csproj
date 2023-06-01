@@ -115,10 +115,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdministrativoController.cs" />
     <Compile Include="Controllers\AdminSistemaController.cs" />
+    <Compile Include="Controllers\GerenteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VendedorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -212,7 +213,6 @@
     <Content Include="Views\Vendedor\Index.cshtml" />
     <Content Include="Views\Vendedor\RegistrarProducto.cshtml" />
     <Content Include="Views\Vendedor\EditarProducto.cshtml" />
-    <Content Include="Views\Usuario\Listar.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\LayoutVendedor.cshtml" />
@@ -220,6 +220,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Administrativo\" />
+    <Folder Include="Views\Gerente\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

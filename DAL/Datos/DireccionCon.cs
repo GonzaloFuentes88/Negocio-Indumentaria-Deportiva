@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace DAL.Datos
 {
@@ -25,22 +26,23 @@ namespace DAL.Datos
 
         private DireccionCon() { }
 
-        public bool RegistrarDireccion(string cp,string calle,long numero)
+        public int RegistrarDireccion(string cp,string calle,long numero)
         {
             Conexion objConexion = Conexion.GetConexion;
             SqlParameter[] parametros = new SqlParameter[3];
-            int filasAfectadas = 0;
+            int id = 0;
 
             parametros[0] = objConexion.crearParametro("@CP", cp);
             parametros[1] = objConexion.crearParametro("@Calle", calle);
             parametros[2] = objConexion.crearParametro("@Numero", numero);
 
-            filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_registrar_direccion", parametros);
-            if (filasAfectadas > 0)
+            DataTable dt = objConexion.LeerPorStoreProcedure("sp_registrar_direccion", parametros);
+            id = Convert.ToInt32(dt.Rows[0]["ID"]);
+            if (id > 0)
             {
-                return true;
+                return id;
             }
-            return false;
+            return 0;
         }
 
 

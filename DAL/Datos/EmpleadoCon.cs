@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace DAL.Datos
 {
@@ -25,11 +26,11 @@ namespace DAL.Datos
 
         private EmpleadoCon() { }
 
-        public bool RegistrarEmpleado(long idDireccion,string nombre,string apellido,long dni,long telefono,string email)
+        public int RegistrarEmpleado(long idDireccion,string nombre,string apellido,long dni,long telefono,string email)
         {
             Conexion objConexion = Conexion.GetConexion;
             SqlParameter[] parametros = new SqlParameter[6];
-            int filasAfectadas = 0;
+            int id = 0;
 
             parametros[0] = objConexion.crearParametro("@Id_Direccion", idDireccion);
             parametros[1] = objConexion.crearParametro("@Nombre", nombre);
@@ -38,12 +39,14 @@ namespace DAL.Datos
             parametros[4] = objConexion.crearParametro("@Telefono", telefono);
             parametros[5] = objConexion.crearParametro("@Email", email);
 
-            filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_registrar_empleado", parametros);
-            if (filasAfectadas > 0)
+            DataTable dt = objConexion.LeerPorStoreProcedure("sp_registrar_empleado", parametros);
+            id = Convert.ToInt32(dt.Rows[0]["ID"]);
+            if (id > 0)
             {
-                return true;
+                return id;
             }
-            return false;
+            return 0;
         }
+        
     }
 }
