@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<BBL.Models.Usuario>
 @{
-    ViewData["Title"] = "Usuarios: ver";
+    ViewData["Title"] = "Usuarios";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 
 }
@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Usuarios: ver</title>
+    <title>Usuarios</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/styles.css" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -27,7 +27,7 @@
             <main>
 
                 <div>
-                    <h1>Usuarios</h1>
+                    <h1 style="color: #3f7c66">Usuarios</h1>
                     <!-- Navbar Search-->
                     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                         <div class="input-group">
@@ -39,58 +39,122 @@
 
 
                     <div>
+                        <h3 style="color: #3f7c66">Usuarios activos</h3>
                         <table class="table">
                             <thead>
                                 <tr scope="row" class="fila-seleccionable">
-                                    <th scope="col">LEGAJO</th>
+                                    <th scope="col">Legajo</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">E-mail</th>
                                     <th scope="col">Perfil</th>
                                     <th scope="col">Estado</th>
-                                    <th scope="col">ALTA-BAJA</th>
-                                    <th scope="col">EDITAR</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col"></th>
+
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                <tr scope="row" class="fila-seleccionable">
-                                    <td scope="col">
-                                        <a @Html.ActionLink(item.Empleado.Legajo.ToString(), "VerUsuario", new { id = item.Empleado.Legajo })
-                                    </td>
-                                    <td scope="col">
-                                        @Html.DisplayFor(modelItem => item.Username)
-                                    </td>
-                                    <td scope="col">
-                                        @Html.DisplayFor(modelItem => item.Empleado.Email)
-                                    </td>
-                                    <td scope="col">
-                                        @Html.DisplayFor(modelItem => item.Role.Nombre)
-                                    </td>
-                                    <td scope="col">
-                                        @Html.DisplayFor(modelItem => item.Estado)
-                                    </td>
-                                    @if (item.Estado)
+                                    if (item.Estado)
                                     {
-                                        <td scope="col">
-                                            <a class="btn btn-primary btn-block" @Html.ActionLink("Baja", "Baja", new { id = item.IdUsuario })
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td scope="col">
-                                            <a class="btn btn-primary btn-block" @Html.ActionLink("Alta", "Baja", new { id = item.IdUsuario })
-                                        </td>
-                                    }
-                                    <td scope="col">
-                                        <a class="btn btn-primary btn-block" @Html.ActionLink("Editar", "Editar", new { id = item.IdUsuario })
-                                    </td>
-                                </tr>
+                                        <tr scope="row" class="fila-seleccionable">
+                                            <td scope="col">
+                                                <a @Html.ActionLink(item.Empleado.Legajo.ToString(), "VerUsuario", new { id = item.Empleado.Legajo })
+                                            </td>
+                                            <td scope="col">
+                                                @Html.DisplayFor(modelItem => item.Username)
+                                            </td>
+                                            <td scope="col">
+                                                @Html.DisplayFor(modelItem => item.Empleado.Email)
+                                            </td>
+                                            <td scope="col">
+                                                @Html.DisplayFor(modelItem => item.Role.Nombre)
+                                            </td>
+                                            <td scope="col" style="padding-left: 25px">
+                                                @Html.DisplayFor(modelItem => item.Estado)
+                                            </td>
+
+
+                                            <td scope="col">
+                                                <a class="btn btn-primary btn-block" @Html.ActionLink("Editar", "Editar", new { id = item.IdUsuario })
+                                            </td>
+
+
+                                            <td scope="col">
+                                                <a class="btn btn-primary btn-block" @Html.ActionLink("Baja", "Baja", new { id = item.IdUsuario })
+
+                                            </td>
+                                            
+
+                                        </tr>
+                                        }
                                     }
                                 </tbody>
                         </table>
 
                     </div>
+
+                    <div>
+                        <h3 style="color: #3f7c66">Usuarios inactivos</h3>
+                        <table class="table">
+                            <thead>
+                                <tr scope="row" class="fila-seleccionable">
+                                    <th scope="col">Legajo</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">E-mail</th>
+                                    <th scope="col">Perfil</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    if (!item.Estado)
+                                    {
+                                        <tr scope="row" class="fila-seleccionable">
+                                            <td scope="col">
+                                                <a @Html.ActionLink(item.Empleado.Legajo.ToString(), "VerUsuario", new { id = item.Empleado.Legajo })
+                                            </td>
+                                            <td scope="col">
+                                                @Html.DisplayFor(modelItem => item.Username)
+                                            </td>
+                                            <td scope="col">
+                                                @Html.DisplayFor(modelItem => item.Empleado.Email)
+                                            </td>
+                                            <td scope="col">
+                                                @Html.DisplayFor(modelItem => item.Role.Nombre)
+                                            </td>
+                                            <td scope="col" style="padding-left: 25px">
+                                                @Html.DisplayFor(modelItem => item.Estado)
+                                            </td>
+
+
+                                            <td scope="col">
+                                                <a class="btn btn-primary btn-block" @Html.ActionLink("Editar", "Editar", new { id = item.IdUsuario })
+                                            </td>
+
+
+
+
+                                            <td scope="col">
+                                                <a class="btn btn-primary btn-block" @Html.ActionLink("Alta", "Baja", new { id = item.IdUsuario })
+                                            </td>
+
+
+
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    
                 </div>
 
             </main>
