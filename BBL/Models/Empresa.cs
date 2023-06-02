@@ -102,6 +102,46 @@ namespace BBL.Models
             return listUsuarios;
         }
 
+        public Usuario ObtenerUsuario(long idUsuario)
+        {
+            UsuarioCon usuarioCon = UsuarioCon.GetUsuarioCon;
+            DataTable dt = usuarioCon.BuscarUsuario(idUsuario);
+
+            Usuario usuario = new Usuario();
+            Direccion direccion = new Direccion();
+            usuario.IdUsuario = Convert.ToInt32(dt.Rows[0]["Id_Usuario"]);
+            usuario.Username = dt.Rows[0]["Username"].ToString();
+            usuario.Password = dt.Rows[0]["Password"].ToString();
+            usuario.Role = new Role(
+                Convert.ToInt32(dt.Rows[0]["Id_Rol"]),
+                dt.Rows[0]["Tipo"].ToString()
+                );
+            direccion.IDdireccion = Convert.ToInt32(dt.Rows[0]["Id_Direccion"]);
+            direccion.Calle = dt.Rows[0]["Calle"].ToString();
+            direccion.CP = dt.Rows[0]["CP"].ToString();
+            direccion.Numero = Convert.ToInt32(dt.Rows[0]["Numero"]);
+            usuario.Empleado = new Empleado(
+                Convert.ToInt32(dt.Rows[0]["Legajo"]),
+                Convert.ToInt32(dt.Rows[0]["DNI"]),
+                dt.Rows[0]["Nombre"].ToString(),
+                dt.Rows[0]["Apellido"].ToString(),
+                Convert.ToInt32(dt.Rows[0]["Telefono"]),
+                dt.Rows[0]["Email"].ToString(),
+                direccion
+                );
+
+            if (Convert.ToInt32(dt.Rows[0]["Estado"]) == 0)
+            {
+                usuario.Estado = false;
+            }
+            else
+            {
+                usuario.Estado = true;
+            }
+            return usuario;
+
+        }
+
         public Usuario IniciarSesion(string user, string pass)
         {
 

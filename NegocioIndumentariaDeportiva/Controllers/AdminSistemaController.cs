@@ -79,5 +79,20 @@ namespace NegocioIndumentariaDeportiva.Controllers
             return RedirectToAction("Vertodos");
         }
 
+        [HttpGet]
+        public ActionResult VerUsuario(long id)
+        {
+            Usuario usuario = empresa.ObtenerUsuario(id);
+
+            if(usuario != null)
+            {
+                return View();
+            }
+            return RedirectToAction("Vertodos");
+
+        }
+
+        
+
     }
 }
