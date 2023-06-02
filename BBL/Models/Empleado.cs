@@ -19,8 +19,10 @@ namespace BBL.Models
         {
 
         }
-        public Empleado(long dni, string nombre, string apellido, long telefono, string email, Direccion direccion)
+
+        public Empleado(long legajo,long dni, string nombre, string apellido, long telefono, string email, Direccion direccion)
         {
+            this.Legajo = legajo;
             this.DNI = dni;
             this.Nombre = nombre;
             this.Apellido = apellido;

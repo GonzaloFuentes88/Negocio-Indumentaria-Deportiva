@@ -102,7 +102,7 @@ namespace DAL.Datos
             SqlParameter[] parametros = new SqlParameter[1];
             int filasAfectadas = 0;
 
-            parametros[0] = objConexion.crearParametro("@Id_Usuario", idUsuario);
+            parametros[0] = objConexion.crearParametro("@Id", idUsuario);
 
             filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_alta_usuario", parametros);
             if (filasAfectadas > 0)
@@ -117,7 +117,7 @@ namespace DAL.Datos
             SqlParameter[] parametros = new SqlParameter[1];
             int filasAfectadas = 0;
 
-            parametros[0] = objConexion.crearParametro("@Id_Usuario", idUsuario);
+            parametros[0] = objConexion.crearParametro("@Id", idUsuario);
 
             filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_baja_usuario", parametros);
             if (filasAfectadas > 0)

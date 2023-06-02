@@ -11,14 +11,6 @@ namespace NegocioIndumentariaDeportiva.Controllers
 {
     public class AdminSistemaController : Controller
     {
-        /*
-        private readonly ILogger<AdminSistemaController> _logger;
-
-        public AdminSistemaController(ILogger<AdminSistemaController> logger)
-        {
-            _logger = logger;
-        }
-        */
         private Empresa empresa = Empresa.GetInstance;
 
         [HttpGet]
@@ -27,37 +19,14 @@ namespace NegocioIndumentariaDeportiva.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Vertodos()
         {
-            List<Usuario> usuarios = new List<Usuario>();
-            Empleado empleado = new Empleado();
-            empleado.Legajo = 123;
-            empleado.Nombre = "Pepe";
-            empleado.Apellido = "Reo";
-            empleado.DNI = 121331;
-            empleado.Email = "pepe@gmail.com";
-            empleado.Telefono = 123131;
-            Role r = new Role(1,"ADMIN");
-            Direccion dir = new Direccion(23,"12312","Mitre",123);
-            empleado.Direccion = dir;
-            Usuario user = new Usuario();
-            user.Role = r;
-            user.Empleado = empleado;
-            user.Username = "Jose";
-            user.Password = "123";
-            user.Estado = true;
-            Usuario user2 = new Usuario();
-            user2.Role = r;
-            user2.Empleado = empleado;
-            user2.Username = "JoseLues";
-            user2.Password = "123";
-            user2.Estado = false;
-
-            usuarios.Add(user);
-            usuarios.Add(user2);
+            List<Usuario> usuarios = empresa.ObtenerUsuarios();
             return View(usuarios);
         }
 
+        [HttpGet]
         public ActionResult Alta()
         {
             List<Role> roles = new List<Role>();
@@ -66,7 +35,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
             return View();
         }
 
-        
+
         public ActionResult Pendientes()
         {
             return View();
@@ -97,14 +66,18 @@ namespace NegocioIndumentariaDeportiva.Controllers
 ;
         }
 
-
-        /*
-         * ARREGLAR ESTA PARTE
-         * 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public ActionResult Error()
+        [HttpGet]
+        public ActionResult BajaUsuario(long id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        } */
+            empresa.bajaUsuario(id);
+            return RedirectToAction("Vertodos");
+        }
+        [HttpGet]
+        public ActionResult AltaUsuario(long id)
+        {
+            empresa.altaUsuario(id);
+            return RedirectToAction("Vertodos");
+        }
+
     }
 }

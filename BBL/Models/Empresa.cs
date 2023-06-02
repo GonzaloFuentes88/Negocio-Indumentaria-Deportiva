@@ -65,13 +65,28 @@ namespace BBL.Models
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 Usuario usuario = new Usuario();
+                Direccion direccion = new Direccion();
                 usuario.IdUsuario = Convert.ToInt32(dt.Rows[i]["Id_Usuario"]);
                 usuario.Username = dt.Rows[i]["Username"].ToString();
                 usuario.Password = dt.Rows[i]["Password"].ToString();
                 usuario.Role = new Role(
                     Convert.ToInt32(dt.Rows[i]["Id_Rol"]),
-                    dt.Rows[i]["NombreRol"].ToString()
+                    dt.Rows[i]["Tipo"].ToString()
                     );
+                direccion.IDdireccion = Convert.ToInt32(dt.Rows[i]["Id_Direccion"]);
+                direccion.Calle = dt.Rows[i]["Calle"].ToString();
+                direccion.CP = dt.Rows[i]["CP"].ToString();
+                direccion.Numero = Convert.ToInt32(dt.Rows[i]["Numero"]);
+                usuario.Empleado = new Empleado(
+                    Convert.ToInt32(dt.Rows[i]["Legajo"]),
+                    Convert.ToInt32(dt.Rows[i]["DNI"]),
+                    dt.Rows[i]["Nombre"].ToString(),
+                    dt.Rows[i]["Apellido"].ToString(),
+                    Convert.ToInt32(dt.Rows[i]["Telefono"]),
+                    dt.Rows[i]["Email"].ToString(),
+                    direccion
+                    );
+
                 if(Convert.ToInt32(dt.Rows[i]["Estado"]) == 0)
                 {
                     usuario.Estado = false;
@@ -152,8 +167,18 @@ namespace BBL.Models
 
         }
 
+        public bool bajaUsuario(long idUsuario)
+        {
+            UsuarioCon usuarioCon = UsuarioCon.GetUsuarioCon;
+            return usuarioCon.BajaUsuario(idUsuario);
+        }
+
+        public bool altaUsuario(long idUsuario)
+        {
+            UsuarioCon usuarioCon = UsuarioCon.GetUsuarioCon;
+            return usuarioCon.AltaUsuario(idUsuario);
+        }
 
 
-                
     }
 }
