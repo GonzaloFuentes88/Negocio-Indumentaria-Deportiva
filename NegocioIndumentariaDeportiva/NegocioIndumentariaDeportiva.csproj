@@ -216,6 +216,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\LayoutVendedor.cshtml" />
+    <Content Include="Views\AdminSistema\VerUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

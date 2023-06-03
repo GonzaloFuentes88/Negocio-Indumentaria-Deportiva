@@ -1,0 +1,94 @@
+﻿@model IEnumerable<BBL.Models.Usuario>
+
+@{
+    ViewBag.Title = "VerUsuario";
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/styles.css" />
+</head>
+
+<body>
+
+    <h2>Usuario: </h2> <!--Legajo-->
+
+    <div>Datos</div>
+
+    @foreach (var item in Model)
+    {
+       
+        <tr scope="row">
+            <td>Nombre: @Html.DisplayFor(modelItem => item.Empleado.Nombre)</td>
+            <td>
+                <button type="button" class="btn btn-default btn-sm"> <!--este boton lleva a editar-->
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </td>
+        </tr>
+        <tr scope="row">
+            <td>Apellido: @Html.DisplayFor(modelItem => item.Empleado.Apellido)</td>
+            <td>
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </td>
+        </tr>
+
+        <tr scope="row">
+            <td>Documento: @Html.DisplayFor(modelItem => item.Empleado.DNI)</td>
+            <td>
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </td>
+        </tr>
+
+        <tr scope="row">
+            <td> Direccion: @Html.DisplayFor(modelItem => item.Empleado.Direccion.Calle)</td>
+            <td>
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </td>
+        </tr>
+
+        <tr scope="row">
+            <td>Email: @Html.DisplayFor(modelItem => item.Empleado.Email)</td>
+            <td>
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </td>
+        </tr>
+
+        <tr scope="row">
+            <td>Teléfono: @Html.DisplayFor(modelItem => item.Empleado.Telefono)</td>
+            <td>
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </td>
+        </tr>
+
+        <tr scope="row">
+
+            <td>Perfil: @Html.DisplayFor(modelItem => item.Role.Nombre)</td>
+            <td>
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </td>
+
+        </tr>
+
+        <tr scope="row">
+            <td>Username: @Html.DisplayFor(modelItem => item.Username)</td>
+            <td>
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </td>
+        </tr>
+
+    }
+    </body>
