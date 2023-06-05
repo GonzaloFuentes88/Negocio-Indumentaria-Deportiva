@@ -24,7 +24,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                @Html.ActionLink("Inicio", "Index", "AdminSistema", new { @class = "nav-link" })
+                                @Html.ActionLink("Inicio", "Vertodos", "AdminSistema", new { @class = "nav-link" })
                             </li>
                             <li class="nav-item">
                                 @Html.ActionLink("Crear usuario", "Alta", "AdminSistema", new { @class = "nav-link" })
@@ -33,10 +33,7 @@
                                 @Html.ActionLink("Usuarios", "Vertodos", "AdminSistema", new { @class = "nav-link" })
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Historial", "Historial", "AdminSistema", new { @class = "nav-link" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Pendientes", "Pendientes", "AdminSistema", new { @class = "nav-link" })
+                                @Html.ActionLink("Salir", "Salir", "AdminSistema", new { @class = "nav-link" })
                             </li>
                         </ul>
                     </div>
@@ -44,7 +41,9 @@
             </nav>
         </header>
         <section>
-            @RenderBody()
+            <div>
+                @RenderBody()
+            </div>
         </section>
 
     </div>

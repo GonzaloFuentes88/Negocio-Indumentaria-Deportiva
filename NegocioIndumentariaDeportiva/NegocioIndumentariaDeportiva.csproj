@@ -204,9 +204,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\AdminSistema\Alta.cshtml" />
-    <Content Include="Views\AdminSistema\Historial.cshtml" />
     <Content Include="Views\AdminSistema\Index.cshtml" />
-    <Content Include="Views\AdminSistema\Pendientes.cshtml" />
     <Content Include="Views\AdminSistema\Vertodos.cshtml" />
     <Content Include="Views\Shared\LayoutNav.cshtml" />
     <Content Include="Views\Vendedor\RegistrarVenta.cshtml" />
@@ -217,6 +215,7 @@
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\LayoutVendedor.cshtml" />
     <Content Include="Views\AdminSistema\VerUsuario.cshtml" />
+    <Content Include="Views\AdminSistema\EditarUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

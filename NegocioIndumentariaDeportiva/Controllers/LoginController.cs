@@ -35,20 +35,22 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
             if (usuario != null)
             {
+                empresa.UsuarioEnUso = usuario;
                 if(usuario.Role.IdRole == 1) {
                     return RedirectToAction("Index", "AdminSistema");
                 }
                 else if (usuario.Role.IdRole == 2)
                 {
-                    return RedirectToAction("Index", "Gerente");
+                    return RedirectToAction("Index", "Administrativo");
+                    
                 }
                 else if (usuario.Role.IdRole == 3)
                 {
-                    return RedirectToAction("Index", "Vendedor");
+                    return RedirectToAction("Index", "Gerente");
                 }
                 else if (usuario.Role.IdRole == 4)
                 {
-                    return RedirectToAction("Index", "Administrativo");
+                    return RedirectToAction("Index", "Vendedor");
                 }
                 else
                 {

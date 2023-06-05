@@ -77,15 +77,16 @@ namespace DAL.Datos
             return dt;
         }
 
-        public bool EditarUsuario(long idUsuario, string username, string password)
+        public bool EditarUsuario(long idUsuario, string username, string password, long idRole)
         {
             Conexion objConexion = Conexion.GetConexion;
-            SqlParameter[] parametros = new SqlParameter[3];
+            SqlParameter[] parametros = new SqlParameter[4];
             int filasAfectadas = 0;
 
-            parametros[0] = objConexion.crearParametro("@Id_Usuario", idUsuario);
+            parametros[0] = objConexion.crearParametro("@id", idUsuario);
             parametros[1] = objConexion.crearParametro("@Username", username);
             parametros[2] = objConexion.crearParametro("@Password", password);
+            parametros[3] = objConexion.crearParametro("@Id_Rol", idRole);
 
             filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_editar_usuario", parametros);
             if (filasAfectadas > 0)

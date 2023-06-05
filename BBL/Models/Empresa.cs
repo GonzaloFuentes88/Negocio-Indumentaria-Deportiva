@@ -219,6 +219,12 @@ namespace BBL.Models
             return usuarioCon.AltaUsuario(idUsuario);
         }
 
+        public bool EditarUsuario(Usuario usuario)
+        {
+            UsuarioCon usuarioCon = UsuarioCon.GetUsuarioCon;
+            return usuarioCon.EditarUsuario(usuario.IdUsuario, usuario.Username, usuario.Password, usuario.Role.IdRole);
+        }
+
 
     }
 }
