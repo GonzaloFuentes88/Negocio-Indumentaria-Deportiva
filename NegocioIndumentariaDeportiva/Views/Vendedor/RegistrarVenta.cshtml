@@ -1,6 +1,8 @@
-﻿@{
+﻿@model BBL.Models.Venta
+@{
     ViewBag.Title = "RegistrarVenta";
     Layout = "~/Views/Shared/LayoutVendedor.cshtml";
+
 }
 
 <body>
@@ -12,101 +14,77 @@
                         <div class="col-lg-7">
                             <div class="card shadow-md border-0 rounded-lg">
                                 <div class="card-header"><h3 class="text-center font-weight-light my-4">Registrar Venta</h3></div>
+
                                 <div class="card-body">
-                                    <form>
-                                        <div class="row mb-3">
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3 mb-md-0">
-                                                    <input class="form-control" id="inputFirstName" type="text" placeholder="Ingrese nombre" />
-                                                    <label for="inputFirstName">Nombre</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-floating">
-                                                    <input class="form-control" id="inputLastName" type="text" placeholder="Ingrese apellido" />
-                                                    <label for="inputLastName">Apellido</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3">
-                                                    <input class="form-control" id="inputDNI" type="text" placeholder="DNI" />
-                                                    <label for="inputDNI">DNI</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3">
-                                                    <input class="form-control" id="inputDireccion" type="text" placeholder="Direccion" />
-                                                    <label for="inputDireccion">Direccion</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3">
-                                                    <input class="form-control" id="inputTelefono" type="text" placeholder="Telefono" />
-                                                    <label for="inputTelefono">Telefono</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3">
-                                                    <select class="form-control" name="marca" id="marca">
-                                                        <option value="producto1">Adidas</option>
-                                                        <option value="producto2">Nike</option>
-                                                        <option value="producto2">Fila</option>
-                                                    </select>
-                                                    <label for="exampleFormControlSelect1">Marca</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3">
-                                                    <select class="form-control" name="tipo_producto" id="tipo_producto">
-                                                        <option value="tipo_producto3">Remera</option>
-                                                        <option value="tipo_producto4">Pantalon</option>
-                                                        <option value="tipo_producto5">Buzo</option>
-                                                        <option value="tipo_producto6">Campera</option>
-                                                    </select>
-                                                    <label for="producto">Producto:</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3">
-                                                    <select class="form-control" name="talle" id="talle">
-                                                        <option value="producto1">XS</option>
-                                                        <option value="producto2">X</option>
-                                                        <option value="producto2">XL</option>
-                                                        <option value="producto2">XLL</option>
-                                                    </select>
-                                                    <label for="talle">Talle:</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3">
 
-                                                    <input class="form-control" type="number" name="cantidad" id="cantidad" min="1" max="100" />
-                                                    <label for="cantidad">Cantidad</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3">
-                                                    <input class="form-control" type="number" name="precio" id="precio"/>
-                                                    <label for="precio">Precio</label>
-                                                </div>
-                                            </div>
+
+                                    <form method="post" action="@Url.Action("hacerVenta", "Controlador")">
+                                        <div>
+                                            <label for="IdVenta">ID de Venta:</label>
+                                            @Html.TextBoxFor(m => m.IdVenta, new { id = "IdVenta" })
                                         </div>
 
-                                        <div class="mt-3">
-                                            <div class="d-grid"><a class="btn btn-primary btn-block" asp-action="Index">Registrar</a></div>
+                                        <div>
+                                            <label for="Usuario">Usuario:</label>
+                                            @Html.TextBoxFor(m => m.Usuario.Username, new { id = "Usuario_Username" })
                                         </div>
+
+                                        <div>
+                                            <label for="Cliente">Cliente:</label>
+                                            @Html.TextBoxFor(m => m.Cliente.Apellido, new { id = "Cliente_Apellido" })
+                                            @Html.TextBoxFor(m => m.Cliente.Direccion, new { id = "Cliente_Direccion" })
+                                            @Html.TextBoxFor(m => m.Cliente.DNI, new { id = "Cliente_DNI" })
+                                            @Html.TextBoxFor(m => m.Cliente.Email, new { id = "Cliente_Email" })
+                                            @Html.TextBoxFor(m => m.Cliente.Telefono, new { id = "Cliente_Telefono" })
+                                        </div>
+
+                                        <div>
+                                            <label for="Fecha">Fecha:</label>
+                                            @Html.TextBoxFor(m => m.Fecha, new { id = "Fecha" })
+                                        </div>
+
+                                        <div>
+                                            <label for="Total">Total:</label>
+                                            @Html.TextBoxFor(m => m.Total)
+                                        </div>
+                                        <!-- Campos de cada detalle -->
+                                        @for (int i = 0; i < Model.Detalles.Count; i++)
+                                        {
+                                            <div>
+                                                <h4>Detalle @(i + 1)</h4>
+
+                                                <!-- Campos del detalle -->
+                                                @Html.HiddenFor(m => m.Detalles[i].Venta)  <!-- Campo oculto para mantener la referencia a la venta -->
+
+                                                <div>
+                                                    <label for="Detalles[@i].Cantidad">Cantidad:</label>
+                                                    @Html.TextBoxFor(m => m.Detalles[i].Cantidad, new { id = "Detalles_" + i + "__Cantidad" })
+                                                </div>
+
+                                                <div>
+                                                    <label for="Detalles[@i].Precio">Precio:</label>
+                                                    @Html.TextBoxFor(m => m.Detalles[i].Precio, new { id = "Detalles_" + i + "__Precio" })
+                                                </div>
+
+                                                <div>
+                                                    <label for="Detalles[@i].Producto">Producto:</label>
+                                                    <input class="form-control" id="inputProducto" name="idProd" type="text" placeholder="Producto" />
+                                                </div>
+                                            </div>
+                                        }
+
+                                        <!-- Botón para agregar un nuevo detalle -->
+                                        <input type="submit" value="Agregar Detalle" name="agregarDetalle" />
+
+                                        <input type="submit" value="Registrar Venta" name="registrarVenta" />
                                     </form>
+
+
+
+
+                                </div>
                                 </div>
 
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -114,6 +92,7 @@
         </div>
 
     </div>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Scripts/js")

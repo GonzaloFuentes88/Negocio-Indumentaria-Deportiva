@@ -30,6 +30,13 @@ namespace BBL.Models
             set { _proveedor = value; }
         }
 
+        public Categoria()
+        {
+        }
+        public Categoria(int IdCategoria)
+        {
+                this.idCategoria = IdCategoria;
 
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace DAL.Datos
     public class VentaCon
     {
         private static VentaCon instance = null;
-        public static VentaCon GetDireccionCon
+        public static VentaCon GetVentaCon
         {
             get
             {
@@ -62,7 +62,25 @@ namespace DAL.Datos
             return dt;
         }
 
+        public bool RegistrarDetalle(long idVenta, long idProd, double precio, int cantidad)
+        {
 
+            Conexion objConexion = Conexion.GetConexion;
+
+            SqlParameter[] parametros = new SqlParameter[4];
+            int filasAfectadas = 0;
+            parametros[0] = objConexion.crearParametro("@Id_Venta", idVenta);
+            parametros[1] = objConexion.crearParametro("@Id_Producto", idProd);
+            parametros[2] = objConexion.crearParametro("@Precio", precio);
+            parametros[3] = objConexion.crearParametro("@Cantidad", cantidad);
+            filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_registrar_detalle", parametros);
+
+            if (filasAfectadas > 0)
+            {
+                return true;
+            }
+            return false;
+        }
         public DataTable ObtenerDetallesVenta(long idVenta)
         {
             Conexion objConexion = Conexion.GetConexion;

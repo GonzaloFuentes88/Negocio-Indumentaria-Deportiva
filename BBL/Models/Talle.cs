@@ -25,9 +25,9 @@ namespace BBL.Models
 
     public Talle(long idTalle, string talles)
     {
-        this.idTalle = idTalle;
-        this.Talles = talles;
-    }
+            this.idTalle = idTalle;
+            this.Talles = talles;
+        }
 
     }
 

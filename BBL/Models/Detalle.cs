@@ -43,9 +43,12 @@ namespace BBL.Models
             set { _precio = value; }
         }
 
-       
+        public Detalle()
+        {
 
-       
+        }
+
+
         public Detalle(long idDetalle, Venta venta, Producto producto, int cantidad, double precio)
         {
             this.IdDetalle = idDetalle;

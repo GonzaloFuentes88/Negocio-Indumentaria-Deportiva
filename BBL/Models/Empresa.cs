@@ -141,7 +141,7 @@ namespace BBL.Models
             return usuario;
 
         }
-
+      
         public Usuario IniciarSesion(string user, string pass)
         {
 
@@ -204,6 +204,60 @@ namespace BBL.Models
                 }
             }
             return false;
+
+        }
+
+        public bool RegistrarVenta(Venta venta, Detalle detalle)
+        {
+
+            ProductoCon productoCon = ProductoCon.GetUsuarioCon;
+            VentaCon ventaCon = VentaCon.GetVentaCon;
+
+            ventaCon.RegistrarDetalle(detalle.Venta.IdVenta, detalle.Producto.IdProducto, detalle.Precio, detalle.Cantidad);
+            ventaCon.RegistrarVenta(venta.Cliente.IdCliente, venta.Usuario.IdUsuario, venta.Fecha, venta.Total);
+            if (detalle.Producto != null)
+            {
+                return true;
+            }
+            return false;
+
+
+        }
+        /**public bool RegistrarDetalle(Detalle detalle, long idProd)
+        {
+            ProductoCon productoCon = ProductoCon.GetUsuarioCon;
+            VentaCon ventaCon = VentaCon.GetVentaCon;
+
+            detalle.Producto = ObtenerProducto(idProd);
+            
+            if (detalle.Producto != null)
+            {
+
+            }
+            return false;
+
+        }**/
+        public Producto ObtenerProducto(long idProd)
+        {
+            ProductoCon productoCon = ProductoCon.GetUsuarioCon;
+            DataTable dt = productoCon.ObtenerProducto(idProd);
+            if (dt == null || dt.Rows.Count == 0)
+                return null;
+
+            Producto producto = new Producto();
+
+            producto.IdProducto = Convert.ToInt32(dt.Rows[0]["Id_Producto"]);
+            producto.Descripcion = dt.Rows[0]["Descripcion"].ToString();
+            producto.Precio = Convert.ToInt32(dt.Rows[0]["Precio"]);
+            producto.Cantidad = Convert.ToInt32(dt.Rows[0]["Cantidad"]);
+            producto.Categoria = new Categoria(
+                Convert.ToInt32(dt.Rows[0]["Id_Categoria"])
+            );
+            producto.Talle = new Talle(
+                Convert.ToInt32(dt.Rows[0]["Id_Talle"])
+            );
+
+            return producto;
 
         }
 

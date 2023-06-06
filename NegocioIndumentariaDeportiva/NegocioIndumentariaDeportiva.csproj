@@ -211,7 +211,6 @@
     <Content Include="Views\Shared\LayoutNav.cshtml" />
     <Content Include="Views\Vendedor\RegistrarVenta.cshtml" />
     <Content Include="Views\Vendedor\Index.cshtml" />
-    <Content Include="Views\Vendedor\RegistrarProducto.cshtml" />
     <Content Include="Views\Vendedor\EditarProducto.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />

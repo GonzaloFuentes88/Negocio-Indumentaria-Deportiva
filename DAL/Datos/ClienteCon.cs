@@ -9,7 +9,7 @@ namespace DAL.Datos
     public class ClienteCon
     {
         private static ClienteCon instance = null;
-        public static ClienteCon GetUsuarioCon
+        public static ClienteCon GetClienteCon
         {
             get
             {
