@@ -16,7 +16,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Vertodos");
         }
 
         [HttpGet]
@@ -36,34 +36,29 @@ namespace NegocioIndumentariaDeportiva.Controllers
         }
 
 
-        public ActionResult Pendientes()
-        {
-            return View();
-        }
-
-        public ActionResult Historial()
-        {
-            return View();
-        }
-
-        
-
-
         [HttpPost]
         public ActionResult DarAlta(Usuario usuario)
         {
-            Boolean registrado = empresa.RegistrarUsuario(usuario); 
-            if (registrado)
+            if(usuario.IdUsuario == 0)
             {
-                return RedirectToAction("Alta");
+                bool registrado = empresa.RegistrarUsuario(usuario);
+                if (registrado)
+                {
+                    return RedirectToAction("Alta");
+                }
+                else
+                {
+                    // El modelo no es válido, manejar los errores de validación
+                    ModelState.AddModelError("", "Usuario o contraseña inválidos");
+                    return RedirectToAction("Alta");
+                }
             }
             else
             {
-                // El modelo no es válido, manejar los errores de validación
-                ModelState.AddModelError("", "Usuario o contraseña inválidos");
-                return RedirectToAction("Alta");
+                bool editado = empresa.EditarUsuario(usuario);
+                return RedirectToAction("Vertodos");
             }
-;
+
         }
 
         [HttpGet]
@@ -86,10 +81,31 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
             if(usuario != null)
             {
-                return View();
+                return View(usuario);
             }
             return RedirectToAction("Vertodos");
 
+        }
+
+        [HttpGet]
+        public ActionResult EditarUsuario(long id)
+        {
+            Usuario usuario = empresa.ObtenerUsuario(id);
+            List<Role> roles = new List<Role>();
+            roles = empresa.ObtenerRoles();
+            ViewBag.roles = roles;
+
+            if (usuario != null)
+            {
+                return View(usuario);
+            }
+            return RedirectToAction("Vertodos");
+        }
+
+        public ActionResult Salir()
+        {
+            empresa.UsuarioEnUso = null;
+            return RedirectToAction("Index","Login");
         }
 
         
