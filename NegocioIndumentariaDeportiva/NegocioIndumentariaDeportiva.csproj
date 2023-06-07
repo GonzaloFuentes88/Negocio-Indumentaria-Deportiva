@@ -215,12 +215,18 @@
     <Content Include="Views\Shared\LayoutVendedor.cshtml" />
     <Content Include="Views\AdminSistema\VerUsuario.cshtml" />
     <Content Include="Views\AdminSistema\EditarUsuario.cshtml" />
+    <Content Include="Views\Gerente\Index.cshtml" />
+    <Content Include="Views\Shared\LayoutGerente.cshtml" />
+    <Content Include="Views\Gerente\VerVendedor.cshtml" />
+    <Content Include="Views\Gerente\VerCliente.cshtml" />
+    <Content Include="Views\Gerente\VerDetalles.cshtml" />
+    <Content Include="Views\Gerente\Reporte.cshtml" />
+    <Content Include="Views\Gerente\GenerarReporte.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Administrativo\" />
-    <Folder Include="Views\Gerente\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

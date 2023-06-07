@@ -25,5 +25,7 @@ namespace BBL.Models
             this.Direccion = direccion;
         }
 
+        public Cliente() { }
+
     }
 }

@@ -57,7 +57,16 @@ namespace DAL.Datos
             parametros[0] = objConexion.crearParametro("@FechaInicio", fechaInicio);
             parametros[1] = objConexion.crearParametro("@FechaFin", fechaFinal);
 
-            dt = objConexion.LeerPorStoreProcedure("sp_obtener_ventas",parametros);
+            dt = objConexion.LeerPorStoreProcedure("sp_obtener_reporte",parametros);
+
+            return dt;
+        }
+        public DataTable ObtenerVentas()
+        {
+            Conexion objConexion = Conexion.GetConexion;
+            DataTable dt;
+
+            dt = objConexion.LeerPorStoreProcedure("sp_obtener_ventas");
 
             return dt;
         }

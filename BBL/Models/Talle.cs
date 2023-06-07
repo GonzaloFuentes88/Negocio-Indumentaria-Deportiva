@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BBL.Models
 {
-    public class Talle 
+    public class Talle
     {
         private long _idtalle;
         public long idTalle
@@ -21,14 +21,17 @@ namespace BBL.Models
             get { return _talles; }
             set { _talles = value; }
         }
-    
 
-    public Talle(long idTalle, string talles)
-    {
+
+        public Talle(long idTalle, string talles)
+        {
             this.idTalle = idTalle;
             this.Talles = talles;
         }
-
+        public Talle(long idTalle)
+        {
+            this.idTalle = idTalle;
+        }
     }
 
 }
