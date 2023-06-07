@@ -5,47 +5,86 @@
     Layout = "~/Views/Shared/LayoutGerente.cshtml";
 }
 
-<h2>VerVendedor</h2>
-
 <div>
-    <h4>Usuario</h4>
+    <h4>Vendedor</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.IdUsuario)
-        </dt>
+    <div class="row">
+        <div class="col">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.IdUsuario)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdUsuario)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.IdUsuario)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Username)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Username)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Username)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Estado)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
+            </dl>
+        </div>
+        <div class="col">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Empleado.Legajo)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Empleado.Legajo)
+                </dd>
 
-    </dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Empleado.Nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Empleado.Nombre)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Empleado.Apellido)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Empleado.Apellido)
+                </dd>
+            </dl>
+        </div>
+        <div class="col">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Empleado.DNI)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Empleado.Email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Empleado.Telefono)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Empleado.Telefono)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        <p>
+            @Html.ActionLink("Volver", "Index",null,new { @class = "btn btn-primary"})
+        </p>

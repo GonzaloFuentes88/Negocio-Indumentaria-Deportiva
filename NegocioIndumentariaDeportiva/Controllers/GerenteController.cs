@@ -68,5 +68,12 @@ namespace NegocioIndumentariaDeportiva.Controllers
             return RedirectToAction("Reporte");
             
         }
+
+        [HttpGet]
+        public ActionResult Salir()
+        {
+            empresa.UsuarioEnUso = null;
+            return RedirectToAction("Index", "Login");
+        }
     }
 }
