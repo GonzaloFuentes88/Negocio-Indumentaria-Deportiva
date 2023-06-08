@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Reporte";
+    Layout = "~/Views/Shared/LayoutGerente.cshtml";
+}
+
+
+<form action="@Url.Action("GenerarReporte", "Gerente")" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+
+        <div class="form-group">
+            @Html.Label("Primer Fecha", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("fecha1", "date", htmlAttributes: new { @type = "date" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Segunda Fecha", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("fecha2","date", htmlAttributes: new {@type = "date" })
+            </div>
+        </div>
+    </div>
+    <div class="mt-4 mb-0">
+        <button type="submit" class="btn btn-primary mt-2">Generar Reporte</button>
+    </div>
+
+</form>

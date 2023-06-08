@@ -279,6 +279,102 @@ namespace BBL.Models
             return usuarioCon.EditarUsuario(usuario.IdUsuario, usuario.Username, usuario.Password, usuario.Role.IdRole);
         }
 
+        public Cliente ObtenerCliente(long id)
+        {
+            ClienteCon clienteCon = ClienteCon.GetClienteCon;
+            DataTable dt = clienteCon.ObtenerCliente(id);
+            if (dt == null || dt.Rows.Count == 0)
+                return null;
+
+            Cliente cliente = new Cliente();
+
+            cliente.IdCliente= Convert.ToInt32(dt.Rows[0]["Id_Cliente"]);
+            cliente.Nombre= dt.Rows[0]["Nombre"].ToString();
+            cliente.Apellido = dt.Rows[0]["Apellido"].ToString();
+            cliente.DNI = Convert.ToInt32(dt.Rows[0]["DNI"]);
+            cliente.Email = dt.Rows[0]["Email"].ToString();
+            cliente.Telefono = Convert.ToInt32(dt.Rows[0]["Telefono"]);
+            cliente.Direccion = new Direccion(
+                Convert.ToInt32(dt.Rows[0]["Id_Direccion"]),
+                dt.Rows[0]["CP"].ToString(),
+                dt.Rows[0]["Calle"].ToString(),
+                Convert.ToInt32(dt.Rows[0]["Numero"])
+                );
+
+            return cliente;
+        }
+        public List<Venta> ObtenerVentas()
+        {
+            List<Venta> listVentas = new List<Venta>();
+            VentaCon ventaCon = VentaCon.GetVentaCon;
+
+            DataTable dt = new DataTable();
+            dt = ventaCon.ObtenerVentas();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Venta venta = new Venta();
+                
+                venta.IdVenta= Convert.ToInt32(dt.Rows[i]["Id_Venta"]);
+                venta.Total = Convert.ToInt32(dt.Rows[i]["Total"]);
+                venta.Fecha = Convert.ToDateTime(dt.Rows[i]["Fecha"]);
+                venta.Usuario = this.ObtenerUsuario(Convert.ToInt32(dt.Rows[i]["Id_Usuario"]));
+                venta.Cliente = this.ObtenerCliente(Convert.ToInt32(dt.Rows[i]["Id_Cliente"]));
+                venta.Detalles = this.ObtenerDetalles(venta.IdVenta);
+
+                listVentas.Add(venta);
+            }
+
+            return listVentas;
+        }
+
+        public List<Detalle> ObtenerDetalles(long id)
+        {
+            List<Detalle> listDetalle = new List<Detalle>();
+            VentaCon ventaCon = VentaCon.GetVentaCon;
+
+            DataTable dt = new DataTable();
+            dt = ventaCon.ObtenerDetallesVenta(id);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Detalle detalle = new Detalle();
+
+                detalle.IdDetalle = Convert.ToInt32(dt.Rows[i]["Id_Detalle"]);
+                detalle.Precio = Convert.ToInt32(dt.Rows[i]["Precio"]);
+                detalle.Producto = this.ObtenerProducto(Convert.ToInt32(dt.Rows[i]["Id_Producto"]));
+                detalle.Cantidad = Convert.ToInt32(dt.Rows[i]["Cantidad"]);
+
+                listDetalle.Add(detalle);
+            }
+
+            return listDetalle;
+        }
+
+        public List<Venta> GenerarReporte(DateTime fecha1, DateTime fecha2)
+        {
+            List<Venta> listVentas = new List<Venta>();
+            VentaCon ventaCon = VentaCon.GetVentaCon;
+
+            DataTable dt = new DataTable();
+            dt = ventaCon.ObtenerVentas(fecha1,fecha2);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Venta venta = new Venta();
+
+                venta.IdVenta = Convert.ToInt32(dt.Rows[i]["Id_Venta"]);
+                venta.Total = Convert.ToInt32(dt.Rows[i]["Total"]);
+                venta.Fecha = Convert.ToDateTime(dt.Rows[i]["Fecha"]);
+                venta.Usuario = this.ObtenerUsuario(Convert.ToInt32(dt.Rows[i]["Id_Usuario"]));
+                venta.Cliente = this.ObtenerCliente(Convert.ToInt32(dt.Rows[i]["Id_Cliente"]));
+                venta.Detalles = this.ObtenerDetalles(venta.IdVenta);
+
+                listVentas.Add(venta);
+            }
+
+            return listVentas;
+        }
 
     }
 }

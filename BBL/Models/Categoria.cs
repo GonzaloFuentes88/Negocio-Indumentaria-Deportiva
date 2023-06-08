@@ -22,13 +22,6 @@ namespace BBL.Models
             set { _nombre = value; }
         }
 
-        private Proveedor _proveedor;
-
-        public Proveedor Proveedor
-        {
-            get { return _proveedor; }
-            set { _proveedor = value; }
-        }
 
         public Categoria()
         {

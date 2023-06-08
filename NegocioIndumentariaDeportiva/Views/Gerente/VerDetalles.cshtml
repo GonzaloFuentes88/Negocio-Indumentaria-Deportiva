@@ -1,0 +1,61 @@
+﻿@model IEnumerable<BBL.Models.Detalle>
+
+@{
+    ViewBag.Title = "VerDetalles";
+    Layout = "~/Views/Shared/LayoutGerente.cshtml";
+}
+
+<h2>Detalles de la Venta: </h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Detalle
+        </th>
+        <th>
+            Descripcion
+        </th>
+        <th>
+            Talle
+        </th>
+        <th>
+            Categoria
+        </th>
+        <th>
+            Proveedor
+        </th>
+        <th>
+            Cantidad
+        </th>
+        <th>
+            Precio
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.IdDetalle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Producto.Descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Producto.Talle.Talles)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Producto.Categoria.Nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Producto.Proveedor.Nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cantidad)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Precio)
+    </td>
+</tr>
+}
+</table>
