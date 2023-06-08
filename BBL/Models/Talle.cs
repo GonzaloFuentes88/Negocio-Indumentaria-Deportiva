@@ -21,14 +21,20 @@ namespace BBL.Models
             get { return _talles; }
             set { _talles = value; }
         }
-    
+        public Talle(int idTalle)
+        {
+            this.idTalle = idTalle;
+        }
 
-    public Talle(long idTalle, string talles)
+        public Talle(long idTalle, string talles)
     {
             this.idTalle = idTalle;
             this.Talles = talles;
         }
 
     }
+
+
+}
 
 }

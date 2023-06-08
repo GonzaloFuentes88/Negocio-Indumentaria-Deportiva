@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "RegistrarVenta";
     Layout = "~/Views/Shared/LayoutVendedor.cshtml";
-
+    m.Usuario = Empresa.UsuarioEnUso;
 }
 
 <body>
@@ -25,11 +25,6 @@
                                         </div>
 
                                         <div>
-                                            <label for="Usuario">Usuario:</label>
-                                            @Html.TextBoxFor(m => m.Usuario.Username, new { id = "Usuario_Username" })
-                                        </div>
-
-                                        <div>
                                             <label for="Cliente">Cliente:</label>
                                             @Html.TextBoxFor(m => m.Cliente.Apellido, new { id = "Cliente_Apellido" })
                                             @Html.TextBoxFor(m => m.Cliente.Direccion, new { id = "Cliente_Direccion" })
@@ -38,7 +33,7 @@
                                             @Html.TextBoxFor(m => m.Cliente.Telefono, new { id = "Cliente_Telefono" })
                                         </div>
 
-                                        <div>
+                                        <div> 
                                             <label for="Fecha">Fecha:</label>
                                             @Html.TextBoxFor(m => m.Fecha, new { id = "Fecha" })
                                         </div>
