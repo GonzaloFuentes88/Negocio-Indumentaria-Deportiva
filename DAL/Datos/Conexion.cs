@@ -55,7 +55,7 @@ namespace DAL.Datos
             //Cambiar InitialCatalog y el Data Source por los propios
             ////gonzaCadena= @"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=TiendaDeportiva_tp;Data Source=localhost\SQLEXPRESS";
             //strCadenaDeConexion = @"Data Source=DESKTOP-LHGQJON;Initial Catalog=TiendaDeportiva_tp;Integrated Security=True;";
-            strCadenaDeConexion = @"Data Source=DESKTOP-LHGQJON;Initial Catalog=TiendaDeportiva_tp;Integrated Security=True;";
+            strCadenaDeConexion = @"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=TiendaDeportiva_tp;Data Source=localhost\SQLEXPRESS";
 
             objConexion = new SqlConnection(strCadenaDeConexion);
             objConexion.Open();
