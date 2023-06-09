@@ -120,6 +120,7 @@
     <Compile Include="Controllers\GerenteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\VendedorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -222,6 +223,7 @@
     <Content Include="Views\Gerente\VerDetalles.cshtml" />
     <Content Include="Views\Gerente\Reporte.cshtml" />
     <Content Include="Views\Gerente\GenerarReporte.cshtml" />
+    <Content Include="Views\Producto\IngresarProducto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

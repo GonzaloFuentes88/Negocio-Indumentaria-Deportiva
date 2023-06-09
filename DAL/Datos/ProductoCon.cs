@@ -11,7 +11,7 @@ namespace DAL.Datos
     public class ProductoCon
     {
         private static ProductoCon instance = null;
-        public static ProductoCon GetUsuarioCon
+        public static ProductoCon GetProductoCon
         {
             get
             {

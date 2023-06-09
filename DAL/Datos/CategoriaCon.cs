@@ -11,7 +11,7 @@ namespace DAL.Datos
     public class CategoriaCon
     {
         private static CategoriaCon instance = null;
-        public static CategoriaCon GetUsuarioCon
+        public static CategoriaCon GetCategoriaCon
         {
             get
             {

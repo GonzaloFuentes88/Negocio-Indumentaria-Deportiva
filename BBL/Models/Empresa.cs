@@ -210,7 +210,7 @@ namespace BBL.Models
         public bool RegistrarVenta(Venta venta, Detalle detalle)
         {
 
-            ProductoCon productoCon = ProductoCon.GetUsuarioCon;
+            ProductoCon productoCon = ProductoCon.GetProductoCon;
             VentaCon ventaCon = VentaCon.GetVentaCon;
 
             ventaCon.RegistrarDetalle(detalle.Venta.IdVenta, detalle.Producto.IdProducto, detalle.Precio, detalle.Cantidad);
@@ -237,9 +237,27 @@ namespace BBL.Models
             return false;
 
         }**/
+
+        public bool RegistrarProducto(Producto producto)
+        {
+            
+            ProductoCon productoCon = ProductoCon.GetProductoCon;
+            Producto p = new Producto();
+            
+                        if (productoCon.RegistrarProducto(p.Categoria.idCategoria, p.IdProducto, p.Descripcion, p.Cantidad))
+                        {
+                            return true;
+                        }
+                    
+                
+            return false;
+
+        }
+        
+
         public Producto ObtenerProducto(long idProd)
         {
-            ProductoCon productoCon = ProductoCon.GetUsuarioCon;
+            ProductoCon productoCon = ProductoCon.GetProductoCon;
             DataTable dt = productoCon.ObtenerProducto(idProd);
             if (dt == null || dt.Rows.Count == 0)
                 return null;
