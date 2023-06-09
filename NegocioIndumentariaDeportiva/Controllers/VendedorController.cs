@@ -65,10 +65,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
 
 
-        public ActionResult EditarProducto()
-        {
-            return View();
-        }
+
 
 
     }
