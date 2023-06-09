@@ -61,9 +61,17 @@ namespace NegocioIndumentariaDeportiva.Controllers
         public ActionResult GenerarReporte(DateTime fecha1, DateTime fecha2)
         {
             List<Venta> reporte = empresa.GenerarReporte(fecha1, fecha2);
+            double total = empresa.TotalReporte(reporte);
             if(reporte.Count > 0)
             {
-                return View(reporte);
+                string fecha = fecha1.ToString("d") + " - " + fecha2.ToString("d");
+                ViewBag.fecha1 = fecha1.ToString("d");
+                ViewBag.fecha2 = fecha2.ToString("d");
+                ViewBag.total = total;
+                return new Rotativa.ViewAsPdf("GenerarReporte", reporte) {
+                    PageSize = Rotativa.Options.Size.A4,
+                    FileName = "Reporte: " + fecha + ".pdf",
+                };
             }
             return RedirectToAction("Reporte");
             

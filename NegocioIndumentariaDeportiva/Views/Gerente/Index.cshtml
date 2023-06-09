@@ -48,14 +48,14 @@
                     <td scope="col">
                         @Html.DisplayFor(modelItem => item.Total)
                     </td>
-                    <td scope="col">>
-                        <a class="btn btn-primary btn-block" @Html.ActionLink("Ver Cliente", "VerCliente", new { id = item.Cliente.IdCliente })/>
+                    <td scope="col">
+                        <a class="btn btn-primary btn-block" @Html.ActionLink("Ver Cliente", "VerCliente", new { id = item.Cliente.IdCliente })
                     </td>
                     <td scope="col">
-                        <a class="btn btn-primary btn-block" @Html.ActionLink("Ver Vendedor", "VerVendedor", new { id = item.Usuario.IdUsuario })/>
+                        <a class="btn btn-primary btn-block" @Html.ActionLink("Ver Vendedor", "VerVendedor", new { id = item.Usuario.IdUsuario })
                     </td>
                     <td scope="col">
-                        <a class="btn btn-primary btn-block" @Html.ActionLink("Ver Detalles", "VerDetalles", new { id = item.IdVenta })/>
+                        <a class="btn btn-primary btn-block" @Html.ActionLink("Ver Detalles", "VerDetalles", new { id = item.IdVenta })
                     </td>
                 </tr>
             }

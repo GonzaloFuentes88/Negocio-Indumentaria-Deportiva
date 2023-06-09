@@ -2,40 +2,87 @@
 
 @{
     ViewBag.Title = "GenerarReporte";
-    Layout = "~/Views/Shared/LayoutGerente.cshtml";
+    Layout = "~/Views/Shared/LayoutPdf.cshtml";
 }
 
-<h2>GenerarReporte</h2>
+<div id="app" class="col-11">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdVenta)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Total)
-        </th>
-        <th></th>
-    </tr>
+    <div>
+        <h1 class="text-center">SPORT SALES</h1>
+    </div>
+    <div class="row my-3">
+        <div class="col-10">
+            <h1>REPORTE</h1>
+        </div>
+    </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdVenta)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Total)
-        </td>
-    </tr>
-}
+    <hr />
 
-</table>
+    <div class="row fact-info mt-3">
+        <div class="col-3">
+            <h5>Desde - @ViewBag.fecha1</h5>
+            <h5>Hasta - @ViewBag.fecha2</h5>
+        </div>
+    </div>
+
+    <div">
+        <table class="table align-text-top">
+            <thead>
+                <tr scope="row">
+                    <th scope="col">
+                        Venta
+                    </th>
+                    <th scope="col">
+                        Cliente
+                    </th>
+                    <th scope="col">
+                        Vendedor
+                    </th>
+                    <th scope="col">
+                        Fecha
+                    </th>
+                    <th scope="col">
+                        Cantidad
+                    </th>
+                    <th scope="col">
+                        Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr scope="row">
+                    <td scope="col">
+                        @Html.DisplayFor(modelItem => item.IdVenta)
+                    </td>
+                    <td scope="col">
+                        @Html.DisplayFor(modelItem => item.Cliente.DNI)
+                    </td>
+                    <td scope="col">
+                        @Html.DisplayFor(modelItem => item.Usuario.IdUsuario)
+                    </td>
+                    <td scope="col">
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td scope="col">
+                        @Html.DisplayFor(modelItem => item.Detalles.Count)
+                    </td>
+                    <td scope="col">
+                        $@Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>Total</th>
+                    <th>$@ViewBag.total</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>

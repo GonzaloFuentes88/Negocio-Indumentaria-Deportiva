@@ -249,7 +249,8 @@ namespace BBL.Models
                 Convert.ToInt32(dt.Rows[0]["Id_Categoria"])
             );
             producto.Talle = new Talle(
-                Convert.ToInt32(dt.Rows[0]["Id_Talle"])
+                Convert.ToInt32(dt.Rows[0]["Id_Talle"]),
+                dt.Rows[0]["Talle"].ToString()
             );
 
             return producto;
@@ -369,6 +370,20 @@ namespace BBL.Models
             }
 
             return listVentas;
+        }
+
+        public double TotalReporte(List<Venta> ventas)
+        {
+            double total = 0;
+
+            foreach(Venta v in ventas)
+            {
+                total += v.Total;
+            }
+
+            return total;
+
+
         }
 
     }
