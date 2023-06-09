@@ -23,36 +23,39 @@
                                         <div>
                                             <div class="mb-3 mb-md-0 ">
 
-                                                <form action="@Url.Action("EditarProducto", "Administrativo")" method="post">
+                                                <form action="@Url.Action("BuscarProducto", "Administrativo")" method="post">
                                                     @Html.AntiForgeryToken()
 
                                                     <div class="row">
 
                                                         <div class="mt-4 mb-0 col-6">
-                                                            @Html.LabelFor(m => m.descripcion)
-                                                            @Html.TextBoxFor(m => m.descripcion, new { @class = "form-control" })
+                                                            @Html.LabelFor(m => m.Descripcion)
+                                                            @Html.TextBoxFor(m => m.Descripcion, new { @class = "form-control" })
                                                         </div>
 
 
                                                         @Html.AntiForgeryToken()
 
                                                         <div class="mt-4 mb-0 col-6">
-                                                            @Html.LabelFor(m => m.precio)
-                                                            @Html.TextBoxFor(m => m.precio, new { @class = "form-control" })
+                                                            @Html.LabelFor(m => m.Precio)
+                                                            @Html.TextBoxFor(m => m.Precio, new { @class = "form-control" })
                                                         </div>
 
                                                         <div class="mt-4 mb-0 col-6">
-                                                            @Html.LabelFor(m => m.cantidad)
-                                                            @Html.TextBoxFor(m => m.cantidad, new { @class = "form-control" })
+                                                            @Html.LabelFor(m => m.Cantidad)
+                                                            @Html.TextBoxFor(m => m.Cantidad, new { @class = "form-control" })
                                                         </div>
 
-                                                        @Html.HiddenFor(m => m.IdProducto )
-
-
-                                                        <div class="mt-4 mb-0">
-                                                            <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                                                        <div class="mt-4 mb-0 col-6">
+                                                            <label for="idProd">Producto</label>
+                                                            @Html.TextBox("idProd", null, new { id = "idProd", @class = "form-control" })
                                                         </div>
+                                        
+
+                                                    <div class="mt-4 mb-0">
+                                                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
                                                     </div>
+</div>
 
                                                 </form>
 

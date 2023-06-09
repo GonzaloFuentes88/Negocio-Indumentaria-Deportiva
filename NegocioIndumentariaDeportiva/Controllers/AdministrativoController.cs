@@ -21,26 +21,26 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
 
         [HttpPost]
-        public ActionResult BuscarProducto(long IdProducto)
+        public ActionResult BuscarProducto(long idProd)
         {
 
-
-            return View("");
-
-        }
-
-
-
-
-        public ActionResult EditarProducto(long IdProducto)
-        {
-            Producto producto = empresa.ObtenerProducto(long IdProducto);
+            Producto producto = empresa.ObtenerProducto(idProd);
 
             if (producto != null)
             {
                 return View(producto);
             }
             return RedirectToAction("Vertodos");
+
+        }
+
+
+
+
+        public ActionResult EditarProducto()
+        {
+            Producto producto = new Producto();
+            return View(producto);
         }
 
 
