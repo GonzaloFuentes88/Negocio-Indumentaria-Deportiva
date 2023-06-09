@@ -22,6 +22,10 @@ namespace BBL.Models
             set { _talles = value; }
         }
 
+        public Talle(long idTalle)
+        {
+            this.idTalle = idTalle;
+        }
 
         public Talle(long idTalle, string talles)
         {

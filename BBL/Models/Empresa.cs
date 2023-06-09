@@ -207,20 +207,15 @@ namespace BBL.Models
 
         }
 
-        public bool RegistrarVenta(Venta venta, Detalle detalle)
+        public bool RegistrarVenta(Venta venta)
         {
 
             ProductoCon productoCon = ProductoCon.GetUsuarioCon;
             VentaCon ventaCon = VentaCon.GetVentaCon;
 
-            ventaCon.RegistrarDetalle(detalle.Venta.IdVenta, detalle.Producto.IdProducto, detalle.Precio, detalle.Cantidad);
             ventaCon.RegistrarVenta(venta.Cliente.IdCliente, venta.Usuario.IdUsuario, venta.Fecha, venta.Total);
-            if (detalle.Producto != null)
-            {
-                return true;
-            }
-            return false;
 
+            return true;
 
         }
         /**public bool RegistrarDetalle(Detalle detalle, long idProd)
