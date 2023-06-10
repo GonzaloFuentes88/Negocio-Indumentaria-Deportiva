@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "RegistrarVenta";
     Layout = "~/Views/Shared/LayoutVendedor.cshtml";
-    var i = Model.Detalles.Count - 1;
+    
 }
 
 <body>
@@ -16,78 +16,49 @@
                                 <div class="card-header"><h3 class="text-center font-weight-light my-4">Registrar Venta</h3></div>
 
                                 <div class="card-body">
-
-
-                                    <form method="post" action="@Url.Action("HacerVenta", "Vendedor")">
-                                        <div>
-                                            <label for="IdVenta">ID de Venta:</label>
-                                            @Html.TextBoxFor(m => m.IdVenta, new { id = "IdVenta" })
-                                        </div>
-
-                                        <div>
-                                            <label for="Cliente">Cliente:</label>
-
-                                            <label for="IdVenta">DNI:</label>
-                                            @Html.TextBoxFor(m => m.Cliente.DNI, new { id = "Cliente_DNI" })
-                                            <label for="IdVenta">Email:</label>
-                                            @Html.TextBoxFor(m => m.Cliente.Email, new { id = "Cliente_Email" })
-                                            <label for="IdVenta">Telefono:</label>
-                                            @Html.TextBoxFor(m => m.Cliente.Telefono, new { id = "Cliente_Telefono" })
-                                            <label for="IdVenta">Apellido:</label>
-                                            @Html.TextBoxFor(m => m.Cliente.Apellido, new { id = "Cliente_Apellido" })
-                                            <label for="IdVenta">Numero:</label>
-                                            @Html.TextBoxFor(m => m.Cliente.Direccion.Numero, new { id = "Cliente_Numero" })
-                                            <label for="IdVenta">CP:</label>
-                                            @Html.TextBoxFor(m => m.Cliente.Direccion.CP, new { id = "Cliente_CP" })
-                                            <label for="IdVenta">Calle:</label>
-                                            @Html.TextBoxFor(m => m.Cliente.Direccion.Calle, new { id = "Cliente_Calle" })
-
-                                        </div>
-
-                                        <div>
-                                            <label for="Fecha">Fecha:</label>
-                                            @Html.TextBoxFor(m => m.Fecha, new { id = "Fecha" })
-                                        </div>
-
-                                        <!-- Campos de cada detalle -->
-                                            <div>
-                                                <h4>Detalle @(i)</h4>
-
-                                                <!-- Campos del detalle -->
-                                                @Html.Hidden("idDetalle", Model.Detalles[i].IdDetalle, new { id = "idDetalle" })
+                                    @using (Html.BeginForm("HacerVenta", "Vendedor", FormMethod.Post))
+                                    {
+                                        <div id="detallesContainer">
+                             
+                                            <div class="detalle">
                                                 <div>
-                                                    <label for="Detalles[@i].Cantidad">Cantidad:</label>
-                                                    @Html.TextBoxFor(m => Model.Detalles[i].Cantidad, new { id = "Detalles_" + i + "__Cantidad" })
+                                                    <label for="Detalle.Cantidad">Cantidad:</label>
+                                                    @Html.TextBox("Cantidad", null, new { id = "Cantidad" })
                                                 </div>
-
                                                 <div>
-                                                    <label for="Detalles[@i].Precio">Precio:</label>
-                                                    @Html.TextBoxFor(m => Model.Detalles[i].Precio, new { id = "Detalles_" + i + "__Precio" })
+                                                    <label for="Detalle.Precio">Precio:</label>
+                                                    @Html.TextBox("Precio", null, new { id = "Precio" })
                                                 </div>
-
                                                 <div>
-                                                    <label for="idProducto">Producto</label>
+                                                    <label for="Detalle.Producto">ID Producto:</label>
                                                     @Html.TextBox("idProducto", null, new { id = "idProducto" })
                                                 </div>
+                       
+
+
+                                                <input type="submit" value="Cargar Producto" class="cargarProducto" formaction="@Url.Action("CargarProducto", "Vendedor")" formmethod="get" />
+
                                             </div>
-                                        }
 
-                                        <!-- Botón para agregar un nuevo detalle -->
-                                        <input type="submit" value="Agregar Producto" name="agregarProducto" />
+                                        </div>
 
-                                        <input type="submit" value="Registrar Venta" name="registrarVenta" />
-                                    </form>
+
+                                        <input type="submit" value="Registrar Venta" />
+                                    }
+     
+
+
                                     @foreach (var detalle in Model.Detalles)
                                     {
-                                        if(detalle.Producto != null) {
-                                        <div>
-                                            <p>Cantidad: @detalle.Cantidad</p>
-                                            <p>Precio: @detalle.Precio</p>
-                                            <p>Producto: @detalle.Producto</p>
-                                        </div>
+                                        if (detalle.Producto != null)
+                                        {
+                                            <div>
+                                                <p>Cantidad: @detalle.Cantidad</p>
+                                                <p>Precio: @detalle.Precio</p>
+                                                <p>Producto: @detalle.Producto</p>
+                                            </div>
                                         }
                                     }
-
 
 
                                 </div>

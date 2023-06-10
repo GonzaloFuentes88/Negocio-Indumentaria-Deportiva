@@ -15,51 +15,65 @@ namespace NegocioIndumentariaDeportiva.Controllers
         {
             return View();
         }
-        Venta venta = new Venta();
-        List<Detalle> listaDetalles = new List<Detalle>();
+
 
         [HttpGet]
         public ActionResult RegistrarVenta()
         {
+            Venta venta;
 
-
-
-            venta.Detalles = listaDetalles;
-  
-            listaDetalles.Add(new Detalle());
-            return View(venta);
-
-        }
-
-        [HttpPost]
-        public ActionResult HacerVenta(Venta venta, string agregarProducto, int idProducto, int idDetalle)
-        {
-            double total = 0;
-            foreach (var detalle in venta.Detalles)
+            if (Session["Venta"] == null)
             {
-                Usuario usuario = empresa.UsuarioEnUso;
-                venta.Usuario = usuario;
-                double subtotal = detalle.Cantidad * detalle.Precio;
-                total += subtotal;
-            }
-            venta.Total = total;
-            if (!string.IsNullOrEmpty(agregarProducto))
-            {
-   
-                Producto producto = empresa.ObtenerProducto(idProducto);
-                venta.Detalles[idDetalle].Producto = producto;
+                venta = new Venta();
+                venta.Detalles = new List<Detalle>();
+                venta.Detalles.Add(new Detalle());
 
+                Session["Venta"] = venta;
             }
             else
             {
-                empresa.RegistrarVenta(venta);
+                venta = (Venta)Session["Venta"];
             }
 
-            // Resto de la lógica para registrar la venta
-
-            return RedirectToAction("RegistrarVenta", venta);
+            return View(venta);
         }
+        [HttpGet]
+        public ActionResult CargarProducto(int Cantidad, int Precio, int idProducto)
+        {
+            Producto producto = empresa.ObtenerProducto(idProducto);
 
+            Venta venta = (Venta)Session["Venta"];
+
+            Detalle detalle = new Detalle();
+            detalle.Cantidad = Cantidad;
+            detalle.Precio = Precio;
+            detalle.Producto = producto;
+            venta.Detalles.Add(detalle);
+
+            return RedirectToAction("RegistrarVenta");
+        }
+        [HttpPost]
+        public ActionResult HacerVenta(Venta venta)
+        {
+            double total = 0;
+
+            Venta ventaEnCurso = (Venta)Session["Venta"];
+
+            foreach (var detalle in ventaEnCurso.Detalles)
+            {
+                Usuario usuario = empresa.UsuarioEnUso;
+                ventaEnCurso.Usuario = usuario;
+                double subtotal = detalle.Cantidad * detalle.Precio;
+                total += subtotal;
+            }
+
+            ventaEnCurso.Total = total;
+            empresa.RegistrarVenta(ventaEnCurso);
+
+            Session.Remove("Venta"); 
+
+            return RedirectToAction("RegistrarVenta");
+        }
 
 
 
