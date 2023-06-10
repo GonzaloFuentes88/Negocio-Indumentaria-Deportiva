@@ -11,7 +11,7 @@ namespace DAL.Datos
     public class ProductoCon
     {
         private static ProductoCon instance = null;
-        public static ProductoCon GetUsuarioCon
+        public static ProductoCon GetProductoCon
         {
             get
             {
@@ -49,7 +49,7 @@ namespace DAL.Datos
         {
             DataTable dt;
             Conexion objConexion = Conexion.GetConexion;
-
+            
             dt = objConexion.LeerPorStoreProcedure("sp_obtener_productos");
 
             return dt;

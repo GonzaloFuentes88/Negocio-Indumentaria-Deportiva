@@ -38,5 +38,27 @@ namespace DAL.Datos
             return dt;
         }
 
+        public bool RegistrarCliente(long idDireccion, string nombre, string apellido, long dni, long telefono, string email)
+        {
+            Conexion objConexion = Conexion.GetConexion;
+            SqlParameter[] parametros = new SqlParameter[6];
+            int filasAfectadas = 0;
+
+            parametros[0] = objConexion.crearParametro("@Id_Direccion", idDireccion);
+            parametros[1] = objConexion.crearParametro("@Nombre", nombre);
+            parametros[2] = objConexion.crearParametro("@Apellido", apellido);
+            parametros[3] = objConexion.crearParametro("@DNI", dni);
+            parametros[4] = objConexion.crearParametro("@Telefono", telefono);
+            parametros[5] = objConexion.crearParametro("@Email", email);
+
+            filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_registrar_cliente", parametros);
+
+            if(filasAfectadas > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }

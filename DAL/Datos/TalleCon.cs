@@ -11,7 +11,7 @@ namespace DAL.Datos
     public class TalleCon
     {
         private static TalleCon instance = null;
-        public static TalleCon GetUsuarioCon
+        public static TalleCon GetTalleCon
         {
             get
             {

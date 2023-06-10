@@ -61,16 +61,19 @@ namespace BBL.Models
         {
         }
 
-        public Producto(long idProducto, Categoria categoria, Talle talle, Proveedor proveedor, string descripcion, double precio, int cantidad)
+        public Producto CargarProducto(long idProducto, Categoria categoria, Talle talle, Proveedor proveedor, string descripcion, double precio, int cantidad)
         {
-            this.IdProducto = idProducto;
-            this.Categoria = categoria;
-            this.Talle = talle;
-            this.Proveedor = proveedor;
-            this.Descripcion = descripcion;
-            this.Precio = precio;
-            this.Cantidad = cantidad;
+            Producto unProducto = new Producto();
+            unProducto.IdProducto = idProducto;
+            unProducto.Categoria = categoria;
+            unProducto.Talle = talle;
+            unProducto.Proveedor = proveedor;
+            unProducto.Descripcion = descripcion;
+            unProducto.Precio = precio;
+            unProducto.Cantidad = cantidad;
+            return unProducto;
         }
+
 
     }
 }

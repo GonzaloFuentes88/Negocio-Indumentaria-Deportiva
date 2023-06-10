@@ -26,9 +26,10 @@ namespace BBL.Models
         public Categoria()
         {
         }
-        public Categoria(int IdCategoria)
+        public Categoria(int IdCategoria, string Nombre)
         {
                 this.idCategoria = IdCategoria;
+                this.Nombre = Nombre;
 
         }
     }

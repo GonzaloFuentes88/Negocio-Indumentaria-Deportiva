@@ -15,7 +15,15 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Vertodos");
+        }
+
+        [HttpGet]
+        public ActionResult Vertodos()
+        {
+
+            List<Producto> productos = empresa.ObtenerProductos();
+            return View(productos);
         }
 
 
@@ -34,18 +42,62 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
         }
 
+        
 
-
-
-        public ActionResult EditarProducto()
+        [HttpGet]
+        public ActionResult EditarProducto(long id)
         {
-            Producto producto = new Producto();
-            return View(producto);
+            Producto producto = empresa.ObtenerProducto(id);
+
+            if (producto != null)
+            {
+                return View(producto);
+            }
+            return RedirectToAction("Vertodos");
+
+        }
+
+
+        [HttpGet]
+        public ActionResult AgregarProducto()
+        {
+            List<Talle> talles = new List<Talle>();
+            talles = empresa.ObtenerTalle();
+            ViewBag.talles = talles;
+            List<Categoria> categoria = new List<Categoria>();
+            categoria = empresa.ObtenerCategoria();
+            ViewBag.categoria = categoria;
+            return View();
         }
 
 
 
+        [HttpPost]
+        public ActionResult DarAltaProducto(Producto producto)
+        {
+            
+                if (producto.IdProducto == 0)
+                {
+                    bool registrado = empresa.RegistrarProducto(producto);
+                    if (registrado)
+                    {
+                        return RedirectToAction("AgregarProducto");
+                    }
+                    else
+                    {
+                        // El modelo no es válido, manejar los errores de validación
+                        ModelState.AddModelError("", "No se pudo registrar el producto");
+                        return RedirectToAction("AgregarProducto");
+                    }
+                }
+                else
+                {
+                    /*bool editado = empresa.EditarProducto(producto);*/
+                    return RedirectToAction("Vertodos");
+                }
+
+            }
+        }
 
 
     }
-}
