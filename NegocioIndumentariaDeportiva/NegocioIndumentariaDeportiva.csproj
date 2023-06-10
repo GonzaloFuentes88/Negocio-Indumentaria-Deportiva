@@ -282,6 +282,7 @@
     <Content Include="Views\Gerente\Reporte.cshtml" />
     <Content Include="Views\Gerente\GenerarReporte.cshtml" />
     <Content Include="Views\Administrativo\EditarProducto.cshtml" />
+    <Content Include="Views\Administrativo\AgregarProducto.cshtml" />
     <Content Include="Views\Shared\LayoutPdf.cshtml" />
     <Content Include="Views\Vendedor\RegistrarClienteGet.cshtml" />
   </ItemGroup>

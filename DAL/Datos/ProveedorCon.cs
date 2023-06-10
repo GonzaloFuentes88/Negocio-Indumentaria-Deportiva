@@ -11,7 +11,7 @@ namespace DAL.Datos
     public class ProveedorCon
     {
         private static ProveedorCon instance = null;
-        public static ProveedorCon GetUsuarioCon
+        public static ProveedorCon GetProveedorCon
         {
             get
             {

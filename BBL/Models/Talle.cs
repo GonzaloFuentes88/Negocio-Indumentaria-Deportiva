@@ -27,10 +27,10 @@ namespace BBL.Models
             this.idTalle = idTalle;
         }
 
-        public Talle(long idTalle, string talles)
+        public Talle()/*long idTalle, string talles*/
         {
-            this.idTalle = idTalle;
-            this.Talles = talles;
+            /*this.idTalle = idTalle;
+            this.Talles = talles;*/
         }
 
     }

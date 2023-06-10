@@ -210,7 +210,7 @@ namespace BBL.Models
         public bool RegistrarVenta(Venta venta)
         {
 
-            ProductoCon productoCon = ProductoCon.GetUsuarioCon;
+            ProductoCon productoCon = ProductoCon.GetProductoCon;
             VentaCon ventaCon = VentaCon.GetVentaCon;
 
             ventaCon.RegistrarVenta(venta.Cliente.IdCliente, venta.Usuario.IdUsuario, venta.Fecha, venta.Total);
@@ -232,9 +232,66 @@ namespace BBL.Models
             return false;
 
         }**/
+
+        public bool RegistrarProducto(Producto producto)
+        {
+            
+            ProductoCon productoCon = ProductoCon.GetProductoCon;
+            Producto p = new Producto();
+            
+                        if (productoCon.RegistrarProducto(p.Categoria.idCategoria, p.IdProducto, p.Descripcion, p.Cantidad))
+                        {
+                            return true;
+                        }
+                    
+                
+            return false;
+
+        }
+
+        public List<Talle> ObtenerTalle()
+        {
+            List<Talle> listTalles = new List<Talle>();
+            TalleCon talleCon = TalleCon.GetTalleCon;
+            DataTable dt = new DataTable();
+            dt = talleCon.ObtenerTalles();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Talle talle = new Talle();
+                talle.idTalle = Convert.ToInt32(dt.Rows[i]["Id_Talle"]);
+                talle.Talles = dt.Rows[i]["Talle"].ToString();
+
+                listTalles.Add(talle);
+            }
+
+            return listTalles;
+        }
+
+
+        public List<Categoria> ObtenerCategoria()
+        {
+            List<Categoria> listCategoria = new List<Categoria>();
+            CategoriaCon categoriaCon = CategoriaCon.GetCategoriaCon;
+            DataTable dt = new DataTable();
+            dt = categoriaCon.ObtenerCategorias();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Categoria categoria = new Categoria();
+                categoria.idCategoria = Convert.ToInt32(dt.Rows[i]["Id_Categoria"]);
+                categoria.Nombre = dt.Rows[i]["Nombre"].ToString();
+
+                listCategoria.Add(categoria);
+            }
+
+            return listCategoria;
+        }
+
+
         public Producto ObtenerProducto(long idProd)
         {
-            ProductoCon productoCon = ProductoCon.GetUsuarioCon;
+            ProductoCon productoCon = ProductoCon.GetProductoCon;
             DataTable dt = productoCon.ObtenerProducto(idProd);
             if (dt == null || dt.Rows.Count == 0)
                 return null;
