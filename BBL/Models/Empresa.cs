@@ -248,7 +248,46 @@ namespace BBL.Models
             return false;
 
         }
-        
+
+        public List<Talle> ObtenerTalle()
+        {
+            List<Talle> listTalles = new List<Talle>();
+            TalleCon talleCon = TalleCon.GetTalleCon;
+            DataTable dt = new DataTable();
+            dt = talleCon.ObtenerTalles();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Talle talle = new Talle();
+                talle.idTalle = Convert.ToInt32(dt.Rows[i]["Id_Talle"]);
+                talle.Talles = dt.Rows[i]["Talle"].ToString();
+
+                listTalles.Add(talle);
+            }
+
+            return listTalles;
+        }
+
+
+        public List<Categoria> ObtenerCategoria()
+        {
+            List<Categoria> listCategoria = new List<Categoria>();
+            CategoriaCon categoriaCon = CategoriaCon.GetCategoriaCon;
+            DataTable dt = new DataTable();
+            dt = categoriaCon.ObtenerCategorias();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Categoria categoria = new Categoria();
+                categoria.idCategoria = Convert.ToInt32(dt.Rows[i]["Id_Categoria"]);
+                categoria.Nombre = dt.Rows[i]["Nombre"].ToString();
+
+                listCategoria.Add(categoria);
+            }
+
+            return listCategoria;
+        }
+
 
         public Producto ObtenerProducto(long idProd)
         {
