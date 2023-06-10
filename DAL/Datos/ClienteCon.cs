@@ -25,18 +25,23 @@ namespace DAL.Datos
         }
 
         private ClienteCon() { }
-        public DataTable ObtenerClienteDNI(long dni)
+        public DataTable ObtenerClienteDNI(int dni)
         {
 
             DataTable dt;
             Conexion objConexion = Conexion.GetConexion;
             SqlParameter[] parametros = new SqlParameter[1];
             parametros[0] = objConexion.crearParametro("@DNI", dni);
-
-            dt = objConexion.LeerPorStoreProcedure("sp_obtener_clienteDNI", parametros);
-
-            return dt;
-
+            try
+            {
+                dt = objConexion.LeerPorStoreProcedure("sp_obtener_clienteDNI", parametros);
+                return dt;
+            }
+            catch (Exception)
+            {
+       
+                return null; 
+            }
         }
         public DataTable ObtenerCliente(long id)
         {

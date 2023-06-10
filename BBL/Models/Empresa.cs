@@ -142,41 +142,7 @@ namespace BBL.Models
 
         }
       
-        public Usuario IniciarSesion(string user, string pass)
-        {
-
-            Usuario usuario = new Usuario();
-            UsuarioCon usuarioCon = UsuarioCon.GetUsuarioCon;
-
-            DataTable dt = new DataTable();
-            dt = usuarioCon.IniciarSesion(user,pass);
-
-            if (dt == null || dt.Rows.Count == 0)
-                return null;
-
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                
-                usuario.IdUsuario = Convert.ToInt32(dt.Rows[i]["Id_Usuario"]);
-                usuario.Username = dt.Rows[i]["Username"].ToString();
-                usuario.Password = dt.Rows[i]["Password"].ToString();
-                usuario.Role = new Role(
-                    Convert.ToInt32(dt.Rows[i]["Id_Rol"]),
-                    dt.Rows[i]["NombreRol"].ToString()
-                    );
-                if (Convert.ToInt32(dt.Rows[i]["Estado"]) == 0)
-                {
-                    usuario.Estado = false;
-                }
-                else
-                {
-                    usuario.Estado = true;
-                }
-            }
-
-
-            return usuario;
-        }
+    
 
         public bool RegistrarUsuario(Usuario usuario)
         {
@@ -362,14 +328,50 @@ namespace BBL.Models
             UsuarioCon usuarioCon = UsuarioCon.GetUsuarioCon;
             return usuarioCon.EditarUsuario(usuario.IdUsuario, usuario.Username, usuario.Password, usuario.Role.IdRole);
         }
-        public Cliente ObtenerClienteDNI(long dni)
+        public Usuario IniciarSesion(string user, string pass)
         {
-            ClienteCon clienteCon = ClienteCon.GetClienteCon;
-            DataTable dt = clienteCon.ObtenerClienteDNI(dni);
+
+            Usuario usuario = new Usuario();
+            UsuarioCon usuarioCon = UsuarioCon.GetUsuarioCon;
+
+            DataTable dt = new DataTable();
+            dt = usuarioCon.IniciarSesion(user, pass);
+
             if (dt == null || dt.Rows.Count == 0)
                 return null;
 
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+
+                usuario.IdUsuario = Convert.ToInt32(dt.Rows[i]["Id_Usuario"]);
+                usuario.Username = dt.Rows[i]["Username"].ToString();
+                usuario.Password = dt.Rows[i]["Password"].ToString();
+                usuario.Role = new Role(
+                    Convert.ToInt32(dt.Rows[i]["Id_Rol"]),
+                    dt.Rows[i]["NombreRol"].ToString()
+                    );
+                if (Convert.ToInt32(dt.Rows[i]["Estado"]) == 0)
+                {
+                    usuario.Estado = false;
+                }
+                else
+                {
+                    usuario.Estado = true;
+                }
+            }
+
+
+            return usuario;
+        }
+        public Cliente ObtenerClienteDNI(int dni)
+        {
             Cliente cliente = new Cliente();
+            ClienteCon clienteCon = ClienteCon.GetClienteCon;
+            DataTable dt = clienteCon.ObtenerClienteDNI(dni);
+
+            if (dt == null || dt.Rows.Count == 0)
+                return null;
+
 
             cliente.IdCliente = Convert.ToInt32(dt.Rows[0]["Id_Cliente"]);
             cliente.Nombre = dt.Rows[0]["Nombre"].ToString();

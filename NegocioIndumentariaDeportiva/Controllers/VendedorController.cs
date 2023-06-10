@@ -80,14 +80,20 @@ namespace NegocioIndumentariaDeportiva.Controllers
         }
 
         [HttpGet]
-        public ActionResult RegistrarClienteGet(long DNI)
+        public ActionResult RegistrarClienteGet(int DNI)
         {
             Cliente cliente = empresa.ObtenerClienteDNI(DNI); //arreglar, tira excepcion si no lo encuentra, deberia devolver null
             if (cliente != null)
             {
                 return RedirectToAction("RegistrarVenta");
             }
-            return View();
+            else
+            {
+                ModelState.AddModelError("", "Cliente no encontrado");
+                return View();
+            }
+
+
         }
         [HttpPost]
         public ActionResult RegistrarClientePost(Cliente cliente)
