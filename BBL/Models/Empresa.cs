@@ -237,12 +237,16 @@ namespace BBL.Models
         {
             
             ProductoCon productoCon = ProductoCon.GetProductoCon;
-            Producto p = new Producto();
-            
-                        if (productoCon.RegistrarProducto(p.Categoria.idCategoria, p.IdProducto, p.Descripcion, p.Cantidad))
-                        {
-                            return true;
-                        }
+            ProveedorCon proveedorCon = ProveedorCon.GetProveedorCon;
+            Proveedor proveedor = producto.Proveedor;
+
+            int id = proveedorCon.RegistrarProveedor(proveedor.Nombre,proveedor.Numero);
+
+            if (productoCon.RegistrarProducto(
+                producto.Categoria.idCategoria,producto.Talle.idTalle,producto.Descripcion,producto.Cantidad,id))
+            {
+                return true;
+            }
                     
                 
             return false;
@@ -269,7 +273,7 @@ namespace BBL.Models
         }
 
 
-        public List<Categoria> ObtenerCategoria()
+        public List<Categoria> ObtenerCategorias()
         {
             List<Categoria> listCategoria = new List<Categoria>();
             CategoriaCon categoriaCon = CategoriaCon.GetCategoriaCon;
@@ -318,7 +322,7 @@ namespace BBL.Models
         public List<Producto> ObtenerProductos()
         {
             List<Producto> listproductos = new List<Producto>();
-            ProductoCon productoCon = ProductoCon.GetUsuarioCon;
+            ProductoCon productoCon = ProductoCon.GetProductoCon;
             DataTable dt = productoCon.ObtenerProductos();
 
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -361,6 +365,11 @@ namespace BBL.Models
         {
             UsuarioCon usuarioCon = UsuarioCon.GetUsuarioCon;
             return usuarioCon.EditarUsuario(usuario.IdUsuario, usuario.Username, usuario.Password, usuario.Role.IdRole);
+        }
+        public bool EditarProducto(Producto producto)
+        {
+            ProductoCon productoCon = ProductoCon.GetProductoCon;
+            return productoCon.EditarProducto(producto.IdProducto,producto.Descripcion,producto.Cantidad,producto.Precio);
         }
 
         public Cliente ObtenerCliente(long id)

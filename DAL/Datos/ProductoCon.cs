@@ -27,15 +27,18 @@ namespace DAL.Datos
         private ProductoCon() { }
 
 
-        public bool RegistrarProducto(long idCategoria,long idProducto,string descripcion,int cantidad)
+        public bool RegistrarProducto(long idCategoria,long idTalle,string descripcion,int cantidad,long idProveedor)
         {
             Conexion objConexion = Conexion.GetConexion;
-            SqlParameter[] parametros = new SqlParameter[4];
+            SqlParameter[] parametros = new SqlParameter[5];
             int filasAfectadas = 0;
+
+
             parametros[0] = objConexion.crearParametro("@Id_Categoria",idCategoria);
-            parametros[1] = objConexion.crearParametro("@Id_Producto", idProducto);
-            parametros[2] = objConexion.crearParametro("@Descripcion", descripcion);
-            parametros[3] = objConexion.crearParametro("@Cantidad", cantidad);
+            parametros[1] = objConexion.crearParametro("@Id_Talle", idTalle);
+            parametros[2] = objConexion.crearParametro("@Id_Proveedor", idProveedor);
+            parametros[3] = objConexion.crearParametro("@Descripcion", descripcion);
+            parametros[4] = objConexion.crearParametro("@Cantidad", cantidad);
             filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_registrar_producto", parametros);
 
             if (filasAfectadas > 0)
@@ -67,12 +70,12 @@ namespace DAL.Datos
             return dt;
         }
 
-        public bool EditarProducto(long idProducto,string descripcion,long cantidad,float precio)
+        public bool EditarProducto(long idProducto,string descripcion,long cantidad,double precio)
         {
             Conexion objConexion = Conexion.GetConexion;
             SqlParameter[] parametros = new SqlParameter[4];
             int filasAfectadas = 0;
-            parametros[0] = objConexion.crearParametro("@Id_Producto", idProducto);
+            parametros[0] = objConexion.crearParametro("@id", idProducto);
             parametros[1] = objConexion.crearParametro("@Descripcion", descripcion);
             parametros[2] = objConexion.crearParametro("@Cantidad", cantidad);
             parametros[3] = objConexion.crearParametro("@Precio", precio);

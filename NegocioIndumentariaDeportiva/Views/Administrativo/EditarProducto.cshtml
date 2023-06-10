@@ -1,6 +1,6 @@
 ﻿@model BBL.Models.Producto
 @{
-    Layout = "~/Views/Shared/LayoutVendedor.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdministrativo.cshtml";
 }
 
 
@@ -23,7 +23,7 @@
                                         <div>
                                             <div class="mb-3 mb-md-0 ">
 
-                                                <form action="@Url.Action("", "Administrativo")" method="post">
+                                                <form action="@Url.Action("DarAltaProducto", "Administrativo")" method="post">
                                                     @Html.AntiForgeryToken()
 
                                                     <div class="row">

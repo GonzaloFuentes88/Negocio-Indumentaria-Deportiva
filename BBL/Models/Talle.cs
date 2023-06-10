@@ -32,6 +32,11 @@ namespace BBL.Models
             /*this.idTalle = idTalle;
             this.Talles = talles;*/
         }
+        public Talle(long idTalle, string talles)
+        {
+            this.idTalle = idTalle;
+            this.Talles = talles;
+        }
 
     }
 

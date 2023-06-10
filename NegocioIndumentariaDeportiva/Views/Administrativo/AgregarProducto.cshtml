@@ -2,7 +2,7 @@
 
 @{
 
-    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdministrativo.cshtml";
 
 }
 <!DOCTYPE html>
@@ -32,9 +32,9 @@
                                                     <div class="row">
 
                                                         <div class="col-6">
-                                                         @Html.LabelFor(m => m.Categoria)
-                                                         @Html.DropDownListFor(m => m.Categoria.idCategoria, new SelectList(ViewBag.roles, "idCategoria", "Nombre"), "Seleccione una categoría", new { @class = "form-control" })
-                                                          </div>
+                                                            @Html.LabelFor(m => m.Categoria)
+                                                            @Html.DropDownListFor(m => m.Categoria.idCategoria, new SelectList(ViewBag.categoria, "idCategoria", "Nombre"), "Seleccione una categoría", new { @class = "form-control" })
+                                                        </div>
 
                                                         <div class="col-6">
                                                             @Html.LabelFor(m => m.Descripcion)
@@ -43,20 +43,22 @@
                                                     </div>
                                                     <div class="row">
 
-                                                              <div class="col-6">
-                                                                  @Html.LabelFor(m => m.Talle.Talles)
-                                                                  @Html.TextBoxFor(m => m.Talle.Talles, new { @class = "form-control" })
-                                                              </div>
+                                                        <div class="col-6">
+                                                            @Html.LabelFor(m => m.Talle.Talles)
+                                                            
+                                                            @Html.DropDownListFor(m => m.Talle.idTalle, new SelectList(ViewBag.talles, "idTalle", "Talles"), "Seleccione una categoría", new { @class = "form-control" })
+                                                        </div>
 
                                                     </div>
-                                                    
-                                                   
 
-                                                    
-                                                        <div class="mt-4 mb-0 col-4">
-                                                            @Html.LabelFor(m => m.Proveedor.Nombre)
-                                                            @Html.TextBoxFor(m => m.Proveedor.Nombre, new { @class = "form-control" })
-                                                        </div>
+                                                    <div class="mt-4 mb-0 col-4">
+                                                        @Html.Label("Proveedor")
+                                                        @Html.TextBoxFor(m => m.Proveedor.Nombre, new { @class = "form-control" })
+                                                    </div>
+                                                    <div class="mt-4 mb-0 col-4">
+                                                        @Html.Label("Numero")
+                                                        @Html.TextBoxFor(m => m.Proveedor.Nombre, new { @class = "form-control" })
+                                                    </div>
 
                                                     <div class="mt-4 mb-0">
                                                         <button type="submit" class="btn btn-primary mt-2">Guardar</button>
