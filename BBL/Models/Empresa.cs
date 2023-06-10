@@ -303,7 +303,8 @@ namespace BBL.Models
             producto.Precio = Convert.ToInt32(dt.Rows[0]["Precio"]);
             producto.Cantidad = Convert.ToInt32(dt.Rows[0]["Cantidad"]);
             producto.Categoria = new Categoria(
-                Convert.ToInt32(dt.Rows[0]["Id_Categoria"])
+                Convert.ToInt32(dt.Rows[0]["Id_Categoria"]),
+                   dt.Rows[0]["Nombre"].ToString()
             );
             producto.Talle = new Talle(
                 Convert.ToInt32(dt.Rows[0]["Id_Talle"]),
@@ -313,6 +314,36 @@ namespace BBL.Models
             return producto;
 
         }
+
+        public List<Producto> ObtenerProductos()
+        {
+            List<Producto> listproductos = new List<Producto>();
+            ProductoCon productoCon = ProductoCon.GetUsuarioCon;
+            DataTable dt = productoCon.ObtenerProductos();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Producto producto = new Producto();
+                producto.IdProducto = Convert.ToInt32(dt.Rows[0]["Id_Producto"]);
+                producto.Descripcion = dt.Rows[0]["Descripcion"].ToString();
+                producto.Precio = Convert.ToInt32(dt.Rows[0]["Precio"]);
+                producto.Cantidad = Convert.ToInt32(dt.Rows[0]["Cantidad"]);
+                producto.Categoria = new Categoria(
+                Convert.ToInt32(dt.Rows[0]["Id_Categoria"]),
+                   dt.Rows[0]["Nombre"].ToString()
+           );
+                producto.Talle = new Talle(
+                    Convert.ToInt32(dt.Rows[0]["Id_Talle"]),
+                        dt.Rows[0]["Talle"].ToString()
+                );
+
+                //listUsuarios.Add(usuario);
+                listproductos.Add(producto);
+            }
+
+            return listproductos;
+        }
+
 
         public bool bajaUsuario(long idUsuario)
         {

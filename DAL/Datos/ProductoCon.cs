@@ -49,7 +49,7 @@ namespace DAL.Datos
         {
             DataTable dt;
             Conexion objConexion = Conexion.GetConexion;
-
+            
             dt = objConexion.LeerPorStoreProcedure("sp_obtener_productos");
 
             return dt;
