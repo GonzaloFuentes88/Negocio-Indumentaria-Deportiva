@@ -23,7 +23,7 @@
                                         <div>
                                             <div class="mb-3 mb-md-0 ">
 
-                                                <form action="@Url.Action("BuscarProducto", "Administrativo")" method="post">
+                                                <form action="@Url.Action("", "Administrativo")" method="post">
                                                     @Html.AntiForgeryToken()
 
                                                     <div class="row">
@@ -46,10 +46,9 @@
                                                             @Html.TextBoxFor(m => m.Cantidad, new { @class = "form-control" })
                                                         </div>
 
-                                                        <div class="mt-4 mb-0 col-6">
-                                                            <label for="idProd">Producto</label>
-                                                            @Html.TextBox("idProd", null, new { id = "idProd", @class = "form-control" })
-                                                        </div>
+                                                        
+
+                                                       @Html.HiddenFor(m => m.IdProducto)
                                         
 
                                                     <div class="mt-4 mb-0">

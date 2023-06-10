@@ -15,7 +15,15 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Vertodos");
+        }
+
+        [HttpGet]
+        public ActionResult Vertodos()
+        {
+
+            List<Producto> productos = empresa.ObtenerProductos();
+            return View(productos);
         }
 
 
@@ -34,13 +42,19 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
         }
 
+        
 
-
-
-        public ActionResult EditarProducto()
+        [HttpGet]
+        public ActionResult EditarProducto(long id)
         {
-            Producto producto = new Producto();
-            return View(producto);
+            Producto producto = empresa.ObtenerProducto(id);
+
+            if (producto != null)
+            {
+                return View(producto);
+            }
+            return RedirectToAction("Vertodos");
+
         }
 
 

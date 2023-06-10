@@ -54,7 +54,7 @@ namespace DAL.Datos
         {
             //Cambiar InitialCatalog y el Data Source por los propios
 
-            strCadenaDeConexion = @"Data Source=DESKTOP-LHGQJON;Initial Catalog=TiendaDeportiva_tp;Integrated Security=True;";
+            strCadenaDeConexion = @"Data Source=DESKTOP-AFAAQCR;Initial Catalog=TiendaDeportiva_tp;Integrated Security=True;";
             //strCadenaDeConexion = @"Data Source=DESKTOP-LHGQJON;Initial Catalog=TiendaDeportiva_tp;Integrated Security=True;";
 
             objConexion = new SqlConnection(strCadenaDeConexion);
