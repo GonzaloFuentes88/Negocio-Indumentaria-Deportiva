@@ -390,7 +390,7 @@ namespace BBL.Models
                 Convert.ToInt32(dt.Rows[0]["Numero"])
                 );
 
-            return cliente
+            return cliente;
         }
         public bool EditarProducto(Producto producto)
         {

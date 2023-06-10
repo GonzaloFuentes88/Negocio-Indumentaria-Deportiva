@@ -92,9 +92,8 @@ namespace NegocioIndumentariaDeportiva.Controllers
                 ModelState.AddModelError("", "Cliente no encontrado");
                 return View();
             }
-
-
         }
+
         [HttpPost]
         public ActionResult RegistrarClientePost(Cliente cliente)
         {
