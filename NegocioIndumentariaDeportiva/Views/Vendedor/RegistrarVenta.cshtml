@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "RegistrarVenta";
     Layout = "~/Views/Shared/LayoutVendedor.cshtml";
-    
 }
 
 <body>
@@ -13,65 +12,78 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-7">
                             <div class="card shadow-md border-0 rounded-lg">
-                                <div class="card-header"><h3 class="text-center font-weight-light my-4">Registrar Venta</h3></div>
+                                <div class="card-header">
+                                    <h3 class="text-center font-weight-light my-4">Registrar Venta</h3>
+                                </div>
 
                                 <div class="card-body">
                                     @using (Html.BeginForm("HacerVenta", "Vendedor", FormMethod.Post))
                                     {
                                         <div id="detallesContainer">
-                             
                                             <div class="detalle">
-                                                <div>
-                                                    <label for="Detalle.Cantidad">Cantidad:</label>
-                                                    @Html.TextBox("Cantidad", null, new { id = "Cantidad" })
+                                                <div class="form-group mt-4 mb-0">
+                                                    <label class="control-label col-md-2" for="idProducto">ID Producto:</label>
+                                                    @Html.TextBox("idProducto", null, new { id = "idProducto", @class = "form-control", type = "number" })
                                                 </div>
-                                                <div>
-                                                    <label for="Detalle.Precio">Precio:</label>
-                                                    @Html.TextBox("Precio", null, new { id = "Precio" })
+                                                <div class="form-group mt-4 mb-0">
+                                                    <label class="control-label col-md-2" for="Talle">Talle:</label>
+                                                    @Html.TextBox("Talle", null, new { id = "Talle", @class = "form-control", type = "number" })
                                                 </div>
-                                                <div>
-                                                    <label for="Detalle.Producto">ID Producto:</label>
-                                                    @Html.TextBox("idProducto", null, new { id = "idProducto" })
+
+                                                <div class="form-group mt-4 mb-0">
+                                                    <label class="control-label col-md-2" for="Cantidad">Cantidad:</label>
+                                                    @Html.TextBox("Cantidad", null, new { id = "Cantidad", @class = "form-control", type = "number" })
                                                 </div>
-                       
+                                                <div class="form-group mt-4 mb-0">
+                                                    <label class="control-label col-md-2" for="Precio">Precio:</label>
+                                                    @Html.TextBox("Precio", null, new { id = "Precio", @class = "form-control", type = "number" })
+                                                </div>
 
-
-                                                <input type="submit" value="Cargar Producto" class="cargarProducto" formaction="@Url.Action("CargarProducto", "Vendedor")" formmethod="get" />
-
+                                                <div class="form-group mt-4 mb-0">
+                                                    <input type="submit" value="Agregar Producto" class="btn btn-primary mt-2" formaction="@Url.Action("CargarProducto", "Vendedor")" formmethod="get" />
+                                                </div>
+                                            </div>
+                                            <div class="detalle">
+                                                <div class="form-group mt-4 mb-0">
+                                                    <label class="control-label col-md-2" for="DNI">DNI:</label>
+                                                    @Html.TextBox("DNI", null, new { id = "DNI", @class = "form-control", type = "number" })
+                                                </div>
+                                                <div class="form-group mt-4 mb-0">
+                                                    <input type="submit" value="Registrar Cliente" class="btn btn-primary mt-2" formaction="@Url.Action("RegistrarClienteGet", "Vendedor")" formmethod="get" />
+                                                </div>
+                                            </div>
+                                                <div class="form-group mt-4 mb-0">
+                                                    <input type="submit" value="Registrar Venta" class="btn btn-primary mt-2" />
+                                                </div>
                                             </div>
 
-                                        </div>
 
-
-                                        <input type="submit" value="Registrar Venta" />
                                     }
-     
-
-
                                     @foreach (var detalle in Model.Detalles)
                                     {
                                         if (detalle.Producto != null)
                                         {
-                                            <div>
-                                                <p>Cantidad: @detalle.Cantidad</p>
-                                                <p>Precio: @detalle.Precio</p>
-                                                <p>Producto: @detalle.Producto</p>
+                                            <div class="form-group mt-4 mb-0">
+                                                <div class="form-group mt-4 mb-0">
+                                                    <p class="col-md-2">Cantidad: @detalle.Cantidad</p>
+                                                </div>
+                                                <div class="form-group mt-4 mb-0">
+                                                    <p class="col-md-2">Precio: @detalle.Precio</p>
+                                                </div>
+                                                <div class="form-group mt-4 mb-0">
+                                                    <p class="col-md-2">Producto: @detalle.Producto.Descripcion</p>
+                                                </div>
                                             </div>
                                         }
                                     }
-
-
                                 </div>
-                                </div>
-
+                            </div>
                         </div>
                     </div>
                 </div>
             </main>
         </div>
-
     </div>
-
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Scripts/js")

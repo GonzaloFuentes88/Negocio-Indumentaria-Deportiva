@@ -318,7 +318,7 @@ namespace BBL.Models
         public List<Producto> ObtenerProductos()
         {
             List<Producto> listproductos = new List<Producto>();
-            ProductoCon productoCon = ProductoCon.GetUsuarioCon;
+            ProductoCon productoCon = ProductoCon.GetProductoCon;
             DataTable dt = productoCon.ObtenerProductos();
 
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -362,7 +362,31 @@ namespace BBL.Models
             UsuarioCon usuarioCon = UsuarioCon.GetUsuarioCon;
             return usuarioCon.EditarUsuario(usuario.IdUsuario, usuario.Username, usuario.Password, usuario.Role.IdRole);
         }
+        public Cliente ObtenerClienteDNI(long dni)
+        {
+            ClienteCon clienteCon = ClienteCon.GetClienteCon;
+            DataTable dt = clienteCon.ObtenerClienteDNI(dni);
+            if (dt == null || dt.Rows.Count == 0)
+                return null;
 
+            Cliente cliente = new Cliente();
+
+            cliente.IdCliente = Convert.ToInt32(dt.Rows[0]["Id_Cliente"]);
+            cliente.Nombre = dt.Rows[0]["Nombre"].ToString();
+            cliente.Apellido = dt.Rows[0]["Apellido"].ToString();
+            cliente.DNI = Convert.ToInt32(dt.Rows[0]["DNI"]);
+            cliente.Email = dt.Rows[0]["Email"].ToString();
+            cliente.Telefono = Convert.ToInt32(dt.Rows[0]["Telefono"]);
+            cliente.Direccion = new Direccion(
+                Convert.ToInt32(dt.Rows[0]["Id_Direccion"]),
+                dt.Rows[0]["CP"].ToString(),
+                dt.Rows[0]["Calle"].ToString(),
+                Convert.ToInt32(dt.Rows[0]["Numero"])
+                );
+
+            return cliente;
+
+        }
         public Cliente ObtenerCliente(long id)
         {
             ClienteCon clienteCon = ClienteCon.GetClienteCon;

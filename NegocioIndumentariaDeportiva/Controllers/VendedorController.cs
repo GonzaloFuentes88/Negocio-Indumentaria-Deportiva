@@ -38,12 +38,16 @@ namespace NegocioIndumentariaDeportiva.Controllers
             return View(venta);
         }
         [HttpGet]
-        public ActionResult CargarProducto(int Cantidad, int Precio, int idProducto)
+        public ActionResult CargarProducto(int idProducto, int Talle, int Cantidad, int Precio)
         {
             Producto producto = empresa.ObtenerProducto(idProducto);
 
             Venta venta = (Venta)Session["Venta"];
 
+            Talle talle = new Talle();
+            talle.idTalle = Talle;
+            producto.Talle = talle;
+            //hacer logica para que traiga el nombre del talle
             Detalle detalle = new Detalle();
             detalle.Cantidad = Cantidad;
             detalle.Precio = Precio;
@@ -76,13 +80,19 @@ namespace NegocioIndumentariaDeportiva.Controllers
         }
 
         [HttpGet]
-        public ActionResult RegistrarClienteGet()
+        public ActionResult RegistrarClienteGet(long DNI)
         {
+            Cliente cliente = empresa.ObtenerClienteDNI(DNI); //arreglar, tira excepcion si no lo encuentra, deberia devolver null
+            if (cliente != null)
+            {
+                return RedirectToAction("RegistrarVenta");
+            }
             return View();
         }
         [HttpPost]
         public ActionResult RegistrarClientePost(Cliente cliente)
         {
+ 
             if(cliente != null)
             {
                 empresa.RegistrarCliente(cliente);
