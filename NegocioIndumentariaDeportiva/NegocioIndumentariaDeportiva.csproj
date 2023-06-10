@@ -283,6 +283,7 @@
     <Content Include="Views\Gerente\GenerarReporte.cshtml" />
     <Content Include="Views\Administrativo\EditarProducto.cshtml" />
     <Content Include="Views\Shared\LayoutPdf.cshtml" />
+    <Content Include="Views\Vendedor\RegistrarClienteGet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

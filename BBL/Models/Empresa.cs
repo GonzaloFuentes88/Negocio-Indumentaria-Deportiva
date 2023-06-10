@@ -372,6 +372,27 @@ namespace BBL.Models
             return listVentas;
         }
 
+        public bool RegistrarCliente(Cliente cliente)
+        {
+            DireccionCon direccionCon = DireccionCon.GetDireccionCon;
+            ClienteCon clienteCon = ClienteCon.GetClienteCon;
+
+            if (cliente.Direccion != null)
+            {
+                Direccion dir = cliente.Direccion;
+                dir.IDdireccion = direccionCon.RegistrarDireccion(dir.CP, dir.Calle, dir.Numero);
+                if (dir.IDdireccion > 0)
+                {
+                    if (clienteCon.RegistrarCliente(dir.IDdireccion,cliente.Nombre,cliente.Apellido,cliente.DNI,cliente.Telefono,cliente.Email))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+
         public double TotalReporte(List<Venta> ventas)
         {
             double total = 0;

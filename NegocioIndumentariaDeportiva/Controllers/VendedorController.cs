@@ -61,6 +61,22 @@ namespace NegocioIndumentariaDeportiva.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult RegistrarClienteGet()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult RegistrarClientePost(Cliente cliente)
+        {
+            if(cliente != null)
+            {
+                empresa.RegistrarCliente(cliente);
+                //SE CREA EL CLIENTE, REDIRIGILO A DONDE QUIERAS
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("RegistrarCliente");
+        }
 
 
 
