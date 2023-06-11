@@ -21,7 +21,9 @@ namespace NegocioIndumentariaDeportiva.Controllers
         public ActionResult RegistrarVenta()
         {
             Venta venta;
-
+            List<Talle> talles = new List<Talle>();
+            talles = empresa.ObtenerTalle();
+            ViewBag.talles = talles;
             if (Session["Venta"] == null)
             {
                 venta = new Venta();
@@ -38,23 +40,32 @@ namespace NegocioIndumentariaDeportiva.Controllers
             return View(venta);
         }
         [HttpGet]
-        public ActionResult CargarProducto(int idProducto, int Talle, int Cantidad, int Precio)
+        public ActionResult CargarProducto(int idProducto, int Cantidad, int Precio, int idTalle, string Talles)
         {
             Producto producto = empresa.ObtenerProducto(idProducto);
+            if (producto != null)
+            {
+                Venta venta = (Venta)Session["Venta"];
+                Talle talle = new Talle();
+                talle.idTalle = idTalle;
+                talle.Talles = Talles;
+                producto.Talle = talle;
 
-            Venta venta = (Venta)Session["Venta"];
 
-            Talle talle = new Talle();
-            talle.idTalle = Talle;
-            producto.Talle = talle;
-            //hacer logica para que traiga el nombre del talle
-            Detalle detalle = new Detalle();
-            detalle.Cantidad = Cantidad;
-            detalle.Precio = Precio;
-            detalle.Producto = producto;
-            venta.Detalles.Add(detalle);
+                //hacer logica para que traiga el nombre del talle
+                Detalle detalle = new Detalle();
+                detalle.Cantidad = Cantidad;
+                detalle.Precio = Precio;
+                detalle.Producto = producto;
+                venta.Detalles.Add(detalle);
+                return RedirectToAction("RegistrarVenta");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Producto no encontrado");
+                return RedirectToAction("RegistrarVenta");
+            }
 
-            return RedirectToAction("RegistrarVenta");
         }
         [HttpPost]
         public ActionResult HacerVenta(Venta venta)
@@ -102,8 +113,10 @@ namespace NegocioIndumentariaDeportiva.Controllers
             if(cliente != null)
             {
                 empresa.RegistrarCliente(cliente);
+                Venta venta = (Venta)Session["Venta"];
+                venta.Cliente = cliente;
                 //SE CREA EL CLIENTE, REDIRIGILO A DONDE QUIERAS
-                return RedirectToAction("Index");
+                return RedirectToAction("RegistrarVenta");
             }
             return RedirectToAction("RegistrarCliente");
         }

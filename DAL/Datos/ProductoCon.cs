@@ -61,10 +61,17 @@ namespace DAL.Datos
             Conexion objConexion = Conexion.GetConexion;
             SqlParameter[] parametros = new SqlParameter[1];
             parametros[0] = objConexion.crearParametro("@id",idProducto);
+            try
+            {
+                dt = objConexion.LeerPorStoreProcedure("sp_obtener_producto", parametros);
+                return dt;
+            }
+            catch (Exception)
+            {
 
-            dt = objConexion.LeerPorStoreProcedure("sp_obtener_producto",parametros);
+                return null;
+            }
 
-            return dt;
         }
 
         public bool EditarProducto(long idProducto,string descripcion,long cantidad,float precio)

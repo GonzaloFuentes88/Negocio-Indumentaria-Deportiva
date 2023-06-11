@@ -9,75 +9,100 @@
         <div id="layoutAuthentication_content">
             <main>
                 <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-7">
-                            <div class="card shadow-md border-0 rounded-lg">
+                    <div class="row">
+                        <div class="col-sm-10 col-lg-7 justify-content-center">
+                            <div class="card shadow-md rounded-lg">
                                 <div class="card-header">
                                     <h3 class="text-center font-weight-light my-4">Registrar Venta</h3>
                                 </div>
 
                                 <div class="card-body">
-                                    @using (Html.BeginForm("HacerVenta", "Vendedor", FormMethod.Post))
+                                    @using (Html.BeginForm("HacerVenta", "Vendedor", FormMethod.Post, new { @class = "row col-sm-12 m-0" }))
                                     {
-                                        <div id="detallesContainer">
-                                            <div class="detalle">
-                                                <div class="form-group mt-4 mb-0">
-                                                    <label class="control-label col-md-2" for="idProducto">ID Producto:</label>
-                                                    @Html.TextBox("idProducto", null, new { id = "idProducto", @class = "form-control", type = "number" })
-                                                </div>
-                                                <div class="form-group mt-4 mb-0">
-                                                    <label class="control-label col-md-2" for="Talle">Talle:</label>
-                                                    @Html.TextBox("Talle", null, new { id = "Talle", @class = "form-control", type = "number" })
-                                                </div>
 
-                                                <div class="form-group mt-4 mb-0">
-                                                    <label class="control-label col-md-2" for="Cantidad">Cantidad:</label>
-                                                    @Html.TextBox("Cantidad", null, new { id = "Cantidad", @class = "form-control", type = "number" })
-                                                </div>
-                                                <div class="form-group mt-4 mb-0">
-                                                    <label class="control-label col-md-2" for="Precio">Precio:</label>
-                                                    @Html.TextBox("Precio", null, new { id = "Precio", @class = "form-control", type = "number" })
-                                                </div>
+                                        <div class="form-group mt-4 mb-0 col-sm-6">
+                                            <label class="control-label" for="idProducto">ID Producto:</label>
+                                            <div>
+                                                @Html.TextBox("idProducto", null, new { id = "idProducto", @class = "form-control", type = "number" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-4 mb-0 col-sm-6">
+                                            <label class="control-label" for="Talle">Talle:</label>
+                                            <div>
+                                                @Html.DropDownList("idTalle", new SelectList(ViewBag.talles, "idTalle", "Talles"), "Seleccione un talle", new { @class = "form-control float-end" })
+                              
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-4 mb-0 col-sm-6">
+                                            <label class="control-label" for="Cantidad">Cantidad:</label>
+                                            <div>
+                                                @Html.TextBox("Cantidad", null, new { id = "Cantidad", @class = "form-control", type = "number" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-4 mb-0 col-sm-6">
+                                            <label class="control-label" for="Precio">Precio:</label>
+                                            <div>
+                                                @Html.TextBox("Precio", null, new { id = "Precio", @class = "form-control float-end", type = "number" })
+                                            </div>
+                                        </div>
 
-                                                <div class="form-group mt-4 mb-0">
-                                                    <input type="submit" value="Agregar Producto" class="btn btn-primary mt-2" formaction="@Url.Action("CargarProducto", "Vendedor")" formmethod="get" />
-                                                </div>
-                                            </div>
-                                            <div class="detalle">
-                                                <div class="form-group mt-4 mb-0">
-                                                    <label class="control-label col-md-2" for="DNI">DNI:</label>
-                                                    @Html.TextBox("DNI", null, new { id = "DNI", @class = "form-control", type = "number" })
-                                                </div>
-                                                <div class="form-group mt-4 mb-0">
-                                                    <input type="submit" value="Registrar Cliente" class="btn btn-primary mt-2" formaction="@Url.Action("RegistrarClienteGet", "Vendedor")" formmethod="get" />
-                                                </div>
-                                            </div>
-                                                <div class="form-group mt-4 mb-0">
-                                                    <input type="submit" value="Registrar Venta" class="btn btn-primary mt-2" />
-                                                </div>
-                                            </div>
+                                        <div class="form-group mt-4 col-sm-6 m-0 ">
+                                            <input type="submit" value="Agregar Producto" class="btn btn-primary mt-2" formaction="@Url.Action("CargarProducto", "Vendedor")" formmethod="get" />
+                                        </div>
+
+                                        <div class="form-group mt-4 col-sm-12  m-0">
+                                            <label class="control-label" for="DNI">DNI:</label>
+                                            @Html.TextBox("DNI", null, new { id = "DNI", @class = "form-control", type = "number" })
+                                        </div>
+                                        <div class="form-group my-4 col-sm-6 m-0">
+                                            <input type="submit" @(Model.Cliente != null ? "disabled" : "") value="Registrar Cliente" class="btn btn-primary mt-2" formaction="@Url.Action("RegistrarClienteGet", "Vendedor")" formmethod="get" />
+                                            @if (Model.Cliente != null)
+                                            {
+                                                <p class="fw-bold">Cliente: @Model.Cliente.Nombre @Model.Cliente.Apellido</p>
+                                            }
+                                        </div>
+                                        <div class="form-group mt-4 mb-0 col-sm-6">
+                                            <input type="submit" value="Registrar Venta" class="btn btn-primary mt-2 float-end" />
+                                        </div>
+
 
 
                                     }
+
+                                </div>
+
+                            </div>
+                           
+                        </div>
+                        <div class="col-sm-10 col-lg-5">
+                            <div class="card shadow-md rounded-lg">
+                                <div class="card-header">
+                                    <p class="h4">Detalles</p>
+                                </div>
+                                <div class="card-body">
                                     @foreach (var detalle in Model.Detalles)
                                     {
                                         if (detalle.Producto != null)
                                         {
-                                            <div class="form-group mt-4 mb-0">
-                                                <div class="form-group mt-4 mb-0">
-                                                    <p class="col-md-2">Cantidad: @detalle.Cantidad</p>
-                                                </div>
-                                                <div class="form-group mt-4 mb-0">
-                                                    <p class="col-md-2">Precio: @detalle.Precio</p>
-                                                </div>
-                                                <div class="form-group mt-4 mb-0">
-                                                    <p class="col-md-2">Producto: @detalle.Producto.Descripcion</p>
-                                                </div>
-                                            </div>
+                                    <div class="form-group col-sm-12 border-top">
+                                        <div class="form-group mt-3">
+                                            <p>Producto: @detalle.Producto.Descripcion</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <p>Talle: @detalle.Producto.Talle.Talles</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <p>Cantidad: @detalle.Cantidad</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <p>Precio: @detalle.Precio</p>
+                                        </div>
+                                    </div>
+
                                         }
                                     }
                                 </div>
-                            </div>
+                                </div>
                         </div>
                     </div>
                 </div>

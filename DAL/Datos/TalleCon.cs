@@ -30,9 +30,17 @@ namespace DAL.Datos
         {
             DataTable dt;
             Conexion objConexion = Conexion.GetConexion;
-            dt = objConexion.LeerPorStoreProcedure("sp_obtener_talles");
+            try
+            {
+                dt = objConexion.LeerPorStoreProcedure("sp_obtener_talles");
 
-            return dt;
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
     }
 }
