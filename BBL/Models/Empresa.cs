@@ -209,7 +209,7 @@ namespace BBL.Models
             int id = proveedorCon.RegistrarProveedor(proveedor.Nombre,proveedor.Numero);
 
             if (productoCon.RegistrarProducto(
-                producto.Categoria.idCategoria,producto.Talle.idTalle,producto.Descripcion,producto.Cantidad,id))
+                producto.Categoria.idCategoria,producto.Talle.idTalle,producto.Descripcion,producto.Cantidad,producto.Proveedor.idProveedor, producto.Precio ))
             {
                 return true;
             }

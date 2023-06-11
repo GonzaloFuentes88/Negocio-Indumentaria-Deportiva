@@ -27,7 +27,7 @@ namespace DAL.Datos
         private ProductoCon() { }
 
 
-        public bool RegistrarProducto(long idCategoria,long idTalle,string descripcion,int cantidad,long idProveedor)
+        public bool RegistrarProducto(long idCategoria,long idTalle,string descripcion,int cantidad,long idProveedor,double precio)
         {
             Conexion objConexion = Conexion.GetConexion;
             SqlParameter[] parametros = new SqlParameter[5];
@@ -39,6 +39,7 @@ namespace DAL.Datos
             parametros[2] = objConexion.crearParametro("@Id_Proveedor", idProveedor);
             parametros[3] = objConexion.crearParametro("@Descripcion", descripcion);
             parametros[4] = objConexion.crearParametro("@Cantidad", cantidad);
+            parametros[5] = objConexion.crearParametro("@Precio", precio);
             filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_registrar_producto", parametros);
 
             if (filasAfectadas > 0)
