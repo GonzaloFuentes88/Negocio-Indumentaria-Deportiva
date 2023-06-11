@@ -35,6 +35,7 @@ namespace BBL.Models
             this.idTalle = idTalle;
             this.Talles = talles;
         }
+        
 
     }
 

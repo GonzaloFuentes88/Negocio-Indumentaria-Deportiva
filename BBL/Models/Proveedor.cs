@@ -22,8 +22,16 @@ namespace BBL.Models
             get { return _nombre; }
             set { _nombre = value; }
         }
-    
+        private long _numero;
+        public long Numero
+        {
+            get { return _numero; }
+            set { _numero = value; }
+        }
 
+        public Proveedor()
+        {
+        }
     
 
     public Proveedor(long idProveedor, string Nombre)

@@ -21,7 +21,6 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult Vertodos()
         {
-
             List<Producto> productos = empresa.ObtenerProductos();
             return View(productos);
         }
@@ -61,21 +60,17 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult AgregarProducto()
         {
-            List<Talle> talles = new List<Talle>();
-            talles = empresa.ObtenerTalle();
+            List<Talle> talles = empresa.ObtenerTalle();
             ViewBag.talles = talles;
-            List<Categoria> categoria = new List<Categoria>();
-            categoria = empresa.ObtenerCategoria();
+            List<Categoria> categoria = empresa.ObtenerCategorias();
             ViewBag.categoria = categoria;
             return View();
         }
 
 
-
         [HttpPost]
         public ActionResult DarAltaProducto(Producto producto)
         {
-            
                 if (producto.IdProducto == 0)
                 {
                     bool registrado = empresa.RegistrarProducto(producto);
@@ -92,12 +87,19 @@ namespace NegocioIndumentariaDeportiva.Controllers
                 }
                 else
                 {
-                    /*bool editado = empresa.EditarProducto(producto);*/
+                    bool editado = empresa.EditarProducto(producto);
                     return RedirectToAction("Vertodos");
                 }
 
             }
+        public ActionResult Salir()
+        {
+            empresa.UsuarioEnUso = null;
+            return RedirectToAction("Index", "Login");
         }
 
+
+    }
+    
 
     }

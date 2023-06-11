@@ -47,21 +47,23 @@ namespace DAL.Datos
         }
 
         //sp_registrar_proveedor
-        public bool RegistrarProveedor(string nombre, long numero)
+        public int RegistrarProveedor(string nombre, long numero)
         {
             Conexion objConexion = Conexion.GetConexion;
-            int filasAfectadas = 0;
+            DataTable dt = new DataTable();
+            int id = 0;
             SqlParameter[] parametros = new SqlParameter[2];
             parametros[0] = objConexion.crearParametro("@Nombre", nombre);
             parametros[1] = objConexion.crearParametro("@Numero", numero);
-            filasAfectadas= objConexion.EscribirPorStoreProcedure("sp_registrar_proveedor", parametros);
 
-            if(filasAfectadas > 0)
+            dt = objConexion.LeerPorStoreProcedure("sp_registrar_proveedor", parametros);
+            id = Convert.ToInt32(dt.Rows[0]["ID"]);
+            if (id > 0)
             {
-                return true;
+                return id;
             }
-            return false;
-            
+            return 0;
+
         }
 
     }
