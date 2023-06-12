@@ -80,9 +80,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
             foreach (var detalle in ventaEnCurso.Detalles)
             {
-                Usuario usuario = empresa.UsuarioEnUso;
-                ventaEnCurso.Usuario = usuario;
-                double subtotal = detalle.Cantidad * detalle.Precio;
+                double subtotal = detalle.Precio;
                 total += subtotal;
             }
 
@@ -98,9 +96,12 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult RegistrarClienteGet(int DNI)
         {
+            Venta ventaEnCurso = (Venta)Session["Venta"];
+
             Cliente cliente = gestorCliente.ObtenerClienteDNI(DNI); //arreglar, tira excepcion si no lo encuentra, deberia devolver null
             if (cliente != null)
             {
+                ventaEnCurso.Cliente = cliente;
                 return RedirectToAction("RegistrarVenta");
             }
             else
