@@ -67,7 +67,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
             }//agregar si existe el producto y el talle es igual aumentar cantidad 
             else
             {
-                ModelState.AddModelError("", "Producto no encontrado");
+ 
                 return RedirectToAction("RegistrarVenta");
             }
         }
