@@ -26,14 +26,11 @@ namespace NegocioIndumentariaDeportiva.Controllers
         public ActionResult RegistrarVenta()
         {
             Venta venta;
-            List<Talle> talles = new List<Talle>();
-            talles = gestorTalles.ObtenerTalles();
-            ViewBag.talles = talles;
+
             if (Session["Venta"] == null)
             {
                 venta = new Venta();
                 venta.Detalles = new List<Detalle>();
-                venta.Detalles.Add(new Detalle());
                 venta.Usuario = empresa.UsuarioEnUso;
                 venta.Fecha = DateTime.Now;
                 Session["Venta"] = venta;
@@ -42,16 +39,17 @@ namespace NegocioIndumentariaDeportiva.Controllers
             {
                 venta = (Venta)Session["Venta"];
             }
-
             return View(venta);
         }
-        [HttpGet]
-        public ActionResult CargarProducto(Venta venta)
+        [HttpPost]
+        public ActionResult CargarProducto(Detalle detalle)
         {
-            Detalle detalle = venta.Detalles[0];
+            detalle.Producto = new Producto();
+            detalle.Producto.IdProducto = detalle.IdDetalle;
+            detalle.IdDetalle = 0;
             Producto producto = gestorProductos.ObtenerProducto(detalle.Producto.IdProducto);
 
-            if (producto != null && detalle.Producto.Cantidad < producto.Cantidad)
+            if (producto != null && detalle.Cantidad < producto.Cantidad)
             {
 
                 Venta ventaEnCurso = (Venta)Session["Venta"];
@@ -59,10 +57,11 @@ namespace NegocioIndumentariaDeportiva.Controllers
                 detalle.Producto.Precio = producto.Precio;
                 detalle.Producto.Descripcion = producto.Descripcion;
                 detalle.Producto.Categoria = producto.Categoria;
-                detalle.Precio = detalle.Producto.Precio * detalle.Producto.Cantidad;
+                detalle.Producto.Talle = producto.Talle;
+                detalle.Precio = detalle.Producto.Precio * detalle.Cantidad;
 
                 //ventaEnCurso.Detalles.Add(detalle);
-                ventaEnCurso.Detalles[ventaEnCurso.Detalles.Count - 1] = detalle;
+                ventaEnCurso.Detalles.Add(detalle);
                 return RedirectToAction("RegistrarVenta");
             }//agregar si existe el producto y el talle es igual aumentar cantidad 
             else
@@ -129,6 +128,12 @@ namespace NegocioIndumentariaDeportiva.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult Salir()
+        {
+            empresa.UsuarioEnUso = null;
+            return RedirectToAction("Index", "Login");
+        }
 
 
 

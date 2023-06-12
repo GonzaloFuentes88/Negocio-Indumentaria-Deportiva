@@ -35,7 +35,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
             // Llama al metodo inciar seson para verificar las credenciales de usuario
             Usuario usuario = gestorUsuario.IniciarSesion(sesion.Username, sesion.Password);
 
-            if (usuario != null)
+            if (usuario != null && usuario.Estado)
             {
                 empresa.UsuarioEnUso = usuario;
                 if (usuario.Role.IdRole == 1) {
