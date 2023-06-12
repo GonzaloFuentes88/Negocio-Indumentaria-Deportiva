@@ -1,0 +1,102 @@
+﻿@model Entitys.Entidades.Producto
+
+@{
+
+    Layout = "~/Views/Shared/_LayoutAdministrativo.cshtml";
+
+}
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="~/Content/styles.css" />
+</head>
+<body>
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div><h3 class="text-center font-weight-light my-4">Agregar producto</h3></div>
+                                <div class="card-body form-group mb-3">
+
+                                    <div class="row mb-3">
+                                        <div>
+                                            <div class="mb-3 mb-md-0 ">
+
+                                                <form action="@Url.Action("DarAltaProducto", "Administrativo")" method="post">
+                                                    @Html.AntiForgeryToken()
+
+
+
+                                                    <div class="row">
+
+                                                        <div class="col-6">
+                                                            @Html.LabelFor(m => m.Categoria)
+                                                            @Html.DropDownListFor(m => m.Categoria.idCategoria, new SelectList(ViewBag.categoria, "idCategoria", "Nombre"), "Seleccione una categoría", new { @class = "form-control" })
+                                                        </div>
+
+                                                        <div class="col-6">
+                                                            @Html.LabelFor(m => m.Descripcion)
+                                                            @Html.TextBoxFor(m => m.Descripcion, new { @class = "form-control" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <div class="col-6">
+                                                            @Html.LabelFor(m => m.Talle.Talles)
+
+                                                            @Html.DropDownListFor(m => m.Talle.idTalle, new SelectList(ViewBag.talles, "idTalle", "Talles"), "Seleccione un Talle", new { @class = "form-control" })
+                                                            <a class="btn btn-primary btn-block" @Html.ActionLink("Agregar Talle", "AgregarTalle")
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="mt-4 mb-0 col-6">
+                                                        @Html.LabelFor(m => m.Precio)
+                                                        @Html.TextBoxFor(m => m.Precio, new { @class = "form-control" })
+                                                    </div>
+
+                                                    <div class="mt-4 mb-0 col-6">
+                                                        @Html.LabelFor(m => m.Cantidad)
+                                                        @Html.TextBoxFor(m => m.Cantidad, new { @class = "form-control" })
+                                                    </div>
+
+                                                    <div class="mt-4 mb-0 col-4">
+                                                        @Html.Label("Proveedor")
+                                                        @Html.TextBoxFor(m => m.Proveedor.Nombre, new { @class = "form-control" })
+                                                    </div>
+                                                    <div class="mt-4 mb-0 col-4">
+                                                        @Html.Label("Numero")
+                                                        @Html.TextBoxFor(m => m.Proveedor.Numero, new { @class = "form-control" })
+                                                    </div>
+
+
+
+                                                    <div class="mt-4 mb-0">
+                                                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                                                    </div>
+
+                                                </form>
+                                                
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/js")
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/scripts.js"></script>
+</body>

@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using Entitys.Entidades;
 
 namespace DAL.Datos
 {
     public class ProveedorCon
     {
         private static ProveedorCon instance = null;
-        public static ProveedorCon GetUsuarioCon
+        public static ProveedorCon GetProveedorCon
         {
             get
             {
@@ -47,21 +48,18 @@ namespace DAL.Datos
         }
 
         //sp_registrar_proveedor
-        public bool RegistrarProveedor(string nombre, long numero)
+        public Proveedor RegistrarProveedor(Proveedor proveedor)
         {
             Conexion objConexion = Conexion.GetConexion;
-            int filasAfectadas = 0;
+            DataTable dt = new DataTable();
             SqlParameter[] parametros = new SqlParameter[2];
-            parametros[0] = objConexion.crearParametro("@Nombre", nombre);
-            parametros[1] = objConexion.crearParametro("@Numero", numero);
-            filasAfectadas= objConexion.EscribirPorStoreProcedure("sp_registrar_proveedor", parametros);
+            parametros[0] = objConexion.crearParametro("@Nombre", proveedor.Nombre);
+            parametros[1] = objConexion.crearParametro("@Numero", proveedor.Numero);
 
-            if(filasAfectadas > 0)
-            {
-                return true;
-            }
-            return false;
-            
+            dt = objConexion.LeerPorStoreProcedure("sp_registrar_proveedor", parametros);
+            proveedor.idProveedor = Convert.ToInt32(dt.Rows[0]["ID"]);
+
+            return proveedor;
         }
 
     }

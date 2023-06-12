@@ -24,7 +24,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                @Html.ActionLink("Inicio", "Index", "AdminSistema", new { @class = "nav-link" })
+                                @Html.ActionLink("Inicio", "Vertodos", "AdminSistema", new { @class = "nav-link" })
                             </li>
                             <li class="nav-item">
                                 @Html.ActionLink("Crear usuario", "Alta", "AdminSistema", new { @class = "nav-link" })
@@ -33,10 +33,7 @@
                                 @Html.ActionLink("Usuarios", "Vertodos", "AdminSistema", new { @class = "nav-link" })
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Historial", "Historial", "AdminSistema", new { @class = "nav-link" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Pendientes", "Pendientes", "AdminSistema", new { @class = "nav-link" })
+                                @Html.ActionLink("Salir", "Salir", "AdminSistema", new { @class = "nav-link" })
                             </li>
                         </ul>
                     </div>
@@ -44,20 +41,13 @@
             </nav>
         </header>
         <section>
-            @RenderBody()
+            <div>
+                @RenderBody()
+            </div>
         </section>
 
     </div>
-    <div class="container">
-        <footer class="py-3 my-4 fixed-bottom">
-            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-            </ul>
-            <p class="text-center text-muted">© 2022 Company, Inc</p>
-        </footer>
-    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="~/Scripts/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

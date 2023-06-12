@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BBL.Models;
+using Entitys.Entidades;
 
 
 
@@ -11,76 +12,106 @@ namespace NegocioIndumentariaDeportiva.Controllers
 {
     public class AdminSistemaController : Controller
     {
-        /*
-        private readonly ILogger<AdminSistemaController> _logger;
-
-        public AdminSistemaController(ILogger<AdminSistemaController> logger)
-        {
-            _logger = logger;
-        }
-        */
+        private NegocioUsuario gestorUsuarios = new NegocioUsuario();
+        private NegocioRole gestorRoles = new NegocioRole();
         private Empresa empresa = Empresa.GetInstance;
 
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Vertodos");
         }
 
+        [HttpGet]
         public ActionResult Vertodos()
         {
-            return View();
+            List<Usuario> usuarios = gestorUsuarios.ObtenerUsuarios();
+            return View(usuarios);
         }
 
+        [HttpGet]
         public ActionResult Alta()
         {
             List<Role> roles = new List<Role>();
-            roles = empresa.ObtenerRoles();
+            roles = gestorRoles.ObtenerRoles();
             ViewBag.roles = roles;
             return View();
         }
-
-        
-        public ActionResult Pendientes()
-        {
-            return View();
-        }
-
-        public ActionResult Historial()
-        {
-            return View();
-        }
-
-        
 
 
         [HttpPost]
         public ActionResult DarAlta(Usuario usuario)
         {
-            Boolean registrado = empresa.RegistrarUsuario(usuario); 
-            if (registrado)
+            if(usuario.IdUsuario == 0)
             {
-
-                return View("Alta");
-
+                bool registrado = gestorUsuarios.RegistrarUsuario(usuario);
+                if (registrado)
+                {
+                    return RedirectToAction("Alta");
+                }
+                else
+                {
+                    // El modelo no es válido, manejar los errores de validación
+                    ModelState.AddModelError("", "Usuario o contraseña inválidos");
+                    return RedirectToAction("Alta");
+                }
             }
             else
             {
-                // El modelo no es válido, manejar los errores de validación
-                ModelState.AddModelError("", "Usuario o contraseña inválidos");
-                return View("Alta");
+                bool editado = gestorUsuarios.EditarUsuario(usuario);
+                return RedirectToAction("Vertodos");
             }
-;
+
         }
 
-
-        /*
-         * ARREGLAR ESTA PARTE
-         * 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public ActionResult Error()
+        [HttpGet]
+        public ActionResult BajaUsuario(long id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        } */
+            gestorUsuarios.bajaUsuario(id);
+            return RedirectToAction("Vertodos");
+        }
+        [HttpGet]
+        public ActionResult AltaUsuario(long id)
+        {
+            gestorUsuarios.altaUsuario(id);
+            return RedirectToAction("Vertodos");
+        }
+
+        [HttpGet]
+        public ActionResult VerUsuario(long id)
+        {
+            Usuario usuario = gestorUsuarios.ObtenerUsuario(id);
+
+            if(usuario != null)
+            {
+                return View(usuario);
+            }
+            return RedirectToAction("Vertodos");
+
+        }
+
+        [HttpGet]
+        public ActionResult EditarUsuario(long id)
+        {
+            Usuario usuario = gestorUsuarios.ObtenerUsuario(id);
+            List<Role> roles = new List<Role>();
+            roles = gestorRoles.ObtenerRoles();
+            ViewBag.roles = roles;
+
+            if (usuario != null)
+            {
+                return View(usuario);
+            }
+            return RedirectToAction("Vertodos");
+        }
+
+        public ActionResult Salir()
+        {
+            empresa.UsuarioEnUso = null;
+            return RedirectToAction("Index","Login");
+        }
+
+        
+
     }
 }

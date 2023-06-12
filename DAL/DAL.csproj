@@ -44,6 +44,7 @@
     <Compile Include="Datos\CategoriaCon.cs" />
     <Compile Include="Datos\ClienteCon.cs" />
     <Compile Include="Datos\Conexion.cs" />
+    <Compile Include="Datos\DetalleCon.cs" />
     <Compile Include="Datos\DireccionCon.cs" />
     <Compile Include="Datos\EmpleadoCon.cs" />
     <Compile Include="Datos\ProductoCon.cs" />
@@ -53,6 +54,12 @@
     <Compile Include="Datos\UsuarioCon.cs" />
     <Compile Include="Datos\VentaCon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entitys\Entitys.csproj">
+      <Project>{51916d7a-aaec-4dde-bfa8-ba7dba5b6eb0}</Project>
+      <Name>Entitys</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

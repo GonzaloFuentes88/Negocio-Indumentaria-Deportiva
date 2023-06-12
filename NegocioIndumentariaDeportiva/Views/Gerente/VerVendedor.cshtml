@@ -1,0 +1,90 @@
+﻿@model Entitys.Entidades.Usuario
+
+@{
+    ViewBag.Title = "VerVendedor";
+    Layout = "~/Views/Shared/LayoutGerente.cshtml";
+}
+
+<div>
+    <h4>Vendedor</h4>
+    <hr />
+    <div class="row">
+        <div class="col">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.IdUsuario)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IdUsuario)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Username)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Username)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Estado)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="col">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Empleado.Legajo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Empleado.Legajo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Empleado.Nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Empleado.Nombre)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Empleado.Apellido)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Empleado.Apellido)
+                </dd>
+            </dl>
+        </div>
+        <div class="col">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Empleado.DNI)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Empleado.Email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Empleado.Telefono)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Empleado.Telefono)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+</div>
+        <p>
+            @Html.ActionLink("Volver", "Index",null,new { @class = "btn btn-primary"})
+        </p>

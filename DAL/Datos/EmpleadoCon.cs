@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data;
+using Entitys.Entidades;
 
 namespace DAL.Datos
 {
@@ -25,25 +27,24 @@ namespace DAL.Datos
 
         private EmpleadoCon() { }
 
-        public bool RegistrarEmpleado(long idDireccion,string nombre,string apellido,long dni,long telefono,string email)
+        public Empleado RegistrarEmpleado(Empleado empleado)
         {
             Conexion objConexion = Conexion.GetConexion;
             SqlParameter[] parametros = new SqlParameter[6];
-            int filasAfectadas = 0;
 
-            parametros[0] = objConexion.crearParametro("@Id_Direccion", idDireccion);
-            parametros[1] = objConexion.crearParametro("@Nombre", nombre);
-            parametros[2] = objConexion.crearParametro("@Apellido", apellido);
-            parametros[3] = objConexion.crearParametro("@DNI", dni);
-            parametros[4] = objConexion.crearParametro("@Telefono", telefono);
-            parametros[5] = objConexion.crearParametro("@Email", email);
+            parametros[0] = objConexion.crearParametro("@Id_Direccion", empleado.Direccion.IDdireccion);
+            parametros[1] = objConexion.crearParametro("@Nombre", empleado.Nombre);
+            parametros[2] = objConexion.crearParametro("@Apellido", empleado.Apellido);
+            parametros[3] = objConexion.crearParametro("@DNI", empleado.DNI);
+            parametros[4] = objConexion.crearParametro("@Telefono", empleado.Telefono);
+            parametros[5] = objConexion.crearParametro("@Email", empleado.Email);
 
-            filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_registrar_empleado", parametros);
-            if (filasAfectadas > 0)
-            {
-                return true;
-            }
-            return false;
+            DataTable dt = objConexion.LeerPorStoreProcedure("sp_registrar_empleado", parametros);
+            empleado.Legajo = Convert.ToInt32(dt.Rows[0]["ID"]);
+
+
+            return empleado;
         }
+        
     }
 }

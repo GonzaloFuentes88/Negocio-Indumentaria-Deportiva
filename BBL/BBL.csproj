@@ -41,26 +41,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Categoria.cs" />
-    <Compile Include="Models\Cliente.cs" />
-    <Compile Include="Models\Detalle.cs" />
-    <Compile Include="Models\Direccion.cs" />
-    <Compile Include="Models\Empleado.cs" />
-    <Compile Include="Models\Empresa.cs" />
-    <Compile Include="Models\Persona.cs" />
-    <Compile Include="Models\Producto.cs" />
-    <Compile Include="Models\Proveedor.cs" />
-    <Compile Include="Models\Talle.cs" />
-    <Compile Include="Models\Venta.cs" />
+    <Compile Include="Models\NegocioCategoria.cs" />
+    <Compile Include="Models\NegocioCliente.cs" />
+    <Compile Include="Models\NegocioDetalle.cs" />
+    <Compile Include="Models\NegocioDireccion.cs" />
+    <Compile Include="Models\NegocioEmpleado.cs" />
+    <Compile Include="Models\NegocioProducto.cs" />
+    <Compile Include="Models\NegocioProveedor.cs" />
+    <Compile Include="Models\NegocioRole.cs" />
+    <Compile Include="Models\NegocioTalle.cs" />
+    <Compile Include="Models\NegocioUsuario.cs" />
+    <Compile Include="Models\NegocioVenta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\Usuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{e908ca27-0f5c-441e-a94e-71d42b55cd4e}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Entitys\Entitys.csproj">
+      <Project>{51916d7a-aaec-4dde-bfa8-ba7dba5b6eb0}</Project>
+      <Name>Entitys</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\BBL.dll" />
+    <Content Include="bin\Debug\BBL.pdb" />
+    <Content Include="bin\Debug\DAL.dll" />
+    <Content Include="bin\Debug\DAL.pdb" />
+    <Content Include="bin\Debug\Entitys.dll" />
+    <Content Include="bin\Debug\Entitys.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
