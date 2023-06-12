@@ -116,6 +116,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
             if (cliente != null)
             {
+                gestorCliente.RegistrarCliente(cliente);
                 Venta venta = (Venta)Session["Venta"];
                 venta.Cliente = cliente;
                 //SE CREA EL CLIENTE, REDIRIGILO A DONDE QUIERAS
