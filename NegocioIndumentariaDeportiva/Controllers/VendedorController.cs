@@ -4,12 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BBL.Models;
+using Entitys.Entidades;
 
 namespace NegocioIndumentariaDeportiva.Controllers
 {
     public class VendedorController : Controller
     {
         private Empresa empresa = Empresa.GetInstance;
+        private NegocioVenta gestorVentas = new NegocioVenta();
+        private NegocioTalle gestorTalles = new NegocioTalle();
+        private NegocioProducto gestorProductos = new NegocioProducto();
+        private NegocioCliente gestorCliente = new NegocioCliente();
         [HttpGet]
         public ActionResult Index()
         {
@@ -22,7 +27,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         {
             Venta venta;
             List<Talle> talles = new List<Talle>();
-            talles = empresa.ObtenerTalle();
+            talles = gestorTalles.ObtenerTalles();
             ViewBag.talles = talles;
             if (Session["Venta"] == null)
             {
@@ -42,7 +47,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult CargarProducto(int idProducto, int Cantidad, int Precio, int idTalle, string Talles)
         {
-            Producto producto = empresa.ObtenerProducto(idProducto);
+            Producto producto = gestorProductos.ObtenerProducto(idProducto);
             if (producto != null)
             {
                 Venta venta = (Venta)Session["Venta"];
@@ -83,7 +88,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
             }
 
             ventaEnCurso.Total = total;
-            empresa.RegistrarVenta(ventaEnCurso);
+            gestorVentas.RegistrarVenta(ventaEnCurso);
 
             Session.Remove("Venta"); 
 
@@ -93,7 +98,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult RegistrarClienteGet(int DNI)
         {
-            Cliente cliente = empresa.ObtenerClienteDNI(DNI); //arreglar, tira excepcion si no lo encuentra, deberia devolver null
+            Cliente cliente = gestorCliente.ObtenerClienteDNI(DNI); //arreglar, tira excepcion si no lo encuentra, deberia devolver null
             if (cliente != null)
             {
                 return RedirectToAction("RegistrarVenta");
@@ -111,7 +116,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
  
             if(cliente != null)
             {
-                empresa.RegistrarCliente(cliente);
+                gestorCliente.RegistrarCliente(cliente);
                 Venta venta = (Venta)Session["Venta"];
                 venta.Cliente = cliente;
                 //SE CREA EL CLIENTE, REDIRIGILO A DONDE QUIERAS

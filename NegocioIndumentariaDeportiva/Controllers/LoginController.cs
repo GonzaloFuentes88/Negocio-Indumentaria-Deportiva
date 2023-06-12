@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BBL.Models;
+using Entitys.Entidades;
 
 namespace NegocioIndumentariaDeportiva.Controllers
 {
     public class LoginController : Controller
     {
         private Empresa empresa = Empresa.GetInstance;
+        private NegocioUsuario gestorUsuario = new NegocioUsuario();
         // GET: Login
 
         [HttpGet]
@@ -31,7 +33,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         {
 
             // Llama al metodo inciar seson para verificar las credenciales de usuario
-            Usuario usuario = empresa.IniciarSesion(sesion.Username, sesion.Password);
+            Usuario usuario = gestorUsuario.IniciarSesion(sesion.Username, sesion.Password);
 
             if (usuario != null)
             {

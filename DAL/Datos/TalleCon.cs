@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using Entitys.Entidades;
 
 namespace DAL.Datos
 {
@@ -26,21 +27,23 @@ namespace DAL.Datos
 
         private TalleCon() { }
 
-        public DataTable ObtenerTalles()
+        public List<Talle> ObtenerTalles()
         {
             DataTable dt;
             Conexion objConexion = Conexion.GetConexion;
-            try
-            {
-                dt = objConexion.LeerPorStoreProcedure("sp_obtener_talles");
+            List<Talle> listTalles = new List<Talle>();
+            dt = objConexion.LeerPorStoreProcedure("sp_obtener_talles");
 
-                return dt;
-            }
-            catch (Exception)
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
+                Talle talle = new Talle();
+                talle.idTalle = Convert.ToInt32(dt.Rows[i]["Id_Talle"]);
+                talle.Talles = dt.Rows[i]["Talle"].ToString();
 
-                return null;
+                listTalles.Add(talle);
             }
+
+            return listTalles;
         }
     }
 }

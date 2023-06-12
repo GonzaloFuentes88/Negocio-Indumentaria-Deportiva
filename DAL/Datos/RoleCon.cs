@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
-
+using Entitys.Entidades;
 
 namespace DAL.Datos
 {
@@ -26,12 +26,23 @@ namespace DAL.Datos
         }
         private RoleCon() { }
 
-        public DataTable ObtenerRoles()
+        public List<Role> ObtenerRoles()
         {
             Conexion objConexion = Conexion.GetConexion;
             DataTable dt;
+            List<Role> listRoles = new List<Role>();
             dt = objConexion.LeerPorStoreProcedure("sp_obtener_roles");
-            return dt;
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Role role = new Role();
+                role.IdRole = Convert.ToInt32(dt.Rows[i]["Id_Rol"]);
+                role.Nombre = dt.Rows[i]["Tipo"].ToString();
+
+                listRoles.Add(role);
+            }
+
+            return listRoles;
         }
     }
 }

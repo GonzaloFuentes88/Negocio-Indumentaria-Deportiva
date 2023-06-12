@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Entitys.Entidades;
 
 namespace NegocioIndumentariaDeportiva.Controllers
 {
@@ -11,17 +12,22 @@ namespace NegocioIndumentariaDeportiva.Controllers
     {
         // GET: Gerente
         private Empresa empresa = Empresa.GetInstance;
+        private NegocioVenta gestorVentas = new NegocioVenta();
+        private NegocioDetalle gestorDetalles = new NegocioDetalle();
+        private NegocioUsuario gestorUsuarios = new NegocioUsuario();
+        private NegocioCliente gestorCliente = new NegocioCliente();
+
         [HttpGet]
         public ActionResult Index()
         {
-            var listVentas = empresa.ObtenerVentas();
+            var listVentas = gestorVentas.ObtenerVentas();
             return View(listVentas);
         }
 
         [HttpGet]
         public ActionResult VerDetalles(long id)
         {
-            var listDetalles = empresa.ObtenerDetalles(id);
+            var listDetalles = gestorDetalles.ObtenerDetalles(id);
             if (listDetalles != null)
             {
                 return View(listDetalles);
@@ -32,7 +38,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult VerCliente(long id)
         {
-            Cliente cliente = empresa.ObtenerCliente(id);
+            Cliente cliente = gestorCliente.ObtenerCliente(id);
             if (cliente != null)
             {
                 return View(cliente);
@@ -43,7 +49,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult VerVendedor(long id)
         {
-            Usuario usuario = empresa.ObtenerUsuario(id);
+            Usuario usuario = gestorUsuarios.ObtenerUsuario(id);
             if (usuario != null)
             {
                 return View(usuario);
@@ -60,8 +66,8 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpPost]
         public ActionResult GenerarReporte(DateTime fecha1, DateTime fecha2)
         {
-            List<Venta> reporte = empresa.GenerarReporte(fecha1, fecha2);
-            double total = empresa.TotalReporte(reporte);
+            List<Venta> reporte = gestorVentas.GenerarReporte(fecha1, fecha2);
+            double total = gestorVentas.TotalReporte(reporte);
             if(reporte.Count > 0)
             {
                 string fecha = fecha1.ToString("d") + " - " + fecha2.ToString("d");

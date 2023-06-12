@@ -1,9 +1,10 @@
-﻿using System;
+﻿susing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BBL.Models;
+using Entitys.Entidades;
 
 
 
@@ -11,6 +12,8 @@ namespace NegocioIndumentariaDeportiva.Controllers
 {
     public class AdminSistemaController : Controller
     {
+        private NegocioUsuario gestorUsuarios = new NegocioUsuario();
+        private NegocioRole gestorRoles = new NegocioRole();
         private Empresa empresa = Empresa.GetInstance;
 
         [HttpGet]
@@ -22,7 +25,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult Vertodos()
         {
-            List<Usuario> usuarios = empresa.ObtenerUsuarios();
+            List<Usuario> usuarios = gestorUsuarios.ObtenerUsuarios();
             return View(usuarios);
         }
 
@@ -30,7 +33,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         public ActionResult Alta()
         {
             List<Role> roles = new List<Role>();
-            roles = empresa.ObtenerRoles();
+            roles = gestorRoles.ObtenerRoles();
             ViewBag.roles = roles;
             return View();
         }
@@ -41,7 +44,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         {
             if(usuario.IdUsuario == 0)
             {
-                bool registrado = empresa.RegistrarUsuario(usuario);
+                bool registrado = gestorUsuarios.RegistrarUsuario(usuario);
                 if (registrado)
                 {
                     return RedirectToAction("Alta");
@@ -55,7 +58,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
             }
             else
             {
-                bool editado = empresa.EditarUsuario(usuario);
+                bool editado = gestorUsuarios.EditarUsuario(usuario);
                 return RedirectToAction("Vertodos");
             }
 
@@ -64,20 +67,20 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult BajaUsuario(long id)
         {
-            empresa.bajaUsuario(id);
+            gestorUsuarios.bajaUsuario(id);
             return RedirectToAction("Vertodos");
         }
         [HttpGet]
         public ActionResult AltaUsuario(long id)
         {
-            empresa.altaUsuario(id);
+            gestorUsuarios.altaUsuario(id);
             return RedirectToAction("Vertodos");
         }
 
         [HttpGet]
         public ActionResult VerUsuario(long id)
         {
-            Usuario usuario = empresa.ObtenerUsuario(id);
+            Usuario usuario = gestorUsuarios.ObtenerUsuario(id);
 
             if(usuario != null)
             {
@@ -90,9 +93,9 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult EditarUsuario(long id)
         {
-            Usuario usuario = empresa.ObtenerUsuario(id);
+            Usuario usuario = gestorUsuarios.ObtenerUsuario(id);
             List<Role> roles = new List<Role>();
-            roles = empresa.ObtenerRoles();
+            roles = gestorRoles.ObtenerRoles();
             ViewBag.roles = roles;
 
             if (usuario != null)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BBL.Models
+namespace Entitys.Entidades
 {
     public class Usuario
     {

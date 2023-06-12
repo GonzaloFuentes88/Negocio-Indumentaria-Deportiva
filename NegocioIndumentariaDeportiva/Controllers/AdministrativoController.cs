@@ -4,14 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BBL.Models;
+using Entitys.Entidades;
 
 namespace NegocioIndumentariaDeportiva.Controllers
 {
     public class AdministrativoController : Controller
     {
         // GET: Administrativo
-        
+        private NegocioProducto gestorProductos = new NegocioProducto();
+        private NegocioTalle gestorTalles = new NegocioTalle();
+        private NegocioCategoria gestorCategorias = new NegocioCategoria();
         private Empresa empresa = Empresa.GetInstance;
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -21,7 +25,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult Vertodos()
         {
-            List<Producto> productos = empresa.ObtenerProductos();
+            List<Producto> productos = gestorProductos.ObtenerProductos();
             return View(productos);
         }
 
@@ -31,7 +35,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         public ActionResult BuscarProducto(long idProd)
         {
 
-            Producto producto = empresa.ObtenerProducto(idProd);
+            Producto producto = gestorProductos.ObtenerProducto(idProd);
 
             if (producto != null)
             {
@@ -46,7 +50,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult EditarProducto(long id)
         {
-            Producto producto = empresa.ObtenerProducto(id);
+            Producto producto = gestorProductos.ObtenerProducto(id);
 
             if (producto != null)
             {
@@ -60,9 +64,9 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpGet]
         public ActionResult AgregarProducto()
         {
-            List<Talle> talles = empresa.ObtenerTalle();
+            List<Talle> talles = gestorTalles.ObtenerTalles();
             ViewBag.talles = talles;
-            List<Categoria> categoria = empresa.ObtenerCategorias();
+            List<Categoria> categoria = gestorCategorias.ObtenerCategorias();
             ViewBag.categoria = categoria;
             return View();
         }
@@ -73,7 +77,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
         {
                 if (producto.IdProducto == 0)
                 {
-                    bool registrado = empresa.RegistrarProducto(producto);
+                    bool registrado = gestorProductos.RegistrarProducto(producto);
                     if (registrado)
                     {
                         return RedirectToAction("AgregarProducto");
@@ -87,7 +91,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
                 }
                 else
                 {
-                    bool editado = empresa.EditarProducto(producto);
+                    bool editado = gestorProductos.EditarProducto(producto);
                     return RedirectToAction("Vertodos");
                 }
 

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BBL.Models
+
+namespace Entitys.Entidades
 {
     public class Producto
     {

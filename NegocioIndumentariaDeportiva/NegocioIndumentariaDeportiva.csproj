@@ -302,6 +302,10 @@
       <Project>{4442d2e8-7215-4cda-9d51-32208580f861}</Project>
       <Name>BBL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Entitys\Entitys.csproj">
+      <Project>{51916d7a-aaec-4dde-bfa8-ba7dba5b6eb0}</Project>
+      <Name>Entitys</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

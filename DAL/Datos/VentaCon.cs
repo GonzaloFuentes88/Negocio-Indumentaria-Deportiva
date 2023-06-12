@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using Entitys.Entidades;
 
 namespace DAL.Datos
 {
@@ -26,17 +27,18 @@ namespace DAL.Datos
 
         private VentaCon() { }
 
-        public bool RegistrarVenta(long idCliente,long idUsuario,DateTime fecha,double total) 
+
+        public bool RegistrarVenta(Venta venta) 
         {
             Conexion objConexion = Conexion.GetConexion;
 
             SqlParameter[] parametros = new SqlParameter[4];
             int filasAfectadas = 0;
 
-            parametros[0] = objConexion.crearParametro("@Id_Cliente", idCliente);
-            parametros[1] = objConexion.crearParametro("@Id_Usuario", idUsuario);
-            parametros[2] = objConexion.crearParametro("@Fecha", fecha);
-            parametros[3] = objConexion.crearParametro("@Total", total);
+            parametros[0] = objConexion.crearParametro("@Id_Cliente", venta.Cliente.IdCliente);
+            parametros[1] = objConexion.crearParametro("@Id_Usuario", venta.Usuario.IdUsuario);
+            parametros[2] = objConexion.crearParametro("@Fecha", venta.Fecha);
+            parametros[3] = objConexion.crearParametro("@Total", venta.Total);
 
             filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_registrar_venta", parametros);
             if (filasAfectadas > 0)
@@ -47,9 +49,12 @@ namespace DAL.Datos
 
         }
 
-        public DataTable ObtenerVentas(DateTime fechaInicio, DateTime fechaFinal)
+        public List<Venta> ObtenerVentas(DateTime fechaInicio, DateTime fechaFinal)
         {
             Conexion objConexion = Conexion.GetConexion;
+            UsuarioCon usuarioCon = UsuarioCon.GetUsuarioCon;
+            ClienteCon clienteCon = ClienteCon.GetClienteCon;
+            DetalleCon detalleCon = DetalleCon.GetDetalleCon;
 
             SqlParameter[] parametros = new SqlParameter[2];
             DataTable dt;
@@ -59,47 +64,58 @@ namespace DAL.Datos
 
             dt = objConexion.LeerPorStoreProcedure("sp_obtener_reporte",parametros);
 
-            return dt;
+            List<Venta> listVentas = new List<Venta>();
+
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Venta venta = new Venta();
+
+                venta.IdVenta = Convert.ToInt32(dt.Rows[i]["Id_Venta"]);
+                venta.Total = Convert.ToInt32(dt.Rows[i]["Total"]);
+                venta.Fecha = Convert.ToDateTime(dt.Rows[i]["Fecha"]);
+                venta.Usuario = usuarioCon.BuscarUsuario(Convert.ToInt32(dt.Rows[i]["Id_Usuario"]));
+                venta.Cliente = clienteCon.ObtenerCliente(Convert.ToInt32(dt.Rows[i]["Id_Cliente"]));
+                venta.Detalles = detalleCon.ObtenerDetallesVenta(venta.IdVenta);
+
+                listVentas.Add(venta);
+            }
+
+            return listVentas;
         }
-        public DataTable ObtenerVentas()
-        {
+        public List<Venta> ObtenerVentas()
+        { 
             Conexion objConexion = Conexion.GetConexion;
+            UsuarioCon usuarioCon = UsuarioCon.GetUsuarioCon;
+            ClienteCon clienteCon = ClienteCon.GetClienteCon;
+            DetalleCon detalleCon = DetalleCon.GetDetalleCon;
             DataTable dt;
 
             dt = objConexion.LeerPorStoreProcedure("sp_obtener_ventas");
 
-            return dt;
-        }
 
-        public bool RegistrarDetalle(long idVenta, long idProd, double precio, int cantidad)
-        {
+            List<Venta> listVentas = new List<Venta>();
 
-            Conexion objConexion = Conexion.GetConexion;
 
-            SqlParameter[] parametros = new SqlParameter[4];
-            int filasAfectadas = 0;
-            parametros[0] = objConexion.crearParametro("@Id_Venta", idVenta);
-            parametros[1] = objConexion.crearParametro("@Id_Producto", idProd);
-            parametros[2] = objConexion.crearParametro("@Precio", precio);
-            parametros[3] = objConexion.crearParametro("@Cantidad", cantidad);
-            filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_registrar_detalle", parametros);
-
-            if (filasAfectadas > 0)
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
-                return true;
-            }
-            return false;
-        }
-        public DataTable ObtenerDetallesVenta(long idVenta)
-        {
-            Conexion objConexion = Conexion.GetConexion;
-            SqlParameter[] parametros = new SqlParameter[1];
-            DataTable dt;
-            parametros[0] = objConexion.crearParametro("@Id_Venta", idVenta);
-            dt = objConexion.LeerPorStoreProcedure("sp_obtener_detalleV", parametros);
+                Venta venta = new Venta();
 
-            return dt;
+                venta.IdVenta = Convert.ToInt32(dt.Rows[i]["Id_Venta"]);
+                venta.Total = Convert.ToInt32(dt.Rows[i]["Total"]);
+                venta.Fecha = Convert.ToDateTime(dt.Rows[i]["Fecha"]);
+                venta.Usuario = usuarioCon.BuscarUsuario(Convert.ToInt32(dt.Rows[i]["Id_Usuario"]));
+                venta.Cliente = clienteCon.ObtenerCliente(Convert.ToInt32(dt.Rows[i]["Id_Cliente"]));
+                venta.Detalles = detalleCon.ObtenerDetallesVenta(venta.IdVenta);
+
+                listVentas.Add(venta);
+            }
+
+            return listVentas;
+
         }
+
+        
 
 
     }

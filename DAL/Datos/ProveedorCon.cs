@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using Entitys.Entidades;
 
 namespace DAL.Datos
 {
@@ -47,23 +48,18 @@ namespace DAL.Datos
         }
 
         //sp_registrar_proveedor
-        public int RegistrarProveedor(string nombre, long numero)
+        public Proveedor RegistrarProveedor(Proveedor proveedor)
         {
             Conexion objConexion = Conexion.GetConexion;
             DataTable dt = new DataTable();
-            int id = 0;
             SqlParameter[] parametros = new SqlParameter[2];
-            parametros[0] = objConexion.crearParametro("@Nombre", nombre);
-            parametros[1] = objConexion.crearParametro("@Numero", numero);
+            parametros[0] = objConexion.crearParametro("@Nombre", proveedor.Nombre);
+            parametros[1] = objConexion.crearParametro("@Numero", proveedor.Numero);
 
             dt = objConexion.LeerPorStoreProcedure("sp_registrar_proveedor", parametros);
-            id = Convert.ToInt32(dt.Rows[0]["ID"]);
-            if (id > 0)
-            {
-                return id;
-            }
-            return 0;
+            proveedor.idProveedor = Convert.ToInt32(dt.Rows[0]["ID"]);
 
+            return proveedor;
         }
 
     }

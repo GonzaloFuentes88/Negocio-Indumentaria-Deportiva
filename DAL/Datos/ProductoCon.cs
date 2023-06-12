@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using Entitys.Entidades;
 using System.Data.SqlClient;
 
 namespace DAL.Datos
@@ -27,19 +28,21 @@ namespace DAL.Datos
         private ProductoCon() { }
 
 
-        public bool RegistrarProducto(long idCategoria,long idTalle,string descripcion,int cantidad,long idProveedor,double precio)
+        public bool RegistrarProducto(Producto producto)
         {
             Conexion objConexion = Conexion.GetConexion;
+            ProveedorCon proveedorCon = ProveedorCon.GetProveedorCon;
             SqlParameter[] parametros = new SqlParameter[5];
             int filasAfectadas = 0;
 
+            producto.Proveedor = proveedorCon.RegistrarProveedor(producto.Proveedor);
 
-            parametros[0] = objConexion.crearParametro("@Id_Categoria",idCategoria);
-            parametros[1] = objConexion.crearParametro("@Id_Talle", idTalle);
-            parametros[2] = objConexion.crearParametro("@Id_Proveedor", idProveedor);
-            parametros[3] = objConexion.crearParametro("@Descripcion", descripcion);
-            parametros[4] = objConexion.crearParametro("@Cantidad", cantidad);
-            parametros[5] = objConexion.crearParametro("@Precio", precio);
+            parametros[0] = objConexion.crearParametro("@Id_Categoria",producto.Categoria.idCategoria);
+            parametros[1] = objConexion.crearParametro("@Id_Talle", producto.Talle.idTalle);
+            parametros[2] = objConexion.crearParametro("@Id_Proveedor", producto.Proveedor.idProveedor);
+            parametros[3] = objConexion.crearParametro("@Descripcion", producto.Descripcion);
+            parametros[4] = objConexion.crearParametro("@Cantidad", producto.Cantidad);
+            parametros[5] = objConexion.crearParametro("@Precio", producto.Precio);
             filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_registrar_producto", parametros);
 
             if (filasAfectadas > 0)
@@ -49,44 +52,76 @@ namespace DAL.Datos
             return false;
         }
 
-        public DataTable ObtenerProductos()
+        public List<Producto> ObtenerProductos()
         {
             DataTable dt;
             Conexion objConexion = Conexion.GetConexion;
-            
+            List<Producto> listproductos = new List<Producto>();
+
             dt = objConexion.LeerPorStoreProcedure("sp_obtener_productos");
 
-            return dt;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Producto producto = new Producto();
+                producto.IdProducto = Convert.ToInt32(dt.Rows[0]["Id_Producto"]);
+                producto.Descripcion = dt.Rows[0]["Descripcion"].ToString();
+                producto.Precio = Convert.ToInt32(dt.Rows[0]["Precio"]);
+                producto.Cantidad = Convert.ToInt32(dt.Rows[0]["Cantidad"]);
+                producto.Categoria = new Categoria(
+                Convert.ToInt32(dt.Rows[0]["Id_Categoria"]),
+                   dt.Rows[0]["Nombre"].ToString()
+           );
+                producto.Talle = new Talle(
+                    Convert.ToInt32(dt.Rows[0]["Id_Talle"]),
+                        dt.Rows[0]["Talle"].ToString()
+                );
+
+                //listUsuarios.Add(usuario);
+                listproductos.Add(producto);
+            }
+
+            return listproductos;
 
         }
-        public DataTable ObtenerProducto(long idProducto)
+        public Producto ObtenerProducto(long idProducto)
         {
             DataTable dt;
             Conexion objConexion = Conexion.GetConexion;
             SqlParameter[] parametros = new SqlParameter[1];
             parametros[0] = objConexion.crearParametro("@id",idProducto);
-            try
-            {
-                dt = objConexion.LeerPorStoreProcedure("sp_obtener_producto", parametros);
-                return dt;
-            }
-            catch (Exception)
-            {
+            dt = objConexion.LeerPorStoreProcedure("sp_obtener_producto", parametros);
 
+            if (dt == null || dt.Rows.Count == 0)
                 return null;
-            }
+
+            Producto producto = new Producto();
+
+            producto.IdProducto = Convert.ToInt32(dt.Rows[0]["Id_Producto"]);
+            producto.Descripcion = dt.Rows[0]["Descripcion"].ToString();
+            producto.Precio = Convert.ToInt32(dt.Rows[0]["Precio"]);
+            producto.Cantidad = Convert.ToInt32(dt.Rows[0]["Cantidad"]);
+            producto.Categoria = new Categoria(
+                Convert.ToInt32(dt.Rows[0]["Id_Categoria"]),
+                   dt.Rows[0]["Nombre"].ToString()
+            );
+            producto.Talle = new Talle(
+                Convert.ToInt32(dt.Rows[0]["Id_Talle"]),
+                dt.Rows[0]["Talle"].ToString()
+            );
+
+            return producto;
 
         }
 
-        public bool EditarProducto(long idProducto,string descripcion,long cantidad,double precio)
+        public bool EditarProducto(Producto producto)
         {
             Conexion objConexion = Conexion.GetConexion;
             SqlParameter[] parametros = new SqlParameter[4];
             int filasAfectadas = 0;
-            parametros[0] = objConexion.crearParametro("@id", idProducto);
-            parametros[1] = objConexion.crearParametro("@Descripcion", descripcion);
-            parametros[2] = objConexion.crearParametro("@Cantidad", cantidad);
-            parametros[3] = objConexion.crearParametro("@Precio", precio);
+            parametros[0] = objConexion.crearParametro("@id", producto.IdProducto);
+            parametros[1] = objConexion.crearParametro("@Descripcion", producto.Descripcion);
+            parametros[2] = objConexion.crearParametro("@Cantidad", producto.Cantidad);
+            parametros[3] = objConexion.crearParametro("@Precio", producto.Precio);
             filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_editar_producto", parametros);
 
             if (filasAfectadas > 0)
@@ -108,7 +143,6 @@ namespace DAL.Datos
                 return true;
             }
             return false;
-
         }
     }
 }

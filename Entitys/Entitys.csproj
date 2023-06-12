@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4442D2E8-7215-4CDA-9D51-32208580F861}</ProjectGuid>
+    <ProjectGuid>{51916D7A-AAEC-4DDE-BFA8-BA7DBA5B6EB0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BBL</RootNamespace>
-    <AssemblyName>BBL</AssemblyName>
+    <RootNamespace>Entitys</RootNamespace>
+    <AssemblyName>Entitys</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,28 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\NegocioCategoria.cs" />
-    <Compile Include="Models\NegocioCliente.cs" />
-    <Compile Include="Models\NegocioDetalle.cs" />
-    <Compile Include="Models\NegocioDireccion.cs" />
-    <Compile Include="Models\NegocioEmpleado.cs" />
-    <Compile Include="Models\NegocioProducto.cs" />
-    <Compile Include="Models\NegocioProveedor.cs" />
-    <Compile Include="Models\NegocioRole.cs" />
-    <Compile Include="Models\NegocioTalle.cs" />
-    <Compile Include="Models\NegocioUsuario.cs" />
-    <Compile Include="Models\NegocioVenta.cs" />
+    <Compile Include="Entidades\Categoria.cs" />
+    <Compile Include="Entidades\Cliente.cs" />
+    <Compile Include="Entidades\Detalle.cs" />
+    <Compile Include="Entidades\Direccion.cs" />
+    <Compile Include="Entidades\Empleado.cs" />
+    <Compile Include="Entidades\Empresa.cs" />
+    <Compile Include="Entidades\Persona.cs" />
+    <Compile Include="Entidades\Producto.cs" />
+    <Compile Include="Entidades\Proveedor.cs" />
+    <Compile Include="Entidades\Role.cs" />
+    <Compile Include="Entidades\Talle.cs" />
+    <Compile Include="Entidades\Usuario.cs" />
+    <Compile Include="Entidades\Venta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{e908ca27-0f5c-441e-a94e-71d42b55cd4e}</Project>
-      <Name>DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entitys\Entitys.csproj">
-      <Project>{51916d7a-aaec-4dde-bfa8-ba7dba5b6eb0}</Project>
-      <Name>Entitys</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
