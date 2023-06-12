@@ -20,25 +20,25 @@
                                     @using (Html.BeginForm("HacerVenta", "Vendedor", FormMethod.Post, new { @class = "row col-sm-12 m-0" }))
                                     {
 
-                                        <div class="form-group mt-4 mb-0 col-sm-2">
+                                        <div class="form-group mt-4 mb-0 col-sm-6">
                                             <label class="control-label" for="idProducto">ID Producto:</label>
                                             <div>
-                                                @Html.TextBoxFor(model => model.Detalles[0].Producto.IdProducto, new { @class = "form-control", type = "number" })
+                                                @Html.TextBoxFor(model => model.Detalles[0].Producto.IdProducto, new { @class = "form-control", type = "number", min = "0" })
                                             </div>
                                         </div>
-                                        <div class="form-group mt-4 mb-0 col-sm-2">
+                                        <div class="form-group mt-4 mb-0 col-sm-6">
                                             <label class="control-label" for="Cantidad">Cantidad:</label>
                                             <div>
-                                                @Html.TextBoxFor(model => model.Detalles[0].Cantidad, new { @class = "form-control", type = "number" })
+                                                @Html.TextBoxFor(model => model.Detalles[0].Cantidad, new { @class = "form-control", type = "number", min = "0" })
                                             </div>
                                         </div>
                                         <div class="form-group mt-4 col-sm-6 m-0 ">
-                                            <input type="submit" value="Agregar Producto" class="btn btn-primary mt-2" formaction="@Url.Action("CargarProducto", "Vendedor")" formmethod="get" />
+                                            <input type="submit" value="Agregar Producto" class="btn btn-primary mt-4" formaction="@Url.Action("CargarProducto", "Vendedor")" formmethod="get" />
                                         </div>
 
                                         <div class="form-group mt-4 col-sm-12  m-0">
                                             <label class="control-label" for="DNI">DNI:</label>
-                                            @Html.TextBox("DNI", null, new { id = "DNI", @class = "form-control", type = "number" })
+                                            @Html.TextBox("DNI", null, new { id = "DNI", @class = "form-control", type = "number", min = "0" })
                                         </div>
                                         <div class="form-group my-4 col-sm-6 m-0">
                                             <input type="submit" @(Model.Cliente != null ? "disabled" : "") value="Registrar Cliente" class="btn btn-primary mt-2" formaction="@Url.Action("RegistrarClienteGet", "Vendedor")" formmethod="get" />

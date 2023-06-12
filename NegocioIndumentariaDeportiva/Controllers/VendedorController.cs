@@ -41,6 +41,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
             else
             {
                 venta = (Venta)Session["Venta"];
+
             }
 
             return View(venta);
@@ -51,7 +52,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
             Detalle detalle = venta.Detalles[0];
             Producto producto = gestorProductos.ObtenerProducto(detalle.Producto.IdProducto);
 
-            if (producto != null && detalle.Producto.Cantidad < producto.Cantidad)
+            if (producto != null && detalle.Cantidad < producto.Cantidad)
             {
 
                 Venta ventaEnCurso = (Venta)Session["Venta"];
@@ -59,15 +60,20 @@ namespace NegocioIndumentariaDeportiva.Controllers
                 detalle.Producto.Precio = producto.Precio;
                 detalle.Producto.Descripcion = producto.Descripcion;
                 detalle.Producto.Categoria = producto.Categoria;
-                detalle.Precio = detalle.Producto.Precio * detalle.Producto.Cantidad;
-
-                //ventaEnCurso.Detalles.Add(detalle);
-                ventaEnCurso.Detalles[ventaEnCurso.Detalles.Count - 1] = detalle;
+                detalle.Precio = producto.Precio * detalle.Cantidad;
+                if (venta.Detalles.Count == 1)
+                {
+                    ventaEnCurso.Detalles[0] = detalle;
+                }
+                else
+                {
+                    ventaEnCurso.Detalles.Add(detalle);
+                }
                 return RedirectToAction("RegistrarVenta");
             }//agregar si existe el producto y el talle es igual aumentar cantidad 
             else
             {
- 
+                ModelState.AddModelError("", "El producto no se encuentra disponible.");
                 return RedirectToAction("RegistrarVenta");
             }
         }
