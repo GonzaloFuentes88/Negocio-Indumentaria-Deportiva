@@ -45,11 +45,10 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
             return View(venta);
         }
-        /*
         [HttpGet]
         public ActionResult CargarProducto(Venta venta)
         {
-            Detalle detalle = venta.Detalle;
+            Detalle detalle = venta.Detalles[0];
             Producto producto = gestorProductos.ObtenerProducto(detalle.Producto.IdProducto);
 
             if (producto != null && detalle.Producto.Cantidad < producto.Cantidad)
@@ -71,7 +70,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
                 return RedirectToAction("RegistrarVenta");
             }
         }
-        */
+
         [HttpPost]
         public ActionResult HacerVenta(Venta venta)
         {
@@ -117,7 +116,6 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
             if (cliente != null)
             {
-                gestorCliente.RegistrarCliente(cliente);
                 Venta venta = (Venta)Session["Venta"];
                 venta.Cliente = cliente;
                 //SE CREA EL CLIENTE, REDIRIGILO A DONDE QUIERAS

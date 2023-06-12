@@ -23,19 +23,19 @@
                                         <div class="form-group mt-4 mb-0 col-sm-2">
                                             <label class="control-label" for="idProducto">ID Producto:</label>
                                             <div>
-                                                @Html.TextBoxFor(model => model.Detalle.Producto.IdProducto, new { @class = "form-control", type = "number" })
+                                                @Html.TextBoxFor(model => model.Detalles[0].Producto.IdProducto, new { @class = "form-control", type = "number" })
                                             </div>
                                         </div>
                                         <div class="form-group mt-4 mb-0 col-sm-4">
                                             <label class="control-label" for="Talle">Talle:</label>
                                             <div>
-                                                @Html.DropDownListFor(model => model.Detalle.Producto.Talle.idTalle, new SelectList(ViewBag.talles, "idTalle", "Talles"), "Seleccione un talle", new { @class = "form-control float-end" })
+                                                @Html.DropDownListFor(model => model.Detalles[0].Producto.Talle.idTalle, new SelectList(ViewBag.talles, "idTalle", "Talles"), "Seleccione un talle", new { @class = "form-control float-end" })
                                             </div>
                                         </div>
                                         <div class="form-group mt-4 mb-0 col-sm-2">
                                             <label class="control-label" for="Cantidad">Cantidad:</label>
                                             <div>
-                                                @Html.TextBoxFor(model => model.Detalle.Cantidad, new { @class = "form-control", type = "number" })
+                                                @Html.TextBoxFor(model => model.Detalles[0].Cantidad, new { @class = "form-control", type = "number" })
                                             </div>
                                         </div>
 

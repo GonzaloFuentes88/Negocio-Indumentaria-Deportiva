@@ -13,7 +13,12 @@ namespace BBL.Models
         private ClienteCon clienteCon = ClienteCon.GetClienteCon;
         public Cliente ObtenerClienteDNI(int dni)
         {
-            return clienteCon.ObtenerClienteDNI(dni);
+            try {
+                Cliente cliente = clienteCon.ObtenerClienteDNI(dni);
+                return cliente;
+            }catch(Exception) {
+                return null;
+            }
         }
 
         public Cliente ObtenerCliente(long id)
