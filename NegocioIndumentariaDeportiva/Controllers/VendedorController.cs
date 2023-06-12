@@ -61,7 +61,8 @@ namespace NegocioIndumentariaDeportiva.Controllers
                 detalle.Producto.Categoria = producto.Categoria;
                 detalle.Precio = detalle.Producto.Precio * detalle.Producto.Cantidad;
 
-                ventaEnCurso.Detalles.Add(detalle);
+                //ventaEnCurso.Detalles.Add(detalle);
+                ventaEnCurso.Detalles[ventaEnCurso.Detalles.Count - 1] = detalle;
                 return RedirectToAction("RegistrarVenta");
             }//agregar si existe el producto y el talle es igual aumentar cantidad 
             else
@@ -84,6 +85,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
                 total += subtotal;
             }
 
+            //ventaEnCurso.Fecha = DateTime.Now;
             ventaEnCurso.Total = total;
             gestorVentas.RegistrarVenta(ventaEnCurso);
 

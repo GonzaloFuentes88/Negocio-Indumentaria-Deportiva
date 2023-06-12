@@ -28,24 +28,25 @@ namespace DAL.Datos
         private VentaCon() { }
 
 
-        public bool RegistrarVenta(Venta venta) 
+        public int RegistrarVenta(Venta venta) 
         {
             Conexion objConexion = Conexion.GetConexion;
 
             SqlParameter[] parametros = new SqlParameter[4];
-            int filasAfectadas = 0;
+            int id= 0;
 
             parametros[0] = objConexion.crearParametro("@Id_Cliente", venta.Cliente.IdCliente);
             parametros[1] = objConexion.crearParametro("@Id_Usuario", venta.Usuario.IdUsuario);
             parametros[2] = objConexion.crearParametro("@Fecha", venta.Fecha);
             parametros[3] = objConexion.crearParametro("@Total", venta.Total);
 
-            filasAfectadas = objConexion.EscribirPorStoreProcedure("sp_registrar_venta", parametros);
-            if (filasAfectadas > 0)
+            DataTable dt = objConexion.LeerPorStoreProcedure("sp_registrar_venta", parametros);
+            id = Convert.ToInt32(dt.Rows[0]["ID"]);
+            if (id > 0)
             {
-                return true;
+                return id;
             }
-            return false;
+            return 0;
 
         }
 

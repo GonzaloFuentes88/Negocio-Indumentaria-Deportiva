@@ -16,11 +16,14 @@ namespace BBL.Models
         public bool RegistrarVenta(Venta venta)
         {
             List<Detalle> detalles = venta.Detalles;
+            int idVenta = ventaCon.RegistrarVenta(venta);
 
-            if (ventaCon.RegistrarVenta(venta)) 
+            if (idVenta > 0) 
             {
                 foreach (Detalle d in detalles)
                 {
+                    d.Venta = new Venta();
+                    d.Venta.IdVenta = idVenta;
                     gestorDetalles.RegistrarDetalle(d);
                 }
                 return true;
