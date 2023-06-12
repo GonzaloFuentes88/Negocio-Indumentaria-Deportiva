@@ -15,5 +15,10 @@ namespace BBL.Models
         {
             return talleCon.ObtenerTalles();
         }
+
+        public bool RegistrarTalle(Talle talle)
+        {
+            return talleCon.RegistrarTalle(talle);
+        }
     }
 }

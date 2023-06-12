@@ -96,6 +96,25 @@ namespace NegocioIndumentariaDeportiva.Controllers
                 }
 
             }
+        [HttpGet]
+        public ActionResult AgregarTalle()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RegistrarTalle(Talle talle)
+        {
+            if(!talle.Talles.Equals(""))
+            {
+                if (gestorTalles.RegistrarTalle(talle))
+                {
+                    return RedirectToAction("AgregarProducto");
+                }
+            }
+            return RedirectToAction("AgregarTalle");
+        }
+
         public ActionResult Salir()
         {
             empresa.UsuarioEnUso = null;

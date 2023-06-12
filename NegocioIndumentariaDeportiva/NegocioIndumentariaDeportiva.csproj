@@ -287,6 +287,7 @@
     <Content Include="Views\Shared\LayoutPdf.cshtml" />
     <Content Include="Views\Vendedor\RegistrarClienteGet.cshtml" />
     <Content Include="Views\Shared\_LayoutAdministrativo.cshtml" />
+    <Content Include="Views\Administrativo\AgregarTalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

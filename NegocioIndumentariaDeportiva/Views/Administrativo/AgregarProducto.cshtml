@@ -46,8 +46,8 @@
                                                         <div class="col-6">
                                                             @Html.LabelFor(m => m.Talle.Talles)
 
-                                                            @*@Html.DropDownListFor(m => m.Talle.idTalle, new SelectList(ViewBag.talles, "idTalle", "Talles"), "Seleccione una categoría", new { @class = "form-control" })*@
-                                                            @Html.TextBoxFor(m => m.Talle.Talles, new { @class = "form-control" })
+                                                            @Html.DropDownListFor(m => m.Talle.idTalle, new SelectList(ViewBag.talles, "idTalle", "Talles"), "Seleccione una categoría", new { @class = "form-control" })
+                                                            <a class="btn btn-primary btn-block" @Html.ActionLink("Agregar Talle", "AgregarTalle")
                                                         </div>
 
                                                     </div>
@@ -56,7 +56,7 @@
                                                         @Html.LabelFor(m => m.Precio)
                                                         @Html.TextBoxFor(m => m.Precio, new { @class = "form-control" })
                                                     </div>
-                                                    
+
                                                     <div class="mt-4 mb-0 col-6">
                                                         @Html.LabelFor(m => m.Cantidad)
                                                         @Html.TextBoxFor(m => m.Cantidad, new { @class = "form-control" })
@@ -78,7 +78,7 @@
                                                     </div>
 
                                                 </form>
-
+                                                
                                             </div>
 
                                         </div>
