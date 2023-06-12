@@ -34,7 +34,8 @@ namespace NegocioIndumentariaDeportiva.Controllers
                 venta = new Venta();
                 venta.Detalles = new List<Detalle>();
                 venta.Detalles.Add(new Detalle());
-
+                venta.Usuario = empresa.UsuarioEnUso;
+                venta.Fecha = DateTime.Now;
                 Session["Venta"] = venta;
             }
             else
@@ -45,32 +46,29 @@ namespace NegocioIndumentariaDeportiva.Controllers
             return View(venta);
         }
         [HttpGet]
-        public ActionResult CargarProducto(int idProducto, int Cantidad, int Precio, int idTalle, string Talles)
+        public ActionResult CargarProducto(Venta venta)
         {
-            Producto producto = gestorProductos.ObtenerProducto(idProducto);
-            if (producto != null)
+            Detalle detalle = venta.Detalle;
+            Producto producto = gestorProductos.ObtenerProducto(detalle.Producto.IdProducto);
+
+            if (producto != null && detalle.Producto.Cantidad < producto.Cantidad)
             {
-                Venta venta = (Venta)Session["Venta"];
-                Talle talle = new Talle();
-                talle.idTalle = idTalle;
-                talle.Talles = Talles;
-                producto.Talle = talle;
 
+                Venta ventaEnCurso = (Venta)Session["Venta"];
 
-                //hacer logica para que traiga el nombre del talle
-                Detalle detalle = new Detalle();
-                detalle.Cantidad = Cantidad;
-                detalle.Precio = Precio;
-                detalle.Producto = producto;
-                venta.Detalles.Add(detalle);
+                detalle.Producto.Precio = producto.Precio;
+                detalle.Producto.Descripcion = producto.Descripcion;
+                detalle.Producto.Categoria = producto.Categoria;
+                detalle.Precio = detalle.Producto.Precio * detalle.Producto.Cantidad;
+
+                ventaEnCurso.Detalles.Add(detalle);
                 return RedirectToAction("RegistrarVenta");
-            }
+            }//agregar si existe el producto y el talle es igual aumentar cantidad 
             else
             {
                 ModelState.AddModelError("", "Producto no encontrado");
                 return RedirectToAction("RegistrarVenta");
             }
-
         }
         [HttpPost]
         public ActionResult HacerVenta(Venta venta)
@@ -90,10 +88,11 @@ namespace NegocioIndumentariaDeportiva.Controllers
             ventaEnCurso.Total = total;
             gestorVentas.RegistrarVenta(ventaEnCurso);
 
-            Session.Remove("Venta"); 
+            Session.Remove("Venta");
 
             return RedirectToAction("RegistrarVenta");
         }
+
 
         [HttpGet]
         public ActionResult RegistrarClienteGet(int DNI)
@@ -113,8 +112,8 @@ namespace NegocioIndumentariaDeportiva.Controllers
         [HttpPost]
         public ActionResult RegistrarClientePost(Cliente cliente)
         {
- 
-            if(cliente != null)
+
+            if (cliente != null)
             {
                 gestorCliente.RegistrarCliente(cliente);
                 Venta venta = (Venta)Session["Venta"];
@@ -124,6 +123,8 @@ namespace NegocioIndumentariaDeportiva.Controllers
             }
             return RedirectToAction("RegistrarCliente");
         }
+
+
 
 
 
