@@ -38,13 +38,13 @@ namespace NegocioIndumentariaDeportiva.Controllers
             if (usuario != null)
             {
                 empresa.UsuarioEnUso = usuario;
-                if(usuario.Role.IdRole == 1) {
+                if (usuario.Role.IdRole == 1) {
                     return RedirectToAction("Index", "AdminSistema");
                 }
                 else if (usuario.Role.IdRole == 2)
                 {
                     return RedirectToAction("Index", "Administrativo");
-                    
+
                 }
                 else if (usuario.Role.IdRole == 3)
                 {
@@ -67,5 +67,5 @@ namespace NegocioIndumentariaDeportiva.Controllers
                 return View("Index", sesion); // Devuelve la vista original con el modelo y el mensaje de error
             }
         }
-    }
+    } 
 }

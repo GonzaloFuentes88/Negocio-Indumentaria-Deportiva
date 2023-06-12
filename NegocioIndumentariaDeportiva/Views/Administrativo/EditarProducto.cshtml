@@ -1,4 +1,4 @@
-﻿@model BBL.Models.Producto
+﻿@model Entitys.Entidades.Producto
 @{
     Layout = "~/Views/Shared/_LayoutAdministrativo.cshtml";
 }
@@ -46,15 +46,15 @@
                                                             @Html.TextBoxFor(m => m.Cantidad, new { @class = "form-control" })
                                                         </div>
 
-                                                        
 
-                                                       @Html.HiddenFor(m => m.IdProducto)
-                                        
 
-                                                    <div class="mt-4 mb-0">
-                                                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                                                        @Html.HiddenFor(m => m.IdProducto)
+
+
+                                                        <div class="mt-4 mb-0">
+                                                            <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                                                        </div>
                                                     </div>
-</div>
 
                                                 </form>
 

@@ -45,6 +45,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
 
             return View(venta);
         }
+        /*
         [HttpGet]
         public ActionResult CargarProducto(Venta venta)
         {
@@ -70,6 +71,7 @@ namespace NegocioIndumentariaDeportiva.Controllers
                 return RedirectToAction("RegistrarVenta");
             }
         }
+        */
         [HttpPost]
         public ActionResult HacerVenta(Venta venta)
         {
