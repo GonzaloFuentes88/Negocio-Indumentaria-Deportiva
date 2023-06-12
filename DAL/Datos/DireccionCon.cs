@@ -31,7 +31,6 @@ namespace DAL.Datos
         {
             Conexion objConexion = Conexion.GetConexion;
             SqlParameter[] parametros = new SqlParameter[3];
-            int id = 0;
 
             parametros[0] = objConexion.crearParametro("@CP", direccion.CP);
             parametros[1] = objConexion.crearParametro("@Calle", direccion.Calle);
