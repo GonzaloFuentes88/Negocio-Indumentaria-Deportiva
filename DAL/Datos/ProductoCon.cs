@@ -32,7 +32,7 @@ namespace DAL.Datos
         {
             Conexion objConexion = Conexion.GetConexion;
             ProveedorCon proveedorCon = ProveedorCon.GetProveedorCon;
-            SqlParameter[] parametros = new SqlParameter[5];
+            SqlParameter[] parametros = new SqlParameter[6];
             int filasAfectadas = 0;
 
             producto.Proveedor = proveedorCon.RegistrarProveedor(producto.Proveedor);
@@ -63,17 +63,17 @@ namespace DAL.Datos
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 Producto producto = new Producto();
-                producto.IdProducto = Convert.ToInt32(dt.Rows[0]["Id_Producto"]);
-                producto.Descripcion = dt.Rows[0]["Descripcion"].ToString();
-                producto.Precio = Convert.ToInt32(dt.Rows[0]["Precio"]);
-                producto.Cantidad = Convert.ToInt32(dt.Rows[0]["Cantidad"]);
+                producto.IdProducto = Convert.ToInt32(dt.Rows[i]["Id_Producto"]);
+                producto.Descripcion = dt.Rows[i]["Descripcion"].ToString();
+                producto.Precio = Convert.ToInt32(dt.Rows[i]["Precio"]);
+                producto.Cantidad = Convert.ToInt32(dt.Rows[i]["Cantidad"]);
                 producto.Categoria = new Categoria(
-                Convert.ToInt32(dt.Rows[0]["Id_Categoria"]),
-                   dt.Rows[0]["Nombre"].ToString()
+                Convert.ToInt32(dt.Rows[i]["Id_Categoria"]),
+                   dt.Rows[i]["Nombre"].ToString()
            );
                 producto.Talle = new Talle(
-                    Convert.ToInt32(dt.Rows[0]["Id_Talle"]),
-                        dt.Rows[0]["Talle"].ToString()
+                    Convert.ToInt32(dt.Rows[i]["Id_Talle"]),
+                        dt.Rows[i]["Talle"].ToString()
                 );
 
                 //listUsuarios.Add(usuario);
