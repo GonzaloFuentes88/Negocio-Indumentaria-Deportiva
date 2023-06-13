@@ -27,25 +27,14 @@
                                             </div>
                                         </div>
                                         <div class="form-group mt-4 mb-0 col-sm-2">
-                                            <label class="control-label" for="Talle">Talle:</label>
+                                            <label class="control-label" for="Cantidad">Cantidad:</label>
                                             <div>
                                                 @Html.TextBox("Cantidad", detalle, new { @class = "form-control", type = "number" })
                                             </div>
                                         </div>
-                                        <div class="form-group mt-4 mb-0 col-sm-2">
-                                            <input type="submit" value="Agregar Producto" class="btn btn-primary mt-2" />
-                                            <div>
-                                                @Html.TextBoxFor(model => model.Detalles[0].Cantidad, new { @class = "form-control", type = "number" })
-                                            </div>
-                                        </div>
-                                        <div class="form-group mt-4 mb-0 col-sm-2">
-                                            <input type="submit" value="Agregar Producto" class="btn btn-primary mt-2" formaction="@Url.Action("CargarProducto", "Vendedor")" formmethod="get" />
-                                            <div>
-                                                @Html.TextBoxFor(model => model.Detalles[0].Cantidad, new { @class = "form-control", type = "number" })
-                                            </div>
-                                        </div>
+
                                         <div class="form-group mt-4 col-sm-6 m-0 ">
-                                            <input type="submit" value="Agregar Producto" class="btn btn-primary mt-2" formaction="@Url.Action("CargarProducto", "Vendedor")" formmethod="get" />
+                                            <input type="submit" value="Agregar Producto" class="btn btn-primary mt-2" />
                                         </div>
 
                                     </form>
@@ -56,7 +45,7 @@
 
                                         <div class="form-group mt-4 col-sm-12  m-0">
                                             <label class="control-label" for="DNI">DNI:</label>
-                                            @Html.TextBox("DNI", null, new { id = "DNI", @class = "form-control", type = "number", min = "0" })
+                                            @Html.TextBox("DNI", null, new { id = "DNI", @class = "form-control", type = "number" })
                                         </div>
                                         <div class="form-group my-4 col-sm-6 m-0">
                                             <input type="submit" @(Model.Cliente != null ? "disabled" : "") value="Registrar Cliente" class="btn btn-primary mt-2" formaction="@Url.Action("RegistrarClienteGet", "Vendedor")" formmethod="get" />
@@ -68,7 +57,7 @@
                                         <div class="form-group">
                                             @if (Model.Detalles.Count > 0)
                                             {
-                                            <p>Total: @Model.Total</p>}
+                                                <p>Total: @Model.Total</p>}
                                         </div>
                                         <div class="form-group mt-4 mb-0 col-sm-6">
                                             <input type="submit" value="Registrar Venta" class="btn btn-primary mt-2 float-end" />
@@ -86,22 +75,22 @@
                         <div class="col-sm-10 col-lg-5">
                             <div class="card shadow-md rounded-lg">
                                 <div class="card-header">
+                                    <p class="h4">Detalles</p>
+                                </div>
+                                <div class="card-body">
+                                    @foreach (var d in Model.Detalles)
+                                    {
+                                        if (d.Producto != null)
+                                        {
+                                            <div class="form-group col-sm-12 border-top">
+                                                <div class="form-group mt-3">
+                                                    <p>Producto: @d.Producto.Descripcion</p>
+                                                </div>
+                                                <div class="form-group">
                                                     <p>Talle: @d.Producto.Talle.Talles</p>
                                                 </div>
                                                 <div class="form-group">
                                                     <p>Cantidad: @d.Cantidad</p>
-                                    {
-                                        if (d.Producto != null)
-                                                    <p>Talle: @detalle.Producto.Talle.Talles</p>
-                                                </div>
-                                                <div class="form-group">
-                                                    <p>Cantidad: @detalle.Cantidad</p>
-                                                </div>
-                                                <div class="form-group">
-                                                    <p>Talle: @detalle.Producto.Talle.Talles</p>
-                                                </div>
-                                                <div class="form-group">
-                                                    <p>Cantidad: @detalle.Cantidad</p>
                                                 </div>
                                                 <div class="form-group">
                                                     <p>Precio: @d.Producto.Precio</p>
